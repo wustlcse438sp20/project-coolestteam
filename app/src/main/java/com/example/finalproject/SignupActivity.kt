@@ -57,7 +57,7 @@ class SignupActivity: AppCompatActivity() {
         signUpButton.setOnClickListener{
             var emailSign: String = emailSignUp.text.toString()
             var passwordSign: String = passwordSignUp.text.toString()
-            var username: String = newUsername.text.toString()
+
 
 
 
@@ -68,26 +68,9 @@ class SignupActivity: AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(emailSign, passwordSign).addOnCompleteListener(this, OnCompleteListener{ task ->
                     if(task.isSuccessful){
                         Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
-                        var newUser = Employee(
-                            username,
-                            0
-                        )
                         val userId = task.result!!.user!!.uid
-                        val newUserMap: MutableMap<String, Any> = HashMap()
-                        newUserMap["name"] = newUser.name
-                        newUserMap["age"] = newUser.age
-                        db.collection("Employees")
-                            .document(userId).set(newUserMap)
-                            .addOnSuccessListener{
-                                Toast.makeText(this, "Exercise created", Toast.LENGTH_LONG)
-                                val intent = Intent(this, MainActivity::class.java)
-                                startActivity(intent)
-                            }
-                            .addOnFailureListener{
-                                Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
-                            }
-
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, EmployeeProfileActivity::class.java)
+                        intent.putExtra("uid", userId)
                         startActivity(intent)
                         finish()
                     }else {
