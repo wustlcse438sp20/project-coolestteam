@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.SignupActivity">
+    >
 
 
 
@@ -36,12 +36,21 @@
 
 
     <Button
-        android:id="@+id/signup_btn"
+        android:id="@+id/employee_signup_btn"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
         android:text="Sign Up As Employee"
         app:layout_constraintTop_toBottomOf="@id/newPassword"
+        />
+
+    <Button
+        android:id="@+id/employer_signup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="5dp"
+        android:text="Sign Up As Employer"
+        app:layout_constraintTop_toBottomOf="@id/employee_signup_btn"
         />
 
 

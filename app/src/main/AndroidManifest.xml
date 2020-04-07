@@ -20,6 +20,8 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SignupActivity" />
         <activity android:name=".EmployeeProfileActivity"/>
+        <activity android:name=".EmployerProfileActivity"/>
+        <activity android:name=".CreateJobPostingActivity"/>
     </application>
 
 </manifest>

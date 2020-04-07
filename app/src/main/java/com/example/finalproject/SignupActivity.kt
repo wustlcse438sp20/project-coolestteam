@@ -32,8 +32,8 @@ class SignupActivity: AppCompatActivity() {
     private lateinit var emailSignUp: EditText
     private lateinit var passwordSignUp: EditText
 
-    private lateinit var signUpButton: Button
-
+    private lateinit var Employee_signUpButton: Button
+    private lateinit var Employer_signUpButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?){
@@ -52,9 +52,9 @@ class SignupActivity: AppCompatActivity() {
         emailSignUp = newEmail
         passwordSignUp = newPassword
 
-        signUpButton = signup_btn
+        Employee_signUpButton = employee_signup_btn
 
-        signUpButton.setOnClickListener{
+        Employee_signUpButton.setOnClickListener{
             var emailSign: String = emailSignUp.text.toString()
             var passwordSign: String = passwordSignUp.text.toString()
 
@@ -74,6 +74,7 @@ class SignupActivity: AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }else {
+                        Log.e("here", "onComplete: Failed=" + task.exception!!.message)
                         Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
                     }
                 })
@@ -81,7 +82,35 @@ class SignupActivity: AppCompatActivity() {
 
         }
 
+        Employer_signUpButton = employer_signup_btn
+        Employer_signUpButton.setOnClickListener {
+            var emailSign: String = emailSignUp.text.toString()
+            var passwordSign: String = passwordSignUp.text.toString()
 
+
+
+
+            if (emailSign == "" || passwordSign == "") {
+                Toast.makeText(this, "Please enter valid email or password", Toast.LENGTH_LONG)
+                    .show()
+            } else {
+                auth.createUserWithEmailAndPassword(emailSign, passwordSign)
+                    .addOnCompleteListener(this, OnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG)
+                                .show()
+                            val userId = task.result!!.user!!.uid
+                            val intent = Intent(this, EmployerProfileActivity::class.java)
+                            intent.putExtra("uid", userId)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Log.d("here", "onComplete: Failed=" + task.exception!!.message)
+                            Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
+                        }
+                    })
+            }
+        }
     }
 }
 
