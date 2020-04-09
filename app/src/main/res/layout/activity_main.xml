@@ -56,11 +56,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:gravity="center"
-            android:src="@drawable/home" />
+            android:layout_height="match_parent"
+            android:text="Sending user to correct profile"
+            android:textSize="50dp"/>
     </LinearLayout>
 
 
