@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.R
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.OAuthProvider
+
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity: AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     private lateinit var emailLogin: EditText
     private lateinit var passwordLogin: EditText
@@ -25,9 +26,6 @@ class LoginActivity: AppCompatActivity() {
     private lateinit var loginButton: Button
 
 
-
-
-    private lateinit var db: FirebaseFirestore
 
 
 
@@ -39,17 +37,14 @@ class LoginActivity: AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         setContentView(R.layout.activity_login)
 
-        auth = FirebaseAuth.getInstance()
-        val twitterAuthProvider = OAuthProvider.newBuilder("twitter.com")
-            .build()
-
         emailLogin = login_email
         passwordLogin = login_Password
-
-
         loginButton = login_btn
         signUpButton = signup_btn2
 
+//        auth = FirebaseAuth.getInstance()
+//        val twitterAuthProvider = OAuthProvider.newBuilder("twitter.com")
+//            .build()
 
 
         loginButton.setOnClickListener {
@@ -80,10 +75,14 @@ class LoginActivity: AppCompatActivity() {
             finish()
         }
 
+        
+
 
 
 
     }
+
+
 
 
 }
