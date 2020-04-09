@@ -53,8 +53,9 @@
     <LinearLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/mediumLight"
         app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +64,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="300dp"
             android:gravity="center"
             android:src="@drawable/home" />
     </LinearLayout>
