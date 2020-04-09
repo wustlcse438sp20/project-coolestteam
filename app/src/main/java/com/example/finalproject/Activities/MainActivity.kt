@@ -17,58 +17,59 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var logoutButton: ImageButton
-    private lateinit var db: FirebaseFirestore
+//    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-        val settings = FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build()
-        db.setFirestoreSettings(settings)
-
-        if(auth.currentUser == null) {
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
-        }else{
-            Toast.makeText(this, "Logged in", Toast.LENGTH_LONG).show()
-            var db = FirebaseFirestore.getInstance()
-            var employeeRef = db.collection("Employees")
-            var uid = auth.currentUser?.uid.toString()
-            employeeRef.document(uid).get()
-                    .addOnSuccessListener { doc->
-                        if(doc.exists()){
-                            //Load employee activity
-                            val intent = Intent(this, HomeEmployeeActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }
-                        else{
-                            //Load employer activity
-                            val intent = Intent(this, HomeEmployerActivity::class.java)
-                            startActivity(intent)
-                            finish()
-
-                        }
-                    }
-                    .addOnFailureListener{
-                        Log.d("blah", "FAIL")
-                    }
-
-        }
-        setContentView(R.layout.activity_main)
+        Log.d("blah", auth.currentUser.toString()+"AT Main")
+//        db = FirebaseFirestore.getInstance()
+//        val settings = FirebaseFirestoreSettings.Builder()
+//                .setTimestampsInSnapshotsEnabled(true)
+//                .build()
+//        db.setFirestoreSettings(settings)
+//
+//        if(auth.currentUser == null) {
+//            val intent = Intent(this, LoginActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            startActivity(intent)
+//            finish()
+//        }else{
+//            Toast.makeText(this, "Logged in", Toast.LENGTH_LONG).show()
+//            var db = FirebaseFirestore.getInstance()
+//            var employeeRef = db.collection("Employees")
+//            var uid = auth.currentUser?.uid.toString()
+//            employeeRef.document(uid).get()
+//                    .addOnSuccessListener { doc->
+//                        if(doc.exists()){
+//                            //Load employee activity
+//                            val intent = Intent(this, HomeEmployeeActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+//                        }
+//                        else{
+//                            //Load employer activity
+//                            val intent = Intent(this, HomeEmployerActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+//
+//                        }
+//                    }
+//                    .addOnFailureListener{
+//                        Log.d("blah", "FAIL")
+//                    }
+//
+//        }
+//        setContentView(R.layout.activity_main)
 
 
         logoutButton = logout_button
 
         logoutButton.setOnClickListener{
             auth.signOut()
-            intent = Intent(this, MainActivity::class.java)
+            intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
