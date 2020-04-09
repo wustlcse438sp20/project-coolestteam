@@ -1,18 +1,17 @@
-package com.example.finalproject
+package com.example.finalproject.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.finalproject.R
 
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -39,10 +38,6 @@ class LoginActivity: AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setTimestampsInSnapshotsEnabled(true)
-            .build()
-        db.setFirestoreSettings(settings)
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
