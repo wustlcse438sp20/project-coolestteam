@@ -37,8 +37,8 @@
         android:layout_marginTop="200dp"
         android:gravity="center"
         android:hint="Job Title"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,8 +49,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="Company"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/job_title" />
@@ -62,8 +62,8 @@
         android:gravity="center"
         android:hint="Salary"
         android:inputType="number"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/job_company" />
@@ -74,8 +74,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="Job Education"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/job_salary" />

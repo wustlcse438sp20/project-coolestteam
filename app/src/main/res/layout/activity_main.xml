@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Sending user to correct profile"
-            android:textSize="50dp"/>
+            android:textSize="50dp" />
     </LinearLayout>
 
 
@@ -88,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@color/dark"       
+            android:background="@color/dark"
             android:src="@drawable/filewhite" />
 
 
@@ -99,7 +99,7 @@
             android:layout_weight="1"
             android:background="@color/dark"
             android:src="@drawable/homewhite" />
-        
+
 
         <ImageButton
             android:id="@+id/search_button"

@@ -37,8 +37,8 @@
         android:layout_marginTop="200dp"
         android:gravity="center"
         android:hint="Full Name"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,9 +49,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="Age"
-        android:textColorHint="@color/mediumLight"
-        android:textColor="@color/light"
         android:inputType="number"
+        android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/employee_name" />
@@ -62,8 +62,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="Major"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/employee_age" />
@@ -74,8 +74,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="School"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/employee_major" />
