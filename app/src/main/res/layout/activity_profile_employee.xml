@@ -44,6 +44,12 @@
             android:src="@drawable/settingswhite" />
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintStart_toStartOf="parent" />
     <LinearLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
@@ -57,7 +63,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="500dp"
             android:gravity="center"
             android:src="@drawable/home" />
     </LinearLayout>
