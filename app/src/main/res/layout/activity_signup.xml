@@ -16,7 +16,7 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOfgit ="parent">
+        app:layout_constraintTop_toTopOf ="parent">
 
         <TextView
             android:layout_width="0dp"
