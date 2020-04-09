@@ -38,8 +38,8 @@
         android:layout_marginTop="200dp"
         android:gravity="center"
         android:hint="Enter Email"
-        android:textColorHint="@color/mediumLight"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,10 +49,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:inputType="textPassword"
         android:hint="Password"
-        android:textColorHint="@color/mediumLight"
+        android:inputType="textPassword"
         android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/newEmail" />

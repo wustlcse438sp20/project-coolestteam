@@ -50,18 +50,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
-        android:orientation="vertical"
         android:background="@color/mediumLight"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="EmployeeUI"
-        android:gravity="center"
-        android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="EmployeeUI"
+            android:textSize="30sp" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -87,8 +89,8 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@color/dark"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/profile_button"
@@ -96,14 +98,15 @@
                 android:layout_height="30dp"
                 android:background="@color/dark"
                 android:src="@drawable/profilewhite" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profile"
                 android:layout_marginTop="-6dp"
-                android:textColor="@color/light"
                 android:gravity="center"
-                android:textSize="10sp"/>
+                android:text="Profile"
+                android:textColor="@color/light"
+                android:textSize="10sp" />
         </LinearLayout>
 
 
@@ -112,8 +115,8 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@color/dark"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/search_button"
@@ -121,16 +124,16 @@
                 android:layout_height="30dp"
                 android:background="@color/dark"
                 android:src="@drawable/searchwhite" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Search"
                 android:layout_marginTop="-6dp"
-                android:textColor="@color/light"
                 android:gravity="center"
-                android:textSize="10sp"/>
+                android:text="Search"
+                android:textColor="@color/light"
+                android:textSize="10sp" />
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -138,8 +141,8 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@color/dark"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/home_button"
@@ -147,17 +150,16 @@
                 android:layout_height="30dp"
                 android:background="@color/dark"
                 android:src="@drawable/homeblue" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Home"
                 android:layout_marginTop="-6dp"
-                android:textColor="@color/light"
                 android:gravity="center"
-                android:textSize="10sp"/>
+                android:text="Home"
+                android:textColor="@color/light"
+                android:textSize="10sp" />
         </LinearLayout>
-
-
 
 
         <LinearLayout
@@ -165,8 +167,8 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@color/dark"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/project_button"
@@ -174,14 +176,15 @@
                 android:layout_height="30dp"
                 android:background="@color/dark"
                 android:src="@drawable/filewhite" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Projects"
                 android:layout_marginTop="-6dp"
-                android:textColor="@color/light"
                 android:gravity="center"
-                android:textSize="10sp"/>
+                android:text="Projects"
+                android:textColor="@color/light"
+                android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -189,8 +192,8 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@color/dark"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/match_button"
@@ -198,14 +201,15 @@
                 android:layout_height="30dp"
                 android:background="@color/dark"
                 android:src="@drawable/messagewhite" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Matches"
                 android:layout_marginTop="-6dp"
-                android:textColor="@color/light"
                 android:gravity="center"
-                android:textSize="10sp"/>
+                android:text="Matches"
+                android:textColor="@color/light"
+                android:textSize="10sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -49,10 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColorHint="@color/mediumLight"
-            android:textColor="@color/light"
             android:hint="Enter Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@color/light"
+            android:textColorHint="@color/mediumLight" />
 
         <EditText
             android:id="@+id/login_Password"
@@ -61,9 +61,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:hint="Password"
-            android:textColorHint="@color/mediumLight"
-            android:textColor="@color/light"
             android:inputType="textPassword"
+            android:textColor="@color/light"
+            android:textColorHint="@color/mediumLight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_email"
