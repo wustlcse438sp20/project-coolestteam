@@ -35,7 +35,8 @@ class EmployeeProfileActivity: AppCompatActivity() {
             var major: String = employee_major.text.toString()
 
             //Get UID of current user to place values in correct doc
-            var currUser = intent.getStringExtra("uid")
+            var currUser = auth.currentUser?.uid.toString()
+//            var currUser = intent.getStringExtra("uid")
 
             //Get values and put them in map to insert into collection
             val newEmployeeMap: MutableMap<String, Any> = HashMap()

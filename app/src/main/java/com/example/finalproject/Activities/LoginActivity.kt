@@ -27,7 +27,7 @@ class LoginActivity: AppCompatActivity() {
     private lateinit var loginButton: Button
     private lateinit var githubLoginButton: Button
 
-
+//    val RC_SIGN_IN = 123
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +40,8 @@ class LoginActivity: AppCompatActivity() {
         loginButton = login_btn
         emailLogin = login_email
         passwordLogin = login_Password
+
+
 
 //        provider.setScopes(scopes)
 
