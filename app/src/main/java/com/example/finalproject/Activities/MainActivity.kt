@@ -4,10 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
+import com.example.finalproject.Activities.EmployeeUI.HomeEmployeeActivity
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -46,7 +45,9 @@ class MainActivity : AppCompatActivity() {
                             //IS employee
                             Log.d("blah", doc.data.toString())
                             //Load employee activity
-
+                            val intent = Intent(this, HomeEmployeeActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
                         else{
                             //is employer
