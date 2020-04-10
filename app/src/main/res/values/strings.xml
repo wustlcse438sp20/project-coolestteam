@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GitHired?</string>
+    <string name="placeholder_name">Doug Shook</string>
+    <string name="placeholder_email">dshook@gmail.com</string>
+    <string name="placeholder_major">Computer Science</string>
+    <string name="employee">Employee</string>
+    <string name="employer">Employer</string>
+    <string name="employees">Employees</string>
+    <string name="employers">Employers</string>
 </resources>

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import com.example.finalproject.Activities.MainActivity
+import com.example.finalproject.Activities.LoginActivity
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_matches_employee.*
@@ -23,7 +23,7 @@ class MatchesEmployeeActivity : AppCompatActivity() {
         profileButton = profile_button
         homeButton = home_button
         projectButton = project_button
-        logoutButton.setOnClickListener { v -> changeActivity(v, MainActivity::class.java, true) }
+        logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployeeActivity::class.java, false) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployeeActivity::class.java, false) }
         projectButton.setOnClickListener { v -> changeActivity(v, ProjectsEmployeeActivity::class.java, false)}
