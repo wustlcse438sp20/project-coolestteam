@@ -1,17 +1,15 @@
-package com.example.finalproject
+package com.example.finalproject.Activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.finalproject.Data.Employee
 import com.example.finalproject.Data.Employer
+import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_employee_profile.*
 import kotlinx.android.synthetic.main.activity_employer_profile.*
-import kotlinx.android.synthetic.main.activity_signup.*
 import java.util.HashMap
 
 class EmployerProfileActivity: AppCompatActivity() {
@@ -36,7 +34,7 @@ class EmployerProfileActivity: AppCompatActivity() {
 
 
             //Get UID of current user to place values in correct doc
-            var currUser = intent.getStringExtra("uid")
+            var currUser = auth.currentUser?.uid.toString()
 
             //Get values and put them in map to insert into collection
             val newEmployerMap: MutableMap<String, Any> = HashMap()

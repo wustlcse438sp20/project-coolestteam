@@ -5,55 +5,78 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/medium">
 
+    <LinearLayout
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark"
+        android:gravity="right"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf ="parent">
 
-
-        <EditText
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/newEmail"
-            android:hint = "Enter Email"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="200dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:gravity="center"
-            />
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:gravity="left"
+            android:paddingLeft="10dp"
+            android:text="@string/app_name"
+            android:textColor="@color/accentGreen"
+            android:textFontWeight="800"
+            android:textSize="30sp" />
+    </LinearLayout>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/newPassword"
-            android:hint = "Password"
-            app:layout_constraintTop_toBottomOf="@id/newEmail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:gravity="center"
-        />
+    <EditText
+        android:id="@+id/newEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:hint="Enter Email"
+        android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
+    <EditText
+        android:id="@+id/newPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="@color/light"
+        android:textColorHint="@color/mediumLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newEmail" />
 
 
     <Button
         android:id="@+id/employee_signup_btn"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:layout_margin="12dp"
         android:layout_marginTop="32dp"
+        android:background="@color/accentBlue"
         android:text="Sign Up As Employee"
-        app:layout_constraintTop_toBottomOf="@id/newPassword"
-        />
+        app:layout_constraintTop_toBottomOf="@id/newPassword" />
 
     <Button
         android:id="@+id/employer_signup_btn"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:layout_margin="12dp"
         android:layout_marginTop="5dp"
+        android:background="@color/accentBlue"
         android:text="Sign Up As Employer"
-        app:layout_constraintTop_toBottomOf="@id/employee_signup_btn"
-        />
-
-
+        app:layout_constraintTop_toBottomOf="@id/employee_signup_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
