@@ -70,7 +70,7 @@ class LoginActivity: AppCompatActivity() {
     fun githubLogin(){
 
         val provider = OAuthProvider.newBuilder("github.com")
-        var scopes = listOf("user:email")
+        var scopes = listOf("read:user") //Github auto grants read access to public info (Public repos)
         provider.setScopes(scopes)
 
         val pendingResultTask = firebaseAuth.pendingAuthResult
@@ -87,7 +87,10 @@ class LoginActivity: AppCompatActivity() {
         } else { // There's no pending result so you need to start the sign-in flow.
             firebaseAuth.startActivityForSignInWithProvider(this, provider.build())
                     .addOnSuccessListener {res ->
+//                        var currentU = firebaseAuth.currentUser
+                        Log.d("blah", "TEST HERE: "+res.user.toString())
 
+//                        Log.d("blah", res.additionalUserInfo.toString())
                         Log.d("blah", "USER SIGNED IN")
                         Log.d("blah", firebaseAuth.currentUser?.uid.toString() ) //r7P3lORglbPGqVN9SVzMCdOOxAk2
                         Log.d("blah", firebaseAuth.currentUser?.displayName.toString() ) //Joe Frazier

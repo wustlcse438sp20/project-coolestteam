@@ -7,4 +7,10 @@
     <string name="employer">Employer</string>
     <string name="employees">Employees</string>
     <string name="employers">Employers</string>
+    <string name="create_a_job">Create a Job</string>
+    <string name="job_description">Job Description</string>
+    <string name="position">Position</string>
+    <string name="qualifications">Qualifications</string>
+    <string name="us_citizen">U.S. Citizen</string>
+    <string name="current_student">Current Student</string>
 </resources>
