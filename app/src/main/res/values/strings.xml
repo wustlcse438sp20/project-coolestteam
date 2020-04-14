@@ -2,7 +2,9 @@
     <string name="app_name">GitHired?</string>
     <string name="placeholder_name">Doug Shook</string>
     <string name="placeholder_email">dshook@gmail.com</string>
+    <string name="placeholder_uni">Washington University in St. Louis</string>
     <string name="placeholder_major">Computer Science</string>
+    <string name="placeholder_gpa">GPA: 4.0</string>
     <string name="employee">Employee</string>
     <string name="employer">Employer</string>
     <string name="employees">Employees</string>
@@ -13,4 +15,7 @@
     <string name="qualifications">Qualifications</string>
     <string name="us_citizen">U.S. Citizen</string>
     <string name="current_student">Current Student</string>
+    <string name="education">Education</string>
+    <string name="university">University</string>
+    <string name="grad_year">2021</string>
 </resources>
