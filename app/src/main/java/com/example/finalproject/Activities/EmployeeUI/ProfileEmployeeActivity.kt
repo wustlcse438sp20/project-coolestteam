@@ -6,62 +6,76 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+
+
 import com.example.finalproject.Activities.LoginActivity
+import com.example.finalproject.Data.Employee
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile_employee.*
 
 class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
     private lateinit var homeButton: ImageButton
     private lateinit var matchButton: ImageButton
+    private lateinit var db: FirebaseFirestore
+    private  var firebase = FirebaseAuth.getInstance()
+    private lateinit var currentEmployee: Employee
+    private lateinit var displayName: TextView
+    private lateinit var email: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_employee)
-
+        db = Firebase.firestore
         logoutButton = logout_button
         homeButton = home_button
-
         matchButton = match_button
+        displayName = user_display_name
+        email = user_email
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployeeActivity::class.java, false) }
         matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false)}
+        loadProfile()
 
 
-        //Goal:        Get data from firebase -> Create classes ->  Create listview adapter
-        val db = Firebase.firestore
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        val uid = currentUser!!.uid
-        val userDoc = db.collection("Employees").document(uid)
-//        userDoc.get()
-//                .addOnSuccessListener { res ->
-//
-////                    Log.d("blah", res.data.toString())
-//                    for(doc in res){
-//                        Log.d("blah", "${doc.id} => ${doc.data}")
-//                    }
-//                }
-//                .addOnFailureListener { e ->
-//                    Log.d("blah", e.toString())
-//                }
-        userDoc.collection("Hobbies").get()
-                .addOnSuccessListener { docs ->
-                    for(doc in docs){
-                        Log.d("blah", doc.data.toString())
-                    }
+    }
+
+
+    fun loadProfile(){
+        var currentUser = firebase.currentUser
+        var uid = currentUser!!.uid
+        var userDoc = db.collection("Employees").document(uid)
+        userDoc.get()
+                .addOnSuccessListener{ docSnap->
+                    Log.d("blah", docSnap.data.toString())
+                    currentEmployee = docSnap.toObject<Employee>()!!
+                    Log.d("blah", currentEmployee.toString())
+                    renderProfile()
                 }
-        userDoc.collection("Education").get()
-                .addOnSuccessListener { docs ->
-                    for(doc in docs){
-                        Log.d("blah", doc.data.toString())
-                    }
+                .addOnFailureListener { e->
+                    Log.d("blah", e.toString())
+                    currentEmployee = Employee()
                 }
-
-
+    }
+    fun renderProfile(){
+        Log.d("blah", "Render")
+        displayName.text = currentEmployee.name
+        var profilePicView: ImageView = user_profile_image
+        if(currentEmployee.general.pic != "") {
+            Picasso.get().load(currentEmployee.general.pic).into(profilePicView)
+        }
+        for(item in currentEmployee.educations){
+            Log.d("blah", item.university)
+        }
 
 
     }

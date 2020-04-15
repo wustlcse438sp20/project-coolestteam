@@ -18,4 +18,6 @@
     <string name="education">Education</string>
     <string name="university">University</string>
     <string name="grad_year">2021</string>
+    <string name ="register_as_employee">Register as Employee</string>
+    <string name="register_as_employer">Register as Employer</string>
 </resources>
