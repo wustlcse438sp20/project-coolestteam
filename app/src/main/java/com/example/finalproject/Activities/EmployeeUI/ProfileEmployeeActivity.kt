@@ -5,14 +5,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Adapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.MergeAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Activities.LoginActivity
+import com.example.finalproject.Adapters.EducationAdapter
+import com.example.finalproject.Adapters.WorkExperienceAdapter
+import com.example.finalproject.Data.Education
 import com.example.finalproject.Data.Employee
+import com.example.finalproject.Data.WorkExperience
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,10 +37,31 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var currentEmployee: Employee
     private lateinit var displayName: TextView
     private lateinit var email: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var mergeAdapter: MergeAdapter
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private var educationList = ArrayList<Education>()
+    private var workExperienceList = ArrayList<WorkExperience>()
+    private lateinit var educationAdapter: EducationAdapter
+    private lateinit var workExperienceAdapter: WorkExperienceAdapter
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_employee)
+
+        viewManager = LinearLayoutManager(this)
+        educationAdapter = EducationAdapter(educationList)
+        workExperienceAdapter = WorkExperienceAdapter(workExperienceList)
+        mergeAdapter = MergeAdapter(educationAdapter, workExperienceAdapter)
+        recyclerView = findViewById<RecyclerView>(R.id.section_list).apply{
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = mergeAdapter
+        }
+
+
         db = Firebase.firestore
         logoutButton = logout_button
         homeButton = home_button
@@ -74,8 +101,15 @@ class ProfileEmployeeActivity : AppCompatActivity() {
             Picasso.get().load(currentEmployee.general.pic).into(profilePicView)
         }
         for(item in currentEmployee.educations){
-            Log.d("blah", item.university)
+            educationList.add(item)
         }
+        for(item in currentEmployee.workExperiences){
+            workExperienceList.add(item)
+        }
+
+        educationAdapter.notifyDataSetChanged()
+        workExperienceAdapter.notifyDataSetChanged()
+//        mergeAdapter.notifyDataSetChanged()
 
 
     }

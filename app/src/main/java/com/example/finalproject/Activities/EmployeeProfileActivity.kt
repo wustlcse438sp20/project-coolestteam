@@ -66,17 +66,26 @@ class EmployeeProfileActivity: AppCompatActivity() {
                 newEmployee.general = generalProfile
             }
 
+
+            //TODO REMOVE THIS
+            var educationTest = Education("Computer Science", "4.0", "2021", "Washington University")
+            newEmployee.educations.add(educationTest)
+            newEmployee.educations.add(educationTest)
+            var workTest = WorkExperience("Google", "Did important stuff", Date(2020), Date(2021), "CEO")
+            newEmployee.workExperiences.add(workTest)
+            newEmployee.workExperiences.add(workTest)
+
 //           newEmployeeMap["employee"] = newEmployee
             newEmployeeMap["name"] = newEmployee.name
             newEmployeeMap["age"] = newEmployee.age
             newEmployeeMap["school"] = newEmployee.school
             newEmployeeMap["major"] = newEmployee.major
             newEmployeeMap["general"] = newEmployee.general
-            newEmployeeMap["education"] = newEmployee.educations
+            newEmployeeMap["educations"] = newEmployee.educations
             newEmployeeMap["hobbies"] = newEmployee.hobbies
             newEmployeeMap["projects"] = newEmployee.projects
             newEmployeeMap["technicalSkills"] = newEmployee.technicalSkills
-            newEmployeeMap["workExperience"] = newEmployee.workExperiences
+            newEmployeeMap["workExperiences"] = newEmployee.workExperiences
 
             //add to the database
             db.collection("Employees")

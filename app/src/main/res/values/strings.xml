@@ -20,4 +20,8 @@
     <string name="grad_year">2021</string>
     <string name ="register_as_employee">Register as Employee</string>
     <string name="register_as_employer">Register as Employer</string>
+    <string name="work_experience">Work Experience</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="description">Description</string>
 </resources>
