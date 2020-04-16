@@ -1,8 +1,14 @@
 package com.example.finalproject.Data
 
 data class Employee(
-    val name: String,
-    val school: String,
-    val major: String,
-    val age: Int
+        var name: String = "",
+        var school: String = "",
+        var major: String = "",
+        var age: Int = 0,
+        var general: GeneralEmployee = GeneralEmployee(null, null, null, null, null),
+        var educations: MutableList<Education> = mutableListOf<Education>(),
+        var hobbies: MutableList<Hobby> = mutableListOf<Hobby>(),
+        var projects: MutableList<Project> = mutableListOf<Project>(),
+        var technicalSkills: MutableList<TechnicalSkill> = mutableListOf<TechnicalSkill>(),
+        var workExperiences: MutableList<WorkExperience> = mutableListOf<WorkExperience>()
 )

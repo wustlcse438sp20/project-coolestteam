@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_home_employee.*
 class HomeEmployeeActivity : AppCompatActivity(){
     private lateinit var logoutButton: ImageButton
     private lateinit var profileButton: ImageButton
-    private lateinit var projectButton: ImageButton
     private lateinit var matchButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +23,8 @@ class HomeEmployeeActivity : AppCompatActivity(){
         setContentView(R.layout.activity_home_employee)
         logoutButton = logout_button
         profileButton = profile_button
-        projectButton = project_button
         matchButton = match_button
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
-        projectButton.setOnClickListener { v -> changeActivity(v, ProjectsEmployeeActivity::class.java, false) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployeeActivity::class.java, false) }
         matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false)}
     }

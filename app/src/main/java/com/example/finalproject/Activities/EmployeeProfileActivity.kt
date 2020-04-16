@@ -5,22 +5,30 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.finalproject.Data.Employee
+import com.example.finalproject.Data.*
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_employee_profile.*
-import java.util.HashMap
+import java.io.Serializable
+import java.util.*
 
 class EmployeeProfileActivity: AppCompatActivity() {
 
     lateinit var createProfile: Button
     lateinit var auth: FirebaseAuth
+    private var generalProfile: GeneralEmployee = GeneralEmployee()
     private lateinit var db: FirebaseFirestore
+    private var intentHasProfileData = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee_profile)
+        if(intent.hasExtra("profile")){
+            generalProfile = intent.getSerializableExtra("profile") as GeneralEmployee
+            intentHasProfileData = true
+        }
 
         //Firebase Initializations
         auth = FirebaseAuth.getInstance()
@@ -46,13 +54,44 @@ class EmployeeProfileActivity: AppCompatActivity() {
                 name,
                 school,
                 major,
-                age
+                age,
+                    GeneralEmployee(),
+                    mutableListOf<Education>(),
+                    mutableListOf<Hobby>(),
+                    mutableListOf<Project>(),
+                    mutableListOf<TechnicalSkill>(),
+                    mutableListOf<WorkExperience>()
             )
+            if(intentHasProfileData){
+                newEmployee.general = generalProfile
+            }
 
+
+            //TODO REMOVE THIS
+            var educationTest = Education("Computer Science", "4.0", "2021", "Washington University")
+            newEmployee.educations.add(educationTest)
+            newEmployee.educations.add(educationTest)
+            var workTest = WorkExperience("Google", "Did important stuff", Date(2020), Date(2021), "CEO")
+            newEmployee.workExperiences.add(workTest)
+            newEmployee.workExperiences.add(workTest)
+            var tempHobby = Hobby("running")
+            newEmployee.hobbies.add(tempHobby)
+            newEmployee.hobbies.add(tempHobby)
+            newEmployee.hobbies.add(tempHobby)
+            newEmployee.hobbies.add(tempHobby)
+            newEmployee.hobbies.add(tempHobby)
+
+//           newEmployeeMap["employee"] = newEmployee
             newEmployeeMap["name"] = newEmployee.name
             newEmployeeMap["age"] = newEmployee.age
             newEmployeeMap["school"] = newEmployee.school
             newEmployeeMap["major"] = newEmployee.major
+            newEmployeeMap["general"] = newEmployee.general
+            newEmployeeMap["educations"] = newEmployee.educations
+            newEmployeeMap["hobbies"] = newEmployee.hobbies
+            newEmployeeMap["projects"] = newEmployee.projects
+            newEmployeeMap["technicalSkills"] = newEmployee.technicalSkills
+            newEmployeeMap["workExperiences"] = newEmployee.workExperiences
 
             //add to the database
             db.collection("Employees")

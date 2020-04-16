@@ -51,10 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="57dp"
-        android:orientation="horizontal"
         android:layout_marginBottom="40dp"
-        android:background="@color/mediumLight"
+        android:background="@color/medium"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,28 +64,28 @@
         <Button
             android:id="@+id/employer_btn"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="75dp"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@color/accentGreen"
-            android:textColor="@color/dark"
-            android:text="@string/employers"/>
+            android:text="@string/register_as_employer"
+            android:textColor="@color/dark" />
+
         <Button
             android:id="@+id/employee_btn"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="75dp"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@color/accentBlue"
-            android:textColor="@color/dark"
-            android:text="@string/employees"/>
+            android:text="@string/register_as_employee"
+            android:textColor="@color/dark" />
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/main_nav_bar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@color/dark"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
@@ -93,49 +93,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/profile_button"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/dark"
-            android:src="@drawable/profilewhite" />
-
-        <ImageButton
-            android:id="@+id/project_button"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/dark"
-            android:src="@drawable/filewhite" />
 
 
-        <ImageButton
-            android:id="@+id/home_button"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/dark"
-            android:src="@drawable/homewhite" />
-
-
-        <ImageButton
-            android:id="@+id/search_button"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/dark"
-            android:src="@drawable/searchwhite" />
-
-
-        <ImageButton
-            android:id="@+id/match_button"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/dark"
-            android:src="@drawable/messagewhite" />
-
-    </LinearLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

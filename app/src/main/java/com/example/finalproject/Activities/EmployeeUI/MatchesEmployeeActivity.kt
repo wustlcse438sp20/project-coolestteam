@@ -14,7 +14,6 @@ class MatchesEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
     private lateinit var profileButton: ImageButton
     private lateinit var homeButton: ImageButton
-    private lateinit var projectButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +21,9 @@ class MatchesEmployeeActivity : AppCompatActivity() {
         logoutButton = logout_button
         profileButton = profile_button
         homeButton = home_button
-        projectButton = project_button
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployeeActivity::class.java, false) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployeeActivity::class.java, false) }
-        projectButton.setOnClickListener { v -> changeActivity(v, ProjectsEmployeeActivity::class.java, false)}
     }
 
     fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
