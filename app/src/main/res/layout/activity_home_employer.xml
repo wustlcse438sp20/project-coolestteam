@@ -58,17 +58,67 @@
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
         <TextView
+            android:id="@+id/main_container_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="EmployerUI"
             android:textSize="30sp" />
 
-        <ImageView
+        <LinearLayout
+            android:id="@+id/info_container"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:gravity="center"
-            android:src="@drawable/home" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="57dp"
+            android:layout_marginBottom="40dp"
+            android:background="@color/mediumLight"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_container_text">
+
+            <TextView
+                android:id="@+id/employee_name_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                app:layout_constraintTop_toTopOf="@+id/info_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/employee_school_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="School"
+                app:layout_constraintTop_toTopOf="@+id/job_posting"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/employee_major_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Major"
+                app:layout_constraintTop_toTopOf="@+id/employee_school_home"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/employee_age_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                app:layout_constraintTop_toTopOf="@+id/employee_major_home"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

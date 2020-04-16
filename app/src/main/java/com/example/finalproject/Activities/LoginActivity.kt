@@ -48,16 +48,15 @@ class LoginActivity: AppCompatActivity() {
         if (currentUser != null) {
             startNewActivity(MainActivity::class.java)
         } else {
+            loginButton.setOnClickListener{
+                emailLoginFlow()
+            }
             githubLoginButton.setOnClickListener{
                 githubLogin()
             }
             signUpButton.setOnClickListener {
                 startNewActivity(SignupActivity::class.java)
             }
-            loginButton.setOnClickListener{
-                emailLoginFlow()
-            }
-
         }
 
     }

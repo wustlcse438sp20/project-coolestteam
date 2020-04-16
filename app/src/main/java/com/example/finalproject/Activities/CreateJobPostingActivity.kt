@@ -44,8 +44,8 @@ class CreateJobPostingActivity: AppCompatActivity() {
 
 
             var newPosting = Posting(
-                position,
                 company,
+                position,
                 education,
                 salary
 
