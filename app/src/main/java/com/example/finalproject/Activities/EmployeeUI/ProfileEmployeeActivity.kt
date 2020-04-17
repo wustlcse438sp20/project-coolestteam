@@ -1,6 +1,7 @@
 package com.example.finalproject.Activities.EmployeeUI
 
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Activities.LoginActivity
+import com.example.finalproject.ActivityUtil
 import com.example.finalproject.Adapters.EducationAdapter
 import com.example.finalproject.Adapters.StringListAdapter
 import com.example.finalproject.Adapters.WorkExperienceAdapter
 import com.example.finalproject.Data.Education
 import com.example.finalproject.Data.Employee
 import com.example.finalproject.Data.WorkExperience
+import com.example.finalproject.Fragments.EmployeeAddProfileSection
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,7 +28,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile_employee.*
-import kotlinx.coroutines.flow.merge
+
 
 class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
@@ -62,8 +65,9 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         hobbyStringListAdapter = StringListAdapter(hobbyList, this, "Hobbies")
         mergeAdapter.addAdapter(educationAdapter)
         mergeAdapter.addAdapter(workExperienceAdapter)
-        mergeAdapter.addAdapter(hobbyStringListAdapter)
         mergeAdapter.addAdapter(technicalSkillListAdapter)
+        mergeAdapter.addAdapter(hobbyStringListAdapter)
+
         recyclerView = findViewById<RecyclerView>(R.id.section_list).apply{
             setHasFixedSize(true)
             layoutManager = viewManager
@@ -109,7 +113,10 @@ class ProfileEmployeeActivity : AppCompatActivity() {
 
     //Display user profile
     fun renderProfile(){
-
+        technicalSkillList.clear()
+        hobbyList.clear()
+        educationList.clear()
+        workExperienceList.clear()
         displayName.text = currentEmployee.name
         var profilePicView: ImageView = user_profile_image
         if(currentEmployee.general.pic != "") {
@@ -133,8 +140,6 @@ class ProfileEmployeeActivity : AppCompatActivity() {
             if(item.skill != null && item.skill !=""){
                 technicalSkillList.add(item.skill!!)
             }
-
-
         }
         educationAdapter.notifyDataSetChanged()
         workExperienceAdapter.notifyDataSetChanged()
@@ -156,7 +161,9 @@ class ProfileEmployeeActivity : AppCompatActivity() {
 
 
     fun addSection(view: View){
-        Toast.makeText(this, "HELLO", Toast.LENGTH_LONG).show()
+        var util = ActivityUtil()
+        var fragment = EmployeeAddProfileSection()
+        util.addFragmentToActivty(supportFragmentManager, fragment, R.id.fragment_container)
     }
 
 
