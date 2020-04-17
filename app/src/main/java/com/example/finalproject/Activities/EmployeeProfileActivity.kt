@@ -80,6 +80,11 @@ class EmployeeProfileActivity: AppCompatActivity() {
             newEmployee.hobbies.add(tempHobby)
             newEmployee.hobbies.add(tempHobby)
             newEmployee.hobbies.add(tempHobby)
+            var tempSkill= TechnicalSkill("Java")
+            newEmployee.technicalSkills.add(tempSkill)
+            newEmployee.technicalSkills.add(tempSkill)
+            newEmployee.technicalSkills.add(tempSkill)
+            newEmployee.technicalSkills.add(tempSkill)
 
 //           newEmployeeMap["employee"] = newEmployee
             newEmployeeMap["name"] = newEmployee.name
