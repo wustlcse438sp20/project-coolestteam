@@ -50,9 +50,8 @@
     <LinearLayout
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:background="@color/mediumLight"
+        android:layout_height="75dp"
+        android:background="@color/medium"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +61,7 @@
             android:id="@+id/user_profile_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/profileblue" />
 
         <LinearLayout
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder_name"
-                android:textColor="@color/dark"
+                android:textColor="@color/mediumLight"
                 android:textSize="25sp" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder_email"
-                android:textColor="@color/dark"
+                android:textColor="@color/mediumLight"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -96,7 +96,7 @@
         android:id="@+id/section_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="143dp"
+        android:layout_marginTop="132dp"
         android:layout_marginBottom="40dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
@@ -195,4 +195,16 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="40dp"
+        android:isScrollContainer="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

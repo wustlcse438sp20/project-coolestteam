@@ -24,4 +24,22 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="description">Description</string>
+    <string name="add_a_profile_section">Add a Profile Section</string>
+    <string-array name="section_options">
+        <item>Project</item>
+        <item>Education</item>
+        <item>Work Experience</item>
+        <item>Technical Skill</item>
+        <item>Hobby</item>
+    </string-array>
+    <string name="hobby_prompt">Enter a Hobby</string>
+    <string name="submit">Submit</string>
+    <string name="skill_prompt">Enter a Skill</string>
+    <string name="company_prompt">Company</string>
+    <string name="position_prompt">Position</string>
+    <string name="from_prompt">Started</string>
+    <string name="to_prompt">Ended</string>
+    <string name="description_prompt">Position description</string>
 </resources>
+
+
