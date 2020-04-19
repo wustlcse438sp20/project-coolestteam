@@ -39,6 +39,4 @@ class HomeEmployeeActivity : AppCompatActivity(){
         }
         startActivity(intent)
     }
-
-
 }
