@@ -1,21 +1,15 @@
 package com.example.finalproject.Fragments
 
 import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.Dialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.finalproject.R
-import kotlinx.android.synthetic.main.employee_add_profile_section.view.*
-import java.text.DateFormat
-import java.util.*
+
 
 
 class EmployeeAddProfileSection: Fragment(){

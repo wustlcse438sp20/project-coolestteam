@@ -34,6 +34,8 @@ class CreateJobPostingActivity: AppCompatActivity() {
             var education: String = job_education.text.toString()
             var salary: Int = job_salary.text.toString().toInt()
 
+            //TODO determine if this is okay
+            //var id: String = ""
 
             //Get UID of current user to place values in correct doc
             var currUser = intent.getStringExtra("uid")
@@ -48,8 +50,10 @@ class CreateJobPostingActivity: AppCompatActivity() {
                 position,
                 education,
                 salary
-
             )
+
+            //TODO does this help?
+            newPosting.updateDatabase()
 
             newPostingMap["Job Title"] = newPosting.position
             newPostingMap["Company"] = newPosting.company

@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalproject.Data.PostMatch
 import com.example.finalproject.Data.Posting
 import com.example.finalproject.R
 
@@ -25,8 +26,8 @@ class MatchesViewHolderEmployer(inflater: LayoutInflater, parent: ViewGroup) :
         matchesContainer = itemView.findViewById(R.id.matchContainerEmployer)
     }
 
-    fun bind(post: Posting) {
-        userName?.text = post.company
+    fun bind(post: PostMatch) {
+        userName?.text = post.companyName
         userMajor?.text = post.position
 
         matchesContainer?.setOnClickListener {
@@ -46,8 +47,8 @@ class MatchesViewHolderEmployer(inflater: LayoutInflater, parent: ViewGroup) :
 }
 
 //create the listener for the recycler view
-class EmployerMatchesAdapter(private val list: ArrayList<Posting>?) : RecyclerView.Adapter<MatchesViewHolderEmployer>() {
-    private var listEvents: ArrayList<Posting>? = list
+class EmployerMatchesAdapter(private val list: ArrayList<PostMatch>?) : RecyclerView.Adapter<MatchesViewHolderEmployer>() {
+    private var listEvents: ArrayList<PostMatch>? = list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchesViewHolderEmployer {
         val inflater = LayoutInflater.from(parent.context)
         return MatchesViewHolderEmployer(inflater, parent)
@@ -55,7 +56,7 @@ class EmployerMatchesAdapter(private val list: ArrayList<Posting>?) : RecyclerVi
 
     //bind the object
     override fun onBindViewHolder(holder: MatchesViewHolderEmployer, position: Int) {
-        val event: Posting = listEvents!!.get(position)
+        val event: PostMatch = listEvents!!.get(position)
         holder.bind(event)
     }
 
