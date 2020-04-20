@@ -67,24 +67,24 @@ class EmployeeProfileActivity: AppCompatActivity() {
             }
 
 
-            //TODO REMOVE THIS
-            var educationTest = Education("Computer Science", "4.0", "2021", "Washington University")
-            newEmployee.educations.add(educationTest)
-            newEmployee.educations.add(educationTest)
-            var workTest = WorkExperience("Google", "Did important stuff", Date(2020), Date(2021), "CEO")
-            newEmployee.workExperiences.add(workTest)
-            newEmployee.workExperiences.add(workTest)
-            var tempHobby = Hobby("running")
-            newEmployee.hobbies.add(tempHobby)
-            newEmployee.hobbies.add(tempHobby)
-            newEmployee.hobbies.add(tempHobby)
-            newEmployee.hobbies.add(tempHobby)
-            newEmployee.hobbies.add(tempHobby)
-            var tempSkill= TechnicalSkill("Java")
-            newEmployee.technicalSkills.add(tempSkill)
-            newEmployee.technicalSkills.add(tempSkill)
-            newEmployee.technicalSkills.add(tempSkill)
-            newEmployee.technicalSkills.add(tempSkill)
+//            //TODO REMOVE THIS
+//            var educationTest = Education("Computer Science", "4.0", "2021", "Washington University")
+//            newEmployee.educations.add(educationTest)
+//            newEmployee.educations.add(educationTest)
+//            var workTest = WorkExperience("Google", "Did important stuff", Date(2020), Date(2021), "CEO")
+//            newEmployee.workExperiences.add(workTest)
+//            newEmployee.workExperiences.add(workTest)
+//            var tempHobby = Hobby("running")
+//            newEmployee.hobbies.add(tempHobby)
+//            newEmployee.hobbies.add(tempHobby)
+//            newEmployee.hobbies.add(tempHobby)
+//            newEmployee.hobbies.add(tempHobby)
+//            newEmployee.hobbies.add(tempHobby)
+//            var tempSkill= TechnicalSkill("Java")
+//            newEmployee.technicalSkills.add(tempSkill)
+//            newEmployee.technicalSkills.add(tempSkill)
+//            newEmployee.technicalSkills.add(tempSkill)
+//            newEmployee.technicalSkills.add(tempSkill)
 
 //           newEmployeeMap["employee"] = newEmployee
             newEmployeeMap["name"] = newEmployee.name

@@ -30,7 +30,7 @@ class EducationViewHolder(inflater: LayoutInflater, parent: ViewGroup):
     fun bind(education: Education){
         degree.text = education.degree
         gpa.text = "GPA: " + education.gpa
-        graduation.text = education.graducation
+        graduation.text = education.graduation
         university.text = education.university
 
 
