@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:visibility="visible">
             <EditText
+                android:id="@+id/hobby_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -61,10 +62,19 @@
             android:layout_height="wrap_content"
             android:visibility="visible">
             <EditText
+                android:id="@+id/skill_skill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/skill_prompt"
                 android:inputType="text"
+                android:textColorHint="@color/accentBlue"
+                android:textColor="@color/mediumLight"/>
+            <EditText
+                android:id="@+id/skill_proficiency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/proficiency_propt"
+                android:inputType="number"
                 android:textColorHint="@color/accentBlue"
                 android:textColor="@color/mediumLight"/>
         </LinearLayout>
@@ -78,6 +88,7 @@
             android:isScrollContainer="true"
             android:visibility="visible">
             <EditText
+                android:id="@+id/work_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/company_prompt"
@@ -85,6 +96,7 @@
                 android:textColorHint="@color/accentBlue"
                 android:textColor="@color/mediumLight"/>
             <EditText
+                android:id="@+id/work_position"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/position_prompt"
@@ -92,39 +104,61 @@
                 android:textColorHint="@color/accentBlue"
                 android:textColor="@color/mediumLight"/>
             <EditText
+                android:id="@+id/work_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/description_prompt"
                 android:inputType="textLongMessage"
                 android:textColorHint="@color/accentBlue"
                 android:textColor="@color/mediumLight"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/education_input"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true"
+            android:visibility="visible">
             <EditText
-                android:id="@+id/work_input_first_date"
+                android:id="@+id/education_university"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/from_prompt"
-                android:inputType="date"
-                android:clickable="true"
-                android:onClick="showDatePickerDialog"
-                android:editable="false"
+                android:hint="@string/university"
+                android:inputType="text"
                 android:textColorHint="@color/accentBlue"
                 android:textColor="@color/mediumLight"/>
             <EditText
-                android:id="@+id/work_input_last_date"
+                android:id="@+id/education_degree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/to_prompt"
+                android:hint="@string/degree"
+                android:inputType="text"
+                android:textColorHint="@color/accentBlue"
+                android:textColor="@color/mediumLight"/>
+            <EditText
+                android:id="@+id/education_gpa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/gpa"
+                android:inputType="textLongMessage"
+                android:textColorHint="@color/accentBlue"
+                android:textColor="@color/mediumLight"/>
+            <EditText
+                android:id="@+id/education_graduation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/graduation"
                 android:inputType="date"
                 android:clickable="true"
-                android:editable="false"
                 android:textColorHint="@color/accentBlue"
                 android:textColor="@color/mediumLight"/>
         </LinearLayout>
 
 
 
-
         <Button
+            android:id="@+id/submitSection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="50dp"

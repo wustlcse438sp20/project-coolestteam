@@ -27,6 +27,7 @@ class StringListViewHolder(inflater: LayoutInflater, var parent: ViewGroup):
     }
 
         fun bind(listObject: ArrayList<String>, context: Context, title: String){
+            listHere.removeAllViews()
             titleHere.text = title
             var width = listHere.width
             for(item in listObject){
@@ -53,8 +54,10 @@ class StringListAdapter(private val list: ArrayList<String>, var context: Contex
     }
 
     override fun onBindViewHolder(holder: StringListViewHolder, position: Int) {
-        val listObject: ArrayList<String> = list
+
+        val listObject: ArrayList<String>  = list
         holder.bind(listObject, context, title)
+
     }
 
     override fun getItemCount(): Int {

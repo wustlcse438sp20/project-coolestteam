@@ -1,13 +1,13 @@
 package com.example.finalproject.Activities.EmployeeUI
 
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +28,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile_employee.*
+import kotlinx.coroutines.flow.merge
 
 
 class ProfileEmployeeActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var homeButton: ImageButton
     private lateinit var matchButton: ImageButton
     private lateinit var db: FirebaseFirestore
-    private  var firebase = FirebaseAuth.getInstance()
+    private var firebase = FirebaseAuth.getInstance()
     private lateinit var currentEmployee: Employee
     private lateinit var displayName: TextView
     private lateinit var email: TextView
@@ -50,7 +51,6 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var workExperienceAdapter: WorkExperienceAdapter
     private lateinit var hobbyStringListAdapter: StringListAdapter
     private lateinit var technicalSkillListAdapter: StringListAdapter
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +68,7 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         mergeAdapter.addAdapter(technicalSkillListAdapter)
         mergeAdapter.addAdapter(hobbyStringListAdapter)
 
-        recyclerView = findViewById<RecyclerView>(R.id.section_list).apply{
+        recyclerView = findViewById<RecyclerView>(R.id.section_list).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = mergeAdapter
@@ -85,58 +85,60 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         email = user_email
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployeeActivity::class.java, false) }
-        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false)}
+        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false) }
 
         //Add data to recycler view
         loadProfile()
     }
 
     //Get current user data
-    fun loadProfile(){
+    fun loadProfile() {
         var currentUser = firebase.currentUser
         var uid = currentUser!!.uid
         email.text = currentUser.email
+
+        hobbyStringListAdapter.notifyDataSetChanged()
+        technicalSkillListAdapter.notifyDataSetChanged()
+
         var userDoc = db.collection("Employees").document(uid)
         userDoc.get()
-                .addOnSuccessListener{ docSnap->
+                .addOnSuccessListener { docSnap ->
                     Log.d("blah", docSnap.data.toString())
                     currentEmployee = docSnap.toObject<Employee>()!!
                     Log.d("blah", currentEmployee.toString())
                     renderProfile()
                 }
-                .addOnFailureListener { e->
+                .addOnFailureListener { e ->
                     Log.d("blah", e.toString())
                     currentEmployee = Employee()
                 }
     }
 
     //Display user profile
-    fun renderProfile(){
+    fun renderProfile() {
         technicalSkillList.clear()
         hobbyList.clear()
         educationList.clear()
         workExperienceList.clear()
+
         displayName.text = currentEmployee.name
         var profilePicView: ImageView = user_profile_image
-        if(currentEmployee.general.pic != "") {
+        if (currentEmployee.general.pic != "") {
             Picasso.get().load(currentEmployee.general.pic).into(profilePicView)
         }
-        for(item in currentEmployee.educations){
+        for (item in currentEmployee.educations) {
             educationList.add(item)
-
         }
-        for(item in currentEmployee.workExperiences){
+        for (item in currentEmployee.workExperiences) {
             workExperienceList.add(item)
-
         }
-        for(hobby in currentEmployee.hobbies){
-            if(hobby.type != null && hobby.type !=""){
+        for (hobby in currentEmployee.hobbies) {
+            if (hobby.type != null && hobby.type != "") {
                 hobbyList.add(hobby.type!!)
             }
-
         }
-        for(item in currentEmployee.technicalSkills){
-            if(item.skill != null && item.skill !=""){
+        for (item in currentEmployee.technicalSkills) {
+            if (item.skill != null && item.skill != "") {
                 technicalSkillList.add(item.skill!!)
             }
         }
@@ -144,31 +146,51 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         workExperienceAdapter.notifyDataSetChanged()
         hobbyStringListAdapter.notifyDataSetChanged()
         technicalSkillListAdapter.notifyDataSetChanged()
-        if(technicalSkillList.size == 0){
+        mergeAdapter.notifyDataSetChanged()
+        if (technicalSkillList.size == 0) {
             mergeAdapter.removeAdapter(technicalSkillListAdapter)
         }
-        if(hobbyList.size == 0){
+        if (hobbyList.size == 0) {
             mergeAdapter.removeAdapter(hobbyStringListAdapter)
         }
-        if(educationList.size == 0){
+        if (educationList.size == 0) {
             mergeAdapter.removeAdapter(educationAdapter)
         }
-        if(workExperienceList.size == 0){
+        if (workExperienceList.size == 0) {
             mergeAdapter.removeAdapter(workExperienceAdapter)
         }
     }
 
 
-    fun addSection(view: View){
+    fun addSection(view: View) {
         var util = ActivityUtil()
         var fragment = EmployeeAddProfileSection()
         util.addFragmentToActivty(supportFragmentManager, fragment, R.id.fragment_container)
     }
 
+    fun closeFragment(fragment: Fragment) {
 
-    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
+
+        var util = ActivityUtil()
+        util.removeFragmentFromActivity(supportFragmentManager, fragment)
+        currentEmployee.hobbies.clear()
+        currentEmployee.technicalSkills.clear()
+        hobbyList.clear()
+        technicalSkillList.clear()
+//        mergeAdapter.removeAdapter(hobbyStringListAdapter)
+//        mergeAdapter.removeAdapter(technicalSkillListAdapter)
+//        hobbyStringListAdapter = StringListAdapter(hobbyList, this, "Technical Skills")
+//        technicalSkillListAdapter = StringListAdapter(technicalSkillList, this, "Hobbies")
+//        mergeAdapter.addAdapter(technicalSkillListAdapter)
+//        mergeAdapter.addAdapter(hobbyStringListAdapter)
+        loadProfile()
+
+    }
+
+
+    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean) {
         val intent = Intent(this, activity)
-        if(isLogout){
+        if (isLogout) {
             FirebaseAuth.getInstance().signOut()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
