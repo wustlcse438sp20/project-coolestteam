@@ -10,5 +10,6 @@ data class Employee(
         var hobbies: MutableList<Hobby> = mutableListOf<Hobby>(),
         var projects: MutableList<Project> = mutableListOf<Project>(),
         var technicalSkills: MutableList<TechnicalSkill> = mutableListOf<TechnicalSkill>(),
-        var workExperiences: MutableList<WorkExperience> = mutableListOf<WorkExperience>()
+        var workExperiences: MutableList<WorkExperience> = mutableListOf<WorkExperience>(),
+        var matchList: MutableList<PostMatch> = mutableListOf<PostMatch>()
 )

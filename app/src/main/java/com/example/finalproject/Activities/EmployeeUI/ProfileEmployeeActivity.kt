@@ -89,7 +89,6 @@ class ProfileEmployeeActivity : AppCompatActivity() {
 
         //Add data to recycler view
         loadProfile()
-
     }
 
     //Get current user data

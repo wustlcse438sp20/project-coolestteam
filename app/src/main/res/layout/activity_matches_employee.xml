@@ -44,19 +44,33 @@
             android:src="@drawable/settingswhite" />
     </LinearLayout>
 
-
-    <ListView
-        android:id="@+id/main_container"
+    <TextView
+        android:id="@+id/usersMatches"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="57dp"
-        android:layout_marginBottom="40dp"
-        android:background="@color/mediumLight"
-        app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/users_matches"
+        android:gravity="center"
+        android:textSize="25sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"/>
+        app:layout_constraintBottom_toTopOf="@id/matchesRecyclerView"
+        />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/matchesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="525dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usersMatches" />
 
     <LinearLayout
         android:id="@+id/main_nav_bar"
@@ -67,6 +81,7 @@
         android:paddingRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
 

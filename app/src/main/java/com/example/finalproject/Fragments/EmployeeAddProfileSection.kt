@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.finalproject.R
-import kotlinx.android.synthetic.main.employee_add_profile_section.*
-import kotlinx.android.synthetic.main.employee_add_profile_section.view.*
+
+
 
 class EmployeeAddProfileSection: Fragment(){
     lateinit var spinner: Spinner
     lateinit var hobbyInput: LinearLayout
     lateinit var skillInput: LinearLayout
+
 
 
     override fun onCreateView(
@@ -30,7 +31,6 @@ class EmployeeAddProfileSection: Fragment(){
             spinner.adapter = adapter
         }
         spinner.onItemSelectedListener = SpinnerActivity(this)
-
         return v
     }
 
