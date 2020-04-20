@@ -27,6 +27,7 @@ class MatchesEmployeeActivity : AppCompatActivity() {
     lateinit var query: Query
     lateinit var adapter : MatchesAdapterEmployee
     lateinit var recycler : RecyclerView
+    private var postingList = ArrayList<PostMatch>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +42,15 @@ class MatchesEmployeeActivity : AppCompatActivity() {
 
         firestore = FirebaseFirestore.getInstance()
 
+        recycler = matchesRecyclerView
+        adapter = MatchesAdapterEmployee(postingList)
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
+
         query = firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .collection("Matches").whereArrayContains("Interested", true)
 
-        var postingList: ArrayList<PostMatch> = arrayListOf()
+
         firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .collection("Matches").get().addOnSuccessListener { result ->
                     Log.d("check success", "s check")
@@ -52,20 +58,10 @@ class MatchesEmployeeActivity : AppCompatActivity() {
                         Log.d("check", document.data.toString())
                         postingList.add(document.toObject<PostMatch>())
                     }
-//            recycler = matchesRecyclerView
-//            adapter = MatchesAdapterEmployee(postingList)
-//            recycler.adapter = adapter
-//            recycler.layoutManager = LinearLayoutManager(this)
-        }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
-        recycler = matchesRecyclerView
-        adapter = MatchesAdapterEmployee(postingList)
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(this)
+                    adapter.notifyDataSetChanged()
 
-        Log.d("a fake thing in postingList", "pList thing")
-        for(post in postingList){
-            Log.d("a thing in postingList", "pList thing")
-        }
+        }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
+
     }
 
     fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
