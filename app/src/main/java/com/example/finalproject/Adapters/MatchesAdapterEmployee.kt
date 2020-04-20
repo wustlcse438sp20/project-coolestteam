@@ -29,9 +29,9 @@ class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     }
 
     fun bind(post: PostMatch) {
-        companyName?.text = post.companyName
-        jobTitle?.text = post.position
-        jobSalary?.text = post.salary.toString()
+        companyName?.text = post.Company
+        jobTitle?.text = post.Position
+        jobSalary?.text = post.Salary.toString()
 
         matchesContainer?.setOnClickListener {
             //allow users to click on postings?

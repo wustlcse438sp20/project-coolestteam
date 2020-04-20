@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Activities.LoginActivity
 import com.example.finalproject.Adapters.MatchesAdapterEmployee
-import com.example.finalproject.Data.Employee
 import com.example.finalproject.Data.PostMatch
-import com.example.finalproject.Data.Posting
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -51,6 +49,7 @@ class MatchesEmployeeActivity : AppCompatActivity() {
                 .collection("Matches").get().addOnSuccessListener { result ->
                     Log.d("check success", "s check")
                     for (document in result) {
+                        Log.d("check", document.data.toString())
                         postingList.add(document.toObject<PostMatch>())
                     }
 //            recycler = matchesRecyclerView
