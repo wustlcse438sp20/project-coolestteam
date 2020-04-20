@@ -6,10 +6,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 data class Posting (
-    var company: String,
-    var position: String,
-    var education: String,
-    var salary: Int,
+    var company: String = "",
+    var position: String ="",
+    var education: String = "",
+    var salary: Int = 0,
     var id : String = ""
 ) {
     fun updateDatabase() {

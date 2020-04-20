@@ -32,7 +32,7 @@
     <string name="description">Description</string>
     <string name="add_a_profile_section">Add a Profile Section</string>
     <string-array name="section_options">
-        <item>Project</item>
+<!--        <item>Project</item>-->
         <item>Education</item>
         <item>Work Experience</item>
         <item>Technical Skill</item>
@@ -46,6 +46,11 @@
     <string name="from_prompt">Started</string>
     <string name="to_prompt">Ended</string>
     <string name="description_prompt">Position description</string>
+    <string name ="degree">Degree</string>
+    <string name ="gpa">GPA</string>
+    <string name="graduation">Graduation</string>
+    <string name ="proficiency_propt">Proficiency</string>
+
 </resources>
 
 

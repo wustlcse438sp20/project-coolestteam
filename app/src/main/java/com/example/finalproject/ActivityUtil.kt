@@ -10,4 +10,11 @@ class ActivityUtil{
         transaction.add(frameId, fragment)
         transaction.commit()
     }
+
+    fun removeFragmentFromActivity(manager: FragmentManager, fragment: Fragment){
+        var transaction: FragmentTransaction = manager.beginTransaction()
+        transaction.remove(fragment)
+        transaction.commit()
+    }
+
 }
