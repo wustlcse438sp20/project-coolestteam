@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:id="@+id/homeContainer">
+
+    <TextView
+        android:id="@+id/jobTitleHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_title"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/companyNameHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/company_name"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        />
+    <TextView
+        android:id="@+id/jobSalaryHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_salary"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        />
+    <TextView
+        android:id="@+id/jobEducationHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_education"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"/>
+
+</LinearLayout>

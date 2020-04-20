@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,10 @@ class HomeEmployeeActivity : AppCompatActivity(){
     private lateinit var logoutButton: ImageButton
     private lateinit var profileButton: ImageButton
     private lateinit var matchButton: ImageButton
+    private lateinit var company: TextView
+    private lateinit var position: TextView
+    private lateinit var education: TextView
+    private lateinit var salary: TextView
 
     lateinit var firestore: FirebaseFirestore
     lateinit var query: Query
@@ -50,6 +55,11 @@ class HomeEmployeeActivity : AppCompatActivity(){
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployeeActivity::class.java, false) }
         matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false)}
 
+        company = home_company_text
+        position = home_position_text
+        education = home_education_text
+        salary = home_salary_text
+
         firestore = FirebaseFirestore.getInstance()
 
         query = firestore.collection("Employers").document(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -63,6 +73,7 @@ class HomeEmployeeActivity : AppCompatActivity(){
                                 .addOnSuccessListener { documents ->
                                     Log.d("check success", "main check")
                                     for (doc in documents) {
+                                        Log.d("check", doc.data.toString())
                                         postingList.add(doc.toObject<Posting>())
                                     }
                         }
@@ -72,9 +83,25 @@ class HomeEmployeeActivity : AppCompatActivity(){
                 Log.d("a thing in postingList", "home pList thing")
             }
         }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
+
+        loadPosting(postingList)
     }
 
+    fun loadPosting(list: ArrayList<Posting>){
+        if(list.size > 0) {
+            Log.d("check", "inside load")
+            var postIndex = (0..list.size).random()
 
+            company.text = list[postIndex].company
+            position.text = list[postIndex].position
+            education.text = list[postIndex].education
+            salary.text = list[postIndex].salary.toString()
+        }
+        else{
+            Log.d("check", "inside load else")
+            Toast.makeText(this, "No postings to show", Toast.LENGTH_LONG)
+        }
+    }
 
     fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
         val intent = Intent(this, activity)
