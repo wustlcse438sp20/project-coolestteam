@@ -50,7 +50,7 @@ class MatchesAdapterEmployee(private val list: ArrayList<PostMatch>?) : Recycler
     //bind the object
     override fun onBindViewHolder(holder: MatchesViewHolder, position: Int) {
         val event: PostMatch = listEvents!!.get(position)
-        holder.bind(event)
+        holder.bind(even
     }
 
     //set the count
