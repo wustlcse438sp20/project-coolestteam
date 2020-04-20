@@ -5,28 +5,45 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Activities.LoginActivity
 import com.example.finalproject.Adapters.MatchesAdapterEmployee
+import com.example.finalproject.Data.Employee
 import com.example.finalproject.Data.PostMatch
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_home_employee.*
+import kotlinx.android.synthetic.main.activity_home_employee.home_button
+import kotlinx.android.synthetic.main.activity_home_employee.logout_button
+import kotlinx.android.synthetic.main.activity_home_employee.profile_button
 import kotlinx.android.synthetic.main.activity_matches_employee.*
+import kotlinx.android.synthetic.main.activity_matches_employee.user_display_name
+import kotlinx.android.synthetic.main.activity_profile_employee.*
 
 class MatchesEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
     private lateinit var profileButton: ImageButton
     private lateinit var homeButton: ImageButton
+    private lateinit var displayName: TextView
+    private lateinit var email: TextView
+    private lateinit var currentEmployee: Employee
+    private lateinit var db: FirebaseFirestore
 
     lateinit var firestore: FirebaseFirestore
     lateinit var query: Query
     lateinit var adapter : MatchesAdapterEmployee
     lateinit var recycler : RecyclerView
+    private var postingList = ArrayList<PostMatch>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,16 +52,22 @@ class MatchesEmployeeActivity : AppCompatActivity() {
         logoutButton = logout_button
         profileButton = profile_button
         homeButton = home_button
+        displayName = user_display_name
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployeeActivity::class.java, false) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployeeActivity::class.java, false) }
 
         firestore = FirebaseFirestore.getInstance()
+        db = Firebase.firestore
+
+        recycler = matchesRecyclerView
+        adapter = MatchesAdapterEmployee(postingList)
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
 
         query = firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .collection("Matches").whereArrayContains("Interested", true)
 
-        var postingList: ArrayList<PostMatch> = arrayListOf()
         firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .collection("Matches").get().addOnSuccessListener { result ->
                     Log.d("check success", "s check")
@@ -52,19 +75,36 @@ class MatchesEmployeeActivity : AppCompatActivity() {
                         Log.d("check", document.data.toString())
                         postingList.add(document.toObject<PostMatch>())
                     }
-//            recycler = matchesRecyclerView
-//            adapter = MatchesAdapterEmployee(postingList)
-//            recycler.adapter = adapter
-//            recycler.layoutManager = LinearLayoutManager(this)
-        }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
-        recycler = matchesRecyclerView
-        adapter = MatchesAdapterEmployee(postingList)
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(this)
+                    adapter.notifyDataSetChanged()
 
-        Log.d("a fake thing in postingList", "pList thing")
-        for(post in postingList){
-            Log.d("a thing in postingList", "pList thing")
+        }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
+
+        loadProfile()
+    }
+
+    fun loadProfile(){
+        var currentUser = FirebaseAuth.getInstance().currentUser
+        var uid = currentUser!!.uid
+        var userDoc = db.collection("Employees").document(uid)
+        userDoc.get()
+                .addOnSuccessListener{ docSnap->
+                    Log.d("blah", docSnap.data.toString())
+                    currentEmployee = docSnap.toObject<Employee>()!!
+                    Log.d("blah", currentEmployee.toString())
+                    renderProfile()
+                }
+                .addOnFailureListener { e->
+                    Log.d("blah", e.toString())
+                    currentEmployee = Employee()
+                }
+    }
+
+    //Display user profile
+    fun renderProfile(){
+        displayName.text = currentEmployee.name + "'s Matches"
+        var profilePicView: ImageView = user_profile_image_matches
+        if(currentEmployee.general.pic != "") {
+            Picasso.get().load(currentEmployee.general.pic).into(profilePicView)
         }
     }
 

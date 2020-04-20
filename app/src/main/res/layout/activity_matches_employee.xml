@@ -44,33 +44,52 @@
             android:src="@drawable/settingswhite" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/usersMatches"
+    <LinearLayout
+        android:id="@+id/profile_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/users_matches"
-        android:gravity="center"
-        android:textSize="25sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        android:layout_height="75dp"
+        android:background="@color/medium"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/matchesRecyclerView"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
+
+        <ImageView
+        android:id="@+id/user_profile_image_matches"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/profileblue" />
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
+
+            <TextView
+            android:id="@+id/user_display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_name"
+            android:textColor="@color/mediumLight"
+            android:textSize="30dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/matchesRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="525dp"
+        android:layout_height= "490dp"
         android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usersMatches" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_header" />
 
     <LinearLayout
         android:id="@+id/main_nav_bar"

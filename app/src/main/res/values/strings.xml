@@ -14,6 +14,7 @@
     <string name="job_description">Job Description</string>
     <string name="job_title">Job Title</string>
     <string name="job_salary">Job Salary</string>
+    <string name="job_education">Job Education</string>
     <string name="users_matches">User Matches</string>
     <string name="posting_matches">Posting Matches</string>
     <string name="position">Position</string>

@@ -4,10 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:id="@+id/matchContainer">
+    android:id="@+id/homeContainer">
 
     <TextView
-        android:id="@+id/jobTitle"
+        android:id="@+id/jobTitleHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/job_title"
@@ -16,7 +16,7 @@
         android:gravity="center"
         />
     <TextView
-        android:id="@+id/companyName"
+        android:id="@+id/companyNameHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/company_name"
@@ -26,10 +26,20 @@
         android:layout_marginStart="8dp"
         />
     <TextView
-        android:id="@+id/jobSalary"
+        android:id="@+id/jobSalaryHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/job_salary"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        />
+    <TextView
+        android:id="@+id/jobEducationHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_education"
         android:textSize="20sp"
         android:gravity="center"
         android:layout_marginEnd="8dp"

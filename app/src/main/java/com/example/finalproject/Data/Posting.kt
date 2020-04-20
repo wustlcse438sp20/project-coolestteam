@@ -7,7 +7,7 @@ import com.google.firebase.ktx.Firebase
 
 data class Posting (
     var company: String = "",
-    var position: String ="",
+    var position: String = "",
     var education: String = "",
     var salary: Int = 0,
     var id : String = ""
