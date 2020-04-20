@@ -35,22 +35,12 @@ class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
         matchesContainer?.setOnClickListener {
             //allow users to click on postings?
-//            var id = pl.id.toString()
-//            val context = it.context
-//            val intent = Intent(context, PlaylistActivity::class.java).apply {
-//                putExtra("id", id)
-//                putExtra("title", pl.title)
-//                putExtra("description", pl.description)
-//                putExtra("rating", pl.rating)
-//                putExtra("genre", pl.genre)
-//            }
-//            context.startActivity(intent)
         }
     }
 }
 
 //create the listener for the recycler view
-class EmployeeMatchesAdapter(private val list: ArrayList<PostMatch>?) : RecyclerView.Adapter<MatchesViewHolder>() {
+class MatchesAdapterEmployee(private val list: ArrayList<PostMatch>?) : RecyclerView.Adapter<MatchesViewHolder>() {
     private var listEvents: ArrayList<PostMatch>? = list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchesViewHolder {
         val inflater = LayoutInflater.from(parent.context)

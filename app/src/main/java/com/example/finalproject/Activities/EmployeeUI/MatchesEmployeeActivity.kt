@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Activities.LoginActivity
-import com.example.finalproject.Adapters.EmployeeMatchesAdapter
+import com.example.finalproject.Adapters.MatchesAdapterEmployee
 import com.example.finalproject.Data.Employee
 import com.example.finalproject.Data.PostMatch
 import com.example.finalproject.Data.Posting
@@ -27,12 +27,13 @@ class MatchesEmployeeActivity : AppCompatActivity() {
 
     lateinit var firestore: FirebaseFirestore
     lateinit var query: Query
-    lateinit var adapter : EmployeeMatchesAdapter
+    lateinit var adapter : MatchesAdapterEmployee
     lateinit var recycler : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matches_employee)
+
         logoutButton = logout_button
         profileButton = profile_button
         homeButton = home_button
@@ -47,15 +48,25 @@ class MatchesEmployeeActivity : AppCompatActivity() {
 
         var postingList: ArrayList<PostMatch> = arrayListOf()
         firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
-                .collection("Matches").whereArrayContains("Interested", true).get().addOnSuccessListener { result ->
-            for (document in result) {
-                postingList.add(document.toObject<PostMatch>())
-            }
-            recycler = matchesRecyclerView
-            adapter = EmployeeMatchesAdapter(postingList)
-            recycler.adapter = adapter
-            recycler.layoutManager = LinearLayoutManager(this)
+                .collection("Matches").get().addOnSuccessListener { result ->
+                    Log.d("check success", "s check")
+                    for (document in result) {
+                        postingList.add(document.toObject<PostMatch>())
+                    }
+//            recycler = matchesRecyclerView
+//            adapter = MatchesAdapterEmployee(postingList)
+//            recycler.adapter = adapter
+//            recycler.layoutManager = LinearLayoutManager(this)
         }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
+        recycler = matchesRecyclerView
+        adapter = MatchesAdapterEmployee(postingList)
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(this)
+
+        Log.d("a fake thing in postingList", "pList thing")
+        for(post in postingList){
+            Log.d("a thing in postingList", "pList thing")
+        }
     }
 
     fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
@@ -66,5 +77,4 @@ class MatchesEmployeeActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
-
 }
