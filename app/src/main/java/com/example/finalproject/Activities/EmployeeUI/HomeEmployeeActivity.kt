@@ -1,7 +1,5 @@
 package com.example.finalproject.Activities.EmployeeUI
 
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,25 +8,16 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject.Activities.LoginActivity
-import com.example.finalproject.Activities.MainActivity
-import com.example.finalproject.Data.Employee
-import com.example.finalproject.Data.PostMatch
 import com.example.finalproject.Data.Posting
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.android.synthetic.main.activity_create_posting.*
 import kotlinx.android.synthetic.main.activity_home_employee.*
 import kotlinx.android.synthetic.main.activity_home_employee.logout_button
 import kotlinx.android.synthetic.main.activity_home_employee.match_button
 import kotlinx.android.synthetic.main.activity_home_employee.profile_button
-import kotlinx.android.synthetic.main.activity_matches_employee.*
-import java.util.HashMap
-
 
 class HomeEmployeeActivity : AppCompatActivity(){
     private lateinit var logoutButton: ImageButton
@@ -39,12 +28,7 @@ class HomeEmployeeActivity : AppCompatActivity(){
     private lateinit var education: TextView
     private lateinit var salary: TextView
     private lateinit var postingList : ArrayList<Posting>
-
-    lateinit var firestore: FirebaseFirestore
-    lateinit var query: Query
-
-    //lateinit var auth: FirebaseAuth
-    //private lateinit var db: FirebaseFirestore
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,21 +40,20 @@ class HomeEmployeeActivity : AppCompatActivity(){
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployeeActivity::class.java, false) }
         matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false)}
 
+        //text for textviews
         company = home_company_text
         position = home_position_text
         education = home_education_text
         salary = home_salary_text
 
+        //prepare firestore and list to populate with listings
         firestore = FirebaseFirestore.getInstance()
-
-        query = firestore.collection("Employers").document(FirebaseAuth.getInstance().currentUser!!.uid)
-                .collection("Matches").whereArrayContains("Interested", true)
-
         postingList = arrayListOf()
 
         populateList()
     }
 
+    // populate the list of potential postings
     fun populateList(){
         firestore.collection("Employers").get().addOnSuccessListener { result ->
             for (document in result) {
@@ -91,6 +74,7 @@ class HomeEmployeeActivity : AppCompatActivity(){
         }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
     }
 
+    // choose a random posting to show the user
     fun loadPosting(){
         if(postingList.size > 0) {
             Log.d("check", "inside load")
@@ -98,7 +82,7 @@ class HomeEmployeeActivity : AppCompatActivity(){
 
             company.text = "Company: " + postingList[postIndex].company
             position.text = "Position: " + postingList[postIndex].position
-            education.text = "Education Reguired: " + postingList[postIndex].education
+            education.text = "Education: " + postingList[postIndex].education
             salary.text = "Salary: " + postingList[postIndex].salary.toString()
         }
         else{
