@@ -53,6 +53,7 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var technicalSkillListAdapter: StringListAdapter
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_employee)
@@ -149,15 +150,19 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         mergeAdapter.notifyDataSetChanged()
         if (technicalSkillList.size == 0) {
             mergeAdapter.removeAdapter(technicalSkillListAdapter)
+
         }
         if (hobbyList.size == 0) {
             mergeAdapter.removeAdapter(hobbyStringListAdapter)
+
         }
         if (educationList.size == 0) {
             mergeAdapter.removeAdapter(educationAdapter)
+
         }
         if (workExperienceList.size == 0) {
             mergeAdapter.removeAdapter(workExperienceAdapter)
+
         }
     }
 
@@ -169,22 +174,13 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     }
 
     fun closeFragment(fragment: Fragment) {
-
-
         var util = ActivityUtil()
         util.removeFragmentFromActivity(supportFragmentManager, fragment)
         currentEmployee.hobbies.clear()
         currentEmployee.technicalSkills.clear()
         hobbyList.clear()
         technicalSkillList.clear()
-//        mergeAdapter.removeAdapter(hobbyStringListAdapter)
-//        mergeAdapter.removeAdapter(technicalSkillListAdapter)
-//        hobbyStringListAdapter = StringListAdapter(hobbyList, this, "Technical Skills")
-//        technicalSkillListAdapter = StringListAdapter(technicalSkillList, this, "Hobbies")
-//        mergeAdapter.addAdapter(technicalSkillListAdapter)
-//        mergeAdapter.addAdapter(hobbyStringListAdapter)
         loadProfile()
-
     }
 
 

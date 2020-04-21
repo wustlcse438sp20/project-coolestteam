@@ -11,8 +11,8 @@ class WorkExperienceViewHolder(inflater: LayoutInflater, parent: ViewGroup):
         RecyclerView.ViewHolder(inflater.inflate(R.layout.work_item, parent, false)){
     private val company: TextView
     private val position: TextView
-    private val from: TextView
-    private val to: TextView
+//    private val from: TextView
+//    private val to: TextView
     private val description: TextView
 
 
@@ -20,16 +20,16 @@ class WorkExperienceViewHolder(inflater: LayoutInflater, parent: ViewGroup):
         company = itemView.findViewById(R.id.company)
         position = itemView.findViewById(R.id.position)
         description = itemView.findViewById(R.id.description)
-        from = itemView.findViewById(R.id.from)
-        to = itemView.findViewById(R.id.to)
+//        from = itemView.findViewById(R.id.from)
+//        to = itemView.findViewById(R.id.to)
     }
 
     fun bind(work: WorkExperience){
         company.text = work.company
         position.text = work.position
         description.text = work.description
-        from.text = work.from.toString()
-        to.text = work.to.toString()
+//        from.text = work.from.toString()
+//        to.text = work.to.toString()
     }
 }
 
