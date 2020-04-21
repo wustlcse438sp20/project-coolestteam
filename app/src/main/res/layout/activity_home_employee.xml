@@ -75,32 +75,32 @@
             android:id="@+id/home_position_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
             android:text="@string/position"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/home_company_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
             android:text="@string/company_name"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/home_education_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
             android:text="@string/job_education"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
         <TextView
             android:id="@+id/home_salary_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
             android:text="@string/education"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 
