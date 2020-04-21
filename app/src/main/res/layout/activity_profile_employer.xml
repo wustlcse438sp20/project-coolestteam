@@ -64,6 +64,12 @@
             android:text="EmployerUI"
             android:textSize="30sp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postings_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
     </LinearLayout>
 
 

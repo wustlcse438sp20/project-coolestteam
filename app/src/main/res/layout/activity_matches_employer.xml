@@ -71,11 +71,11 @@ tools:context=".Activities.EmployerUI.ProfileEmployerActivity">
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/matchesRecyclerViewEmployer"
+        app:layout_constraintBottom_toTopOf="@id/postings_matchesRecyclerViewEmployer"
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/matchesRecyclerViewEmployer"
+        android:id="@+id/postings_matchesRecyclerViewEmployer"
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:layout_margin="10dp"
