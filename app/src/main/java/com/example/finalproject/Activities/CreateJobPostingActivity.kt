@@ -34,16 +34,11 @@ class CreateJobPostingActivity: AppCompatActivity() {
             var education: String = job_education.text.toString()
             var salary: Int = job_salary.text.toString().toInt()
 
-            //TODO determine if this is okay
-            //var id: String = ""
-
             //Get UID of current user to place values in correct doc
             var currUser = intent.getStringExtra("uid")
 
-
             //Get values and put them in map to insert into collection
             val newPostingMap: MutableMap<String, Any> = HashMap()
-
 
             var newPosting = Posting(
                 company,
@@ -52,14 +47,10 @@ class CreateJobPostingActivity: AppCompatActivity() {
                 salary
             )
 
-            //TODO does this help?
-            newPosting.updateDatabase()
-
             newPostingMap["Job Title"] = newPosting.position
             newPostingMap["Company"] = newPosting.company
             newPostingMap["Education"] = newPosting.education
             newPostingMap["Salary"] = newPosting.salary
-
 
             //add to the database
             db.collection("Employers").document(currUser)

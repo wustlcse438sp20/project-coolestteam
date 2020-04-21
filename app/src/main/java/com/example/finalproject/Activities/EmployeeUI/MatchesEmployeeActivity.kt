@@ -17,30 +17,25 @@ import com.example.finalproject.Data.PostMatch
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_home_employee.*
 import kotlinx.android.synthetic.main.activity_home_employee.home_button
 import kotlinx.android.synthetic.main.activity_home_employee.logout_button
 import kotlinx.android.synthetic.main.activity_home_employee.profile_button
 import kotlinx.android.synthetic.main.activity_matches_employee.*
 import kotlinx.android.synthetic.main.activity_matches_employee.user_display_name
-import kotlinx.android.synthetic.main.activity_profile_employee.*
 
 class MatchesEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
     private lateinit var profileButton: ImageButton
     private lateinit var homeButton: ImageButton
     private lateinit var displayName: TextView
-    private lateinit var email: TextView
     private lateinit var currentEmployee: Employee
     private lateinit var db: FirebaseFirestore
 
     lateinit var firestore: FirebaseFirestore
-    lateinit var query: Query
     lateinit var adapter : MatchesAdapterEmployee
     lateinit var recycler : RecyclerView
     private var postingList = ArrayList<PostMatch>()
@@ -60,14 +55,13 @@ class MatchesEmployeeActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         db = Firebase.firestore
 
+        // prepare recycler
         recycler = matchesRecyclerView
         adapter = MatchesAdapterEmployee(postingList)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
 
-        query = firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
-                .collection("Matches").whereArrayContains("Interested", true)
-
+        // get all matches for this user for recycler
         firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .collection("Matches").get().addOnSuccessListener { result ->
                     Log.d("check success", "s check")
@@ -75,13 +69,16 @@ class MatchesEmployeeActivity : AppCompatActivity() {
                         Log.d("check", document.data.toString())
                         postingList.add(document.toObject<PostMatch>())
                     }
+                    // notify to show fetched matches
                     adapter.notifyDataSetChanged()
 
         }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
 
+        // call load profile to update banner
         loadProfile()
     }
 
+    // gets user info for the banner
     fun loadProfile(){
         var currentUser = FirebaseAuth.getInstance().currentUser
         var uid = currentUser!!.uid
@@ -101,7 +98,7 @@ class MatchesEmployeeActivity : AppCompatActivity() {
 
     //Display user profile
     fun renderProfile(){
-        displayName.text = currentEmployee.name + "'s Matches"
+        displayName.text = "Matches for " + currentEmployee.name
         var profilePicView: ImageView = user_profile_image_matches
         if(currentEmployee.general.pic != "") {
             Picasso.get().load(currentEmployee.general.pic).into(profilePicView)
