@@ -38,6 +38,7 @@ class HomeEmployeeActivity : AppCompatActivity(){
     private lateinit var position: TextView
     private lateinit var education: TextView
     private lateinit var salary: TextView
+    private lateinit var postingList : ArrayList<Posting>
 
     lateinit var firestore: FirebaseFirestore
     lateinit var query: Query
@@ -65,41 +66,44 @@ class HomeEmployeeActivity : AppCompatActivity(){
         query = firestore.collection("Employers").document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .collection("Matches").whereArrayContains("Interested", true)
 
-        var postingList: ArrayList<Posting> = arrayListOf()
-        firestore.collection("Employers").get().addOnSuccessListener { result ->
-                    for (document in result) {
-                        firestore.collection("Employers").document(document.id)
-                                .collection("Postings").get()
-                                .addOnSuccessListener { documents ->
-                                    Log.d("check success", "main check")
-                                    for (doc in documents) {
-                                        Log.d("check", doc.data.toString())
-                                        postingList.add(doc.toObject<Posting>())
-                                    }
-                        }
-                    }
+        postingList = arrayListOf()
 
-            for(post in postingList){
-                Log.d("a thing in postingList", "home pList thing")
-            }
-        }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
-
-        loadPosting(postingList)
+        populateList()
     }
 
-    fun loadPosting(list: ArrayList<Posting>){
-        if(list.size > 0) {
-            Log.d("check", "inside load")
-            var postIndex = (0..list.size).random()
+    fun populateList(){
+        firestore.collection("Employers").get().addOnSuccessListener { result ->
+            for (document in result) {
+                firestore.collection("Employers").document(document.id)
+                        .collection("Postings").get()
+                        .addOnSuccessListener { documents ->
+                            Log.d("check success", "main check")
+                            for (doc in documents) {
+                                Log.d("check", doc.data.toString())
+                                var curPost = doc.toObject<Posting>()
+                                if(curPost.company != "") {
+                                    postingList.add(doc.toObject<Posting>())
+                                }
+                                loadPosting()
+                            }
+                        }
+            }
+        }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
+    }
 
-            company.text = list[postIndex].company
-            position.text = list[postIndex].position
-            education.text = list[postIndex].education
-            salary.text = list[postIndex].salary.toString()
+    fun loadPosting(){
+        if(postingList.size > 0) {
+            Log.d("check", "inside load")
+            var postIndex = (0..postingList.size-1).random()
+
+            company.text = "Company: " + postingList[postIndex].company
+            position.text = "Position: " + postingList[postIndex].position
+            education.text = "Education Reguired: " + postingList[postIndex].education
+            salary.text = "Salary: " + postingList[postIndex].salary.toString()
         }
         else{
             Log.d("check", "inside load else")
-            Toast.makeText(this, "No postings to show", Toast.LENGTH_LONG)
+            Toast.makeText(this, "No postings to show", Toast.LENGTH_LONG).show()
         }
     }
 
