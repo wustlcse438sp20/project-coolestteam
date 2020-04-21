@@ -3,14 +3,20 @@ package com.example.finalproject.Activities.EmployerUI
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
 import com.example.finalproject.Activities.LoginActivity
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home_employer.*
+import kotlin.math.abs
 
 class HomeEmployerActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
@@ -18,6 +24,8 @@ class HomeEmployerActivity : AppCompatActivity() {
     private lateinit var createJobButton: ImageButton
     private lateinit var matchButton: ImageButton
     private lateinit var homeButton: ImageButton
+    private lateinit var gestureDetector: GestureDetectorCompat
+    var i = 0
 
 //    lateinit var postingList: MutableList<Map<String, Any>>
 //    lateinit var employerList: MutableList<Map<String, Any>>
@@ -28,6 +36,7 @@ class HomeEmployerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_home_employer)
+        gestureDetector = GestureDetectorCompat(this, MyGestureListener())
 
         logoutButton = logout_button
         profileButton = profile_button
@@ -73,6 +82,7 @@ class HomeEmployerActivity : AppCompatActivity() {
             } */
 
         //For employees
+
         employeeList = arrayListOf()
         db.collection("Employees").get()
             .addOnSuccessListener { result ->
@@ -80,10 +90,10 @@ class HomeEmployerActivity : AppCompatActivity() {
                     employeeList.add(document.data)
                 }
                 Log.d("here", "${employeeList}")
-                employee_name_home.text = employeeList[0].get("name").toString()
-                employee_age_home.text = employeeList[0].get("age").toString()
-                employee_school_home.text = employeeList[0].get("school").toString()
-                employee_major_home.text = employeeList[0].get("major").toString()
+                employee_name_home.text = employeeList[i].get("name").toString()
+                employee_age_home.text = employeeList[i].get("age").toString()
+                employee_school_home.text = employeeList[i].get("school").toString()
+                employee_major_home.text = employeeList[i].get("major").toString()
             }
             .addOnFailureListener { exception ->
                 Log.d("here", "Error getting documents: ", exception)
@@ -101,5 +111,45 @@ class HomeEmployerActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        gestureDetector.onTouchEvent(event)
+        return super.onTouchEvent(event)
+    }
 
+    private inner class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
+
+        override fun onSingleTapConfirmed(event: MotionEvent): Boolean {
+            return true
+        }
+
+        override fun onFling(
+            e1: MotionEvent,
+            e2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            val xDif = e2.rawX - e1.rawX
+            val yDif = e2.rawY - e1.rawY
+
+            //on right swipe
+            if (xDif < 0 && abs(xDif) > 500) {
+                if(i<employeeList.size - 1) {
+                    i += 1
+                    employee_name_home.text = employeeList[i].get("name").toString()
+                    employee_age_home.text = employeeList[i].get("age").toString()
+                    employee_school_home.text = employeeList[i].get("school").toString()
+                    employee_major_home.text = employeeList[i].get("major").toString()
+                }
+                else{
+                    i = 0
+                    employee_name_home.text = employeeList[i].get("name").toString()
+                    employee_age_home.text = employeeList[i].get("age").toString()
+                    employee_school_home.text = employeeList[i].get("school").toString()
+                    employee_major_home.text = employeeList[i].get("major").toString()
+                }
+            }
+
+            return true
+        }
+    }
 }
