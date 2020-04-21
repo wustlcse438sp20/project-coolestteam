@@ -25,12 +25,16 @@ class HomeEmployerActivity : AppCompatActivity() {
     private lateinit var matchButton: ImageButton
     private lateinit var homeButton: ImageButton
     private lateinit var gestureDetector: GestureDetectorCompat
+    var auth = FirebaseAuth.getInstance()
+    var db = FirebaseFirestore.getInstance()
+
     var i = 0
 
 //    lateinit var postingList: MutableList<Map<String, Any>>
 //    lateinit var employerList: MutableList<Map<String, Any>>
 
     lateinit var employeeList: MutableList<Map<String, Any>>
+    lateinit var docIds: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +53,7 @@ class HomeEmployerActivity : AppCompatActivity() {
         matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployerActivity::class.java, false)}
         homeButton.setOnClickListener{ v -> changeActivity(v, HomeEmployerActivity::class.java, false)}
 
-        var auth = FirebaseAuth.getInstance()
-        var db = FirebaseFirestore.getInstance()
+
 
 
 
@@ -84,9 +87,12 @@ class HomeEmployerActivity : AppCompatActivity() {
         //For employees
 
         employeeList = arrayListOf()
+        docIds = arrayListOf()
+
         db.collection("Employees").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
+                    docIds.add(document.id)
                     employeeList.add(document.data)
                 }
                 Log.d("here", "${employeeList}")
@@ -149,7 +155,38 @@ class HomeEmployerActivity : AppCompatActivity() {
                 }
             }
 
+            else if(xDif > 0 && abs(xDif) > 500){
+                val newPostingMatchMap: MutableMap<String, Any> = HashMap()
+                var currUserData = db.collection("Employers").document(auth.currentUser!!.uid).get()
+
+                    .addOnSuccessListener { document ->
+                        newPostingMatchMap["name"] = document.data!!.get("name")
+
+                    }
+                    .addOnFailureListener { e ->
+                        Log.d("blah", e.toString())
+                        curEmployeeMatch = EmployeeMatch()
+                    }
+                newPostingMatchMap["name"] = ""
+
+
+                db.collection("Employee").document(docIds[i]).
+                    .collection("Matches").document(postingList[postIndex].id)
+                    .collection("Matches").add(newEmployeeMatchMap)
+                    .addOnSuccessListener{
+                        Toast.makeText(this, "Posting Discarded", Toast.LENGTH_SHORT)
+
+                    }
+                    .addOnFailureListener{
+                        Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
+                    }
+            }
+            }
+
+
             return true
+
+
         }
     }
 }
