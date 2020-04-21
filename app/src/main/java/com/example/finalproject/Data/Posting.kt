@@ -10,7 +10,8 @@ data class Posting (
     var position: String = "",
     var education: String = "",
     var salary: Int = 0,
-    var id : String = ""
+    var id : String = "",
+    var companyid: String = ""
 ) {
     fun updateDatabase() {
         val db = Firebase.firestore
