@@ -15,14 +15,15 @@ import com.example.finalproject.Data.PostMatch
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_home_employer.*
 import kotlinx.android.synthetic.main.activity_home_employer.create_job_button
 import kotlinx.android.synthetic.main.activity_home_employer.home_button
 import kotlinx.android.synthetic.main.activity_home_employer.logout_button
 import kotlinx.android.synthetic.main.activity_home_employer.match_button
 import kotlinx.android.synthetic.main.activity_home_employer.profile_button
 import kotlinx.android.synthetic.main.activity_post_home_employer_activity.*
+
 import kotlin.math.abs
+
 
 class PostHomeEmployerActivity: AppCompatActivity() {
 
@@ -174,16 +175,19 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                                     document.data!!.get("Company").toString(),
                                     true,
                                     document.data!!.get("Job Title").toString(),
-                                    document.data!!.get("Salary").toString().toInt(),
-                                    currId
+                                    document.data!!.get("Salary").toString().toInt()
+
                                 )
                                 newPostingMatchMap["company"] = postingMatch.Company
                                 newPostingMatchMap["position"] = postingMatch.Position
                                 newPostingMatchMap["salary"] = postingMatch.Salary
                                 newPostingMatchMap["interested"] = postingMatch.Interested
 
+                                val id = db.collection("Employees").document(docIds[i])
+                                    .collection("Matches").document().id
+
                                 db.collection("Employees").document(docIds[i])
-                                    .collection("Matches").document(postingMatch.Company)
+                                    .collection("Matches").document(id)
                                     .set(newPostingMatchMap)
                                     .addOnSuccessListener {
                                         Toast.makeText(
