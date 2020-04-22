@@ -1,14 +1,19 @@
 package com.example.finalproject.Adapters
 
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Data.PostMatch
+import com.example.finalproject.Fragments.EmployeeMatchJobDisplayFragment
 import com.example.finalproject.R
+
 
 //create the view holder
 class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -32,7 +37,14 @@ class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         jobSalary?.text = "Salary: " + post.Salary.toString()
 
         matchesContainer?.setOnClickListener {
-            Toast.makeText(it.context, post.toString(), Toast.LENGTH_LONG).show()
+//            Toast.makeText(it.context, post.toString(), Toast.LENGTH_LONG).show()
+            val bundle = Bundle()
+            bundle.putSerializable("post", post)
+            var fragment = EmployeeMatchJobDisplayFragment()
+            fragment.arguments = bundle
+            val transaction: FragmentTransaction = (it.context as FragmentActivity).supportFragmentManager.beginTransaction()
+            transaction.add(R.id.fragment_container, fragment)
+            transaction.commit()
             //allow users to click on postings?
         }
     }

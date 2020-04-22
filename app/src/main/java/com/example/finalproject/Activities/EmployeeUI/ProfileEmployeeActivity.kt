@@ -28,7 +28,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile_employee.*
-import kotlinx.coroutines.flow.merge
+
 
 var isInDeleteMode = false
 class ProfileEmployeeActivity : AppCompatActivity() {
