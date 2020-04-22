@@ -1,7 +1,6 @@
 package com.example.finalproject.Adapters
 
-import android.content.Intent
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -9,7 +8,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Data.PostMatch
-import com.example.finalproject.Data.Posting
 import com.example.finalproject.R
 
 //create the view holder
@@ -34,6 +32,7 @@ class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         jobSalary?.text = "Salary: " + post.Salary.toString()
 
         matchesContainer?.setOnClickListener {
+            Toast.makeText(it.context, post.toString(), Toast.LENGTH_LONG).show()
             //allow users to click on postings?
         }
     }
