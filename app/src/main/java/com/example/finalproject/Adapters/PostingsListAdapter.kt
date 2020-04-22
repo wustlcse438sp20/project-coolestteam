@@ -5,20 +5,31 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalproject.Data.Posting
 import com.example.finalproject.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.posting_item.view.*
 
 class LeaderboardHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.posting_item, parent, false)) {
     private val postingItemName : TextView
-
+    private var postObj : Posting? = Posting()
+    var db = FirebaseFirestore.getInstance()
 
     init {
         postingItemName = itemView.posting_item_name
     }
 
     fun bind(data: String) {
-        postingItemName.text = data
+        var item = db.collection("Employers")
+                .document(FirebaseAuth.getInstance().currentUser!!.uid)
+                .collection("Postings").document(data)
+        item.get().addOnSuccessListener { doc ->
+            postObj = doc.toObject<Posting>()
+            postingItemName.text= postObj!!.position
+        }
     }
 
 }

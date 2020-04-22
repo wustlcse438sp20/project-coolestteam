@@ -163,12 +163,13 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                     employee_major_home.text = employeeList[i].get("major").toString()
                 }
             }
+            //document.data!!.get("company").toString() <-- removed this below
 
             else if(xDif > 0 && abs(xDif) > 500) {
                 val newPostingMatchMap: MutableMap<String, Any> = HashMap()
                 var currUserData = db.collection("Employers").document(auth.currentUser!!.uid).get()
                     .addOnSuccessListener { document ->
-                        db.collection("Employers").document(auth.currentUser!!.uid).collection(document.data!!.get("company").toString())
+                        db.collection("Employers").document(auth.currentUser!!.uid).collection("Postings")
                             .document(currId).get()
                             .addOnSuccessListener { document ->
                                 var postingMatch = PostMatch(
