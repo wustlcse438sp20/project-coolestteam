@@ -26,6 +26,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+
         <GridLayout
             android:id="@+id/list_here"
             android:layout_width="match_parent"

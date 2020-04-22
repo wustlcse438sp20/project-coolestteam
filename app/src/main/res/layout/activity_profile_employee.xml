@@ -45,6 +45,14 @@
             android:src="@drawable/greenaddnobackground"
             android:onClick="addSection"
             />
+        <ImageButton
+            android:id="@+id/delete_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/dark"
+            android:src="@drawable/deletered"
+            android:onClick="deleteSection"
+            />
     </LinearLayout>
 
     <LinearLayout

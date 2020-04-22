@@ -30,7 +30,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile_employee.*
 import kotlinx.coroutines.flow.merge
 
-
+var isInDeleteMode = false
 class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
     private lateinit var homeButton: ImageButton
@@ -51,6 +51,7 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var workExperienceAdapter: WorkExperienceAdapter
     private lateinit var hobbyStringListAdapter: StringListAdapter
     private lateinit var technicalSkillListAdapter: StringListAdapter
+
 
 
 
@@ -171,6 +172,11 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         var util = ActivityUtil()
         var fragment = EmployeeAddProfileSection()
         util.addFragmentToActivty(supportFragmentManager, fragment, R.id.fragment_container)
+    }
+
+    fun deleteSection(view:View){
+        Toast.makeText(this, "Tap a section to delete it.", Toast.LENGTH_LONG).show()
+        isInDeleteMode = true
     }
 
     fun closeFragment(fragment: Fragment) {

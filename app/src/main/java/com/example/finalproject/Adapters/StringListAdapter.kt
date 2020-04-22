@@ -41,7 +41,6 @@ class StringListViewHolder(inflater: LayoutInflater, var parent: ViewGroup):
                 temp.setTextColor(textColor)
                 listHere.addView(temp)
             }
-            listObject.clear()
         }
 }
 
