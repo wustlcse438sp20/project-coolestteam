@@ -173,13 +173,11 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                             .document(currId).get()
                             .addOnSuccessListener { document ->
                                 var postingMatch = PostMatch(
-                                    document.data!!.get("Company").toString(),
+                                    document.data!!.get("company").toString(),
                                     true,
-                                    document.data!!.get("Job Title").toString(),
-                                    document.data!!.get("Salary").toString().toInt(),
+                                    document.data!!.get("position").toString(),
+                                    document.data!!.get("salary").toString().toInt(),
                                         document.id.toString()
-
-
                                 )
                                 newPostingMatchMap["company"] = postingMatch.Company
                                 newPostingMatchMap["position"] = postingMatch.Position
