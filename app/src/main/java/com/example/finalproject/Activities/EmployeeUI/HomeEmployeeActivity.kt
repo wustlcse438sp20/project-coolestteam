@@ -68,6 +68,7 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
                 .addOnSuccessListener { docSnap ->
                     Log.d("blah", docSnap.data.toString())
                     curEmployeeMatch = docSnap.toObject<EmployeeMatch>()!!
+                    curEmployeeMatch.id = FirebaseAuth.getInstance().currentUser!!.uid
                     Log.d("blah", curEmployeeMatch.toString())
                 }
                 .addOnFailureListener { e ->
@@ -110,7 +111,6 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         if(postingList.size > 0) {
             Log.d("check", "inside load")
             postIndex = (0..postingList.size-1).random()
-
             company.text = "Company: " + postingList[postIndex].company
             position.text = "Position: " + postingList[postIndex].position
             education.text = "Education: " + postingList[postIndex].education
@@ -140,7 +140,10 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         newEmployeeMatchMap["age"] = curEmployeeMatch.age
         newEmployeeMatchMap["major"] = curEmployeeMatch.major
         newEmployeeMatchMap["interested"] = curEmployeeMatch.interested
+        newEmployeeMatchMap["id"] = curEmployeeMatch.id
 
+
+        Log.d("blah", curEmployeeMatch.toString())
         //TODO add to the database
         firestore.collection("Employers").document(postingList[postIndex].companyid)
                 .collection("Postings").document(postingList[postIndex].id)
