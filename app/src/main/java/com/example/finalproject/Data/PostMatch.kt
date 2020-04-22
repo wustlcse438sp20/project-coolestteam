@@ -10,6 +10,7 @@ data class PostMatch(var Company: String = "",
                      var Interested: Boolean = true,
                      var Position : String = "" ,
                      var Salary : Int = 0,
+                     var employerId: String = "",
                      var id: String = ""){
     fun updatDatabase(){
         val db = Firebase.firestore
