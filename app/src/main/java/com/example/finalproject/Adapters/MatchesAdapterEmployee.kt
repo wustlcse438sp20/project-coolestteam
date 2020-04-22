@@ -1,7 +1,6 @@
 package com.example.finalproject.Adapters
 
-import android.content.Intent
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -9,7 +8,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Data.PostMatch
-import com.example.finalproject.Data.Posting
 import com.example.finalproject.R
 
 //create the view holder
