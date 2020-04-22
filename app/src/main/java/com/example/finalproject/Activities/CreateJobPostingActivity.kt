@@ -47,16 +47,17 @@ class CreateJobPostingActivity: AppCompatActivity() {
                 salary
             )
 
-            newPostingMap["Job Title"] = newPosting.position
-            newPostingMap["Company"] = newPosting.company
-            newPostingMap["Education"] = newPosting.education
-            newPostingMap["Salary"] = newPosting.salary
+            newPostingMap["position"] = newPosting.position
+            newPostingMap["company"] = newPosting.company
+            newPostingMap["education"] = newPosting.education
+            newPostingMap["salary"] = newPosting.salary
 
             //add to the database
+            //TODO make sure this change no break stuff
             db.collection("Employers").document(currUser)
-                .collection(company).document(position).set(newPostingMap)
+                .collection("Postings").add(newPostingMap)
                 .addOnSuccessListener{
-                    Toast.makeText(this, "Profile created", Toast.LENGTH_LONG)
+                    Toast.makeText(this, "Posting created", Toast.LENGTH_LONG)
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }

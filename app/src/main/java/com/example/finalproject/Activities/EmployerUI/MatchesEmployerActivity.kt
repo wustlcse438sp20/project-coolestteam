@@ -55,8 +55,8 @@ class MatchesEmployerActivity : AppCompatActivity() {
         var doc = db.collection("Employers").document(auth.currentUser!!.uid)
         doc.get().addOnSuccessListener { document ->
             Log.d("here", "${document.data!!.get("company").toString()}")
-            var companyName = document.data!!.get("company").toString()
-            doc.collection(companyName).get()
+            //var companyName = document.data!!.get("company").toString()
+            doc.collection("Postings").get()
                 .addOnSuccessListener { result ->
                     for (document2 in result) {
                         postingList.add(document2.id)
