@@ -176,13 +176,17 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                                     document.data!!.get("Company").toString(),
                                     true,
                                     document.data!!.get("Job Title").toString(),
-                                    document.data!!.get("Salary").toString().toInt()
+                                    document.data!!.get("Salary").toString().toInt(),
+                                        document.id.toString()
+
 
                                 )
                                 newPostingMatchMap["company"] = postingMatch.Company
                                 newPostingMatchMap["position"] = postingMatch.Position
                                 newPostingMatchMap["salary"] = postingMatch.Salary
                                 newPostingMatchMap["interested"] = postingMatch.Interested
+                                newPostingMatchMap["id"] = postingMatch.id
+
 
                                 val id = db.collection("Employees").document(docIds[i])
                                     .collection("Matches").document().id
