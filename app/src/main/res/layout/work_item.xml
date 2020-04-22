@@ -14,7 +14,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+       >
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,35 +78,6 @@
             android:text="@string/description"
             android:textColor="@color/light"
             android:textSize="18sp" />
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/from"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/from"
-                android:textColor="@color/light"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/to"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/to"
-                android:textColor="@color/light"
-                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>
