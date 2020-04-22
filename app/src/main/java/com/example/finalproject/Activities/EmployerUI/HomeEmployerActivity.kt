@@ -11,11 +11,24 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Activities.LoginActivity
+import com.example.finalproject.Adapters.EmployersHomePostingListAdapter
+import com.example.finalproject.Adapters.PostingsListAdapter
+import com.example.finalproject.Data.PostMatch
+import com.example.finalproject.Data.PostingMatch
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home_employer.*
+import kotlinx.android.synthetic.main.activity_home_employer.create_job_button
+import kotlinx.android.synthetic.main.activity_home_employer.home_button
+import kotlinx.android.synthetic.main.activity_home_employer.logout_button
+import kotlinx.android.synthetic.main.activity_home_employer.match_button
+
+import kotlinx.android.synthetic.main.activity_home_employer.profile_button
+import kotlinx.android.synthetic.main.activity_profile_employer.*
 import kotlin.math.abs
 
 class HomeEmployerActivity : AppCompatActivity() {
@@ -27,8 +40,9 @@ class HomeEmployerActivity : AppCompatActivity() {
     private lateinit var gestureDetector: GestureDetectorCompat
     var auth = FirebaseAuth.getInstance()
     var db = FirebaseFirestore.getInstance()
+    lateinit var postingList: MutableList<String>
+    lateinit var recyclerView: RecyclerView
 
-    var i = 0
 
 //    lateinit var postingList: MutableList<Map<String, Any>>
 //    lateinit var employerList: MutableList<Map<String, Any>>
@@ -40,7 +54,7 @@ class HomeEmployerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_home_employer)
-        gestureDetector = GestureDetectorCompat(this, MyGestureListener())
+
 
         logoutButton = logout_button
         profileButton = profile_button
@@ -54,56 +68,32 @@ class HomeEmployerActivity : AppCompatActivity() {
         homeButton.setOnClickListener{ v -> changeActivity(v, HomeEmployerActivity::class.java, false)}
 
 
-
-
-
-        //For Employers idk why I did this lmao
-        /*
-        employeeList = arrayListOf()
+        var db = FirebaseFirestore.getInstance()
+        var auth = FirebaseAuth.getInstance()
         postingList = arrayListOf()
-        db.collection("Employers").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d("here", "${document.data.get("company").toString()}")
-                    var companyName = document.data.get("company").toString()
-                    db.collection("Employers").document(document.id).collection(companyName).get()
-                        .addOnSuccessListener { result ->
-                            for(document2 in result) {
-                                postingList.add(document2.data)
-                                Log.d("here", "${postingList}")
-                            }
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.d("here", "Error getting documents: ", exception)
-                        }
+
+        var doc = db.collection("Employers").document(auth.currentUser!!.uid)
+        doc.get().addOnSuccessListener { document ->
+            Log.d("here", "${document.data!!.get("company").toString()}")
+            var companyName = document.data!!.get("company").toString()
+            doc.collection(companyName).get()
+                .addOnSuccessListener { result ->
+                    for (document2 in result) {
+                        postingList.add(document2.id)
+                        Log.d("here", "${postingList}")
+                    }
+                    recyclerView = employer_home_postings_recycler_view
+                    var adapter = EmployersHomePostingListAdapter(postingList)
+                    recyclerView.adapter = adapter
+                    recyclerView.layoutManager = LinearLayoutManager(this)
                 }
-
-                R.layout.activity
-            }
-            .addOnFailureListener { exception ->
-                Log.d("here", "Error getting documents: ", exception)
-            } */
-
-        //For employees
-
-        employeeList = arrayListOf()
-        docIds = arrayListOf()
-
-        db.collection("Employees").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    docIds.add(document.id)
-                    employeeList.add(document.data)
+                .addOnFailureListener { exception ->
+                    Log.d("here", "Error getting documents: ", exception)
                 }
-                Log.d("here", "${employeeList}")
-                employee_name_home.text = employeeList[i].get("name").toString()
-                employee_age_home.text = employeeList[i].get("age").toString()
-                employee_school_home.text = employeeList[i].get("school").toString()
-                employee_major_home.text = employeeList[i].get("major").toString()
-            }
-            .addOnFailureListener { exception ->
-                Log.d("here", "Error getting documents: ", exception)
-            }
+        }
+
+
+
 
 
     }
@@ -117,76 +107,5 @@ class HomeEmployerActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        gestureDetector.onTouchEvent(event)
-        return super.onTouchEvent(event)
-    }
 
-    private inner class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
-
-        override fun onSingleTapConfirmed(event: MotionEvent): Boolean {
-            return true
-        }
-
-        override fun onFling(
-            e1: MotionEvent,
-            e2: MotionEvent,
-            velocityX: Float,
-            velocityY: Float
-        ): Boolean {
-            val xDif = e2.rawX - e1.rawX
-            val yDif = e2.rawY - e1.rawY
-
-            //on right swipe
-            if (xDif < 0 && abs(xDif) > 500) {
-                if(i<employeeList.size - 1) {
-                    i += 1
-                    employee_name_home.text = employeeList[i].get("name").toString()
-                    employee_age_home.text = employeeList[i].get("age").toString()
-                    employee_school_home.text = employeeList[i].get("school").toString()
-                    employee_major_home.text = employeeList[i].get("major").toString()
-                }
-                else{
-                    i = 0
-                    employee_name_home.text = employeeList[i].get("name").toString()
-                    employee_age_home.text = employeeList[i].get("age").toString()
-                    employee_school_home.text = employeeList[i].get("school").toString()
-                    employee_major_home.text = employeeList[i].get("major").toString()
-                }
-            }
-
-            else if(xDif > 0 && abs(xDif) > 500){
-                val newPostingMatchMap: MutableMap<String, Any> = HashMap()
-                var currUserData = db.collection("Employers").document(auth.currentUser!!.uid).get()
-
-                    .addOnSuccessListener { document ->
-                        newPostingMatchMap["name"] = document.data!!.get("name")
-
-                    }
-                    .addOnFailureListener { e ->
-                        Log.d("blah", e.toString())
-                        curEmployeeMatch = EmployeeMatch()
-                    }
-                newPostingMatchMap["name"] = ""
-
-
-                db.collection("Employee").document(docIds[i]).
-                    .collection("Matches").document(postingList[postIndex].id)
-                    .collection("Matches").add(newEmployeeMatchMap)
-                    .addOnSuccessListener{
-                        Toast.makeText(this, "Posting Discarded", Toast.LENGTH_SHORT)
-
-                    }
-                    .addOnFailureListener{
-                        Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
-                    }
-            }
-            }
-
-
-            return true
-
-
-        }
-    }
 }

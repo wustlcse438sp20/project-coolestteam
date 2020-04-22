@@ -17,6 +17,7 @@
         <activity android:name=".Activities.EmployeeUI.MatchesEmployeeActivity" />
         <activity android:name=".Activities.EmployeeUI.ProfileEmployeeActivity" />
         <activity android:name=".Activities.EmployerUI.HomeEmployerActivity" />
+        <activity android:name=".Activities.EmployerUI.PostHomeEmployerActivity"/>
         <activity android:name=".Activities.MainActivity"/>
 
         <activity android:name=".Activities.LoginActivity" >
