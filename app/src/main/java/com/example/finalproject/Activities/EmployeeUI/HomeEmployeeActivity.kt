@@ -91,8 +91,11 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
                             for (doc in documents) {
                                 Log.d("check", doc.data.toString())
                                 var curPost = doc.toObject<Posting>()
-                                curPost.companyid = document.id.toString()
-                                Log.d("check id", document.id.toString())
+
+                                curPost.companyid = document.id
+                                curPost.id = doc.id
+                                Log.d("check company id", document.id)
+                                Log.d("check id", doc.id)
                                 if(curPost.company != "") {
                                     postingList.add(curPost)
                                 }
@@ -139,19 +142,19 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         newEmployeeMatchMap["major"] = curEmployeeMatch.major
         newEmployeeMatchMap["interested"] = curEmployeeMatch.interested
 
-        var id = postingList[postIndex].companyid
-        Log.d("blah", postingList[postIndex].toString())
+//        var id = postingList[postIndex].companyid
+//        Log.d("check addMatch id", postingList[postIndex].companyid)
+
         //TODO add to the database
-//        firestore.collection("Employers").document(id)
-//                .collection("Postings").document(postingList[postIndex].id)
-//                .collection("Matches").add(newEmployeeMatchMap)
-//                .addOnSuccessListener{
-//                    Toast.makeText(this, "Posting Liked", Toast.LENGTH_SHORT)
-//
-//                }
-//                .addOnFailureListener{
-//                    Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
-//                }
+        firestore.collection("Employers").document(postingList[postIndex].companyid)
+                .collection("Postings").document(postingList[postIndex].id)
+                .collection("Matches").add(newEmployeeMatchMap)
+                .addOnSuccessListener{
+                    Toast.makeText(this, "Posting Liked", Toast.LENGTH_SHORT)
+                }
+                .addOnFailureListener{
+                    Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
+                }
     }
 
     fun addNoMatch(){

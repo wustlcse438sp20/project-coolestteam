@@ -52,7 +52,7 @@ class EmployerProfileActivity: AppCompatActivity() {
 
             //add to the database
             db.collection("Employers")
-                .document(currUser).collection("Postings").add(newEmployerMap)
+                .document(currUser).set(newEmployerMap)
                 .addOnSuccessListener{
                     Toast.makeText(this, "Profile created", Toast.LENGTH_LONG)
                     val intent = Intent(this, CreateJobPostingActivity::class.java)
