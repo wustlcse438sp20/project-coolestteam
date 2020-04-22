@@ -111,7 +111,7 @@ tools:context=".Activities.EmployerUI.ProfileEmployerActivity">
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@color/dark"
-            android:src="@drawable/businessblue" />
+            android:src="@drawable/businesswhite" />
 
         <TextView
             android:layout_width="match_parent"
@@ -162,7 +162,7 @@ tools:context=".Activities.EmployerUI.ProfileEmployerActivity">
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@color/dark"
-            android:src="@drawable/addwhite" />
+            android:src="@drawable/addwhite2" />
 
         <TextView
             android:layout_width="match_parent"
@@ -187,7 +187,7 @@ tools:context=".Activities.EmployerUI.ProfileEmployerActivity">
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@color/dark"
-            android:src="@drawable/messagewhite" />
+            android:src="@drawable/messageblue" />
 
         <TextView
             android:layout_width="match_parent"
