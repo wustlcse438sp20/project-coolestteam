@@ -34,6 +34,7 @@ class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         jobSalary?.text = "Salary: " + post.Salary.toString()
 
         matchesContainer?.setOnClickListener {
+            Toast.makeText(it.context, post.toString(), Toast.LENGTH_LONG).show()
             //allow users to click on postings?
         }
     }
