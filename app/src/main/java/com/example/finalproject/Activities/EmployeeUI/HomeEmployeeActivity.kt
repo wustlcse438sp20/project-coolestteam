@@ -91,6 +91,7 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
                             for (doc in documents) {
                                 Log.d("check", doc.data.toString())
                                 var curPost = doc.toObject<Posting>()
+
                                 curPost.companyid = document.id
                                 curPost.id = doc.id
                                 Log.d("check company id", document.id)

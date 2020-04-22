@@ -30,7 +30,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile_employee.*
 import kotlinx.coroutines.flow.merge
 
-
+var isInDeleteMode = false
 class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
     private lateinit var homeButton: ImageButton
@@ -51,6 +51,8 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var workExperienceAdapter: WorkExperienceAdapter
     private lateinit var hobbyStringListAdapter: StringListAdapter
     private lateinit var technicalSkillListAdapter: StringListAdapter
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -149,15 +151,19 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         mergeAdapter.notifyDataSetChanged()
         if (technicalSkillList.size == 0) {
             mergeAdapter.removeAdapter(technicalSkillListAdapter)
+
         }
         if (hobbyList.size == 0) {
             mergeAdapter.removeAdapter(hobbyStringListAdapter)
+
         }
         if (educationList.size == 0) {
             mergeAdapter.removeAdapter(educationAdapter)
+
         }
         if (workExperienceList.size == 0) {
             mergeAdapter.removeAdapter(workExperienceAdapter)
+
         }
     }
 
@@ -168,23 +174,19 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         util.addFragmentToActivty(supportFragmentManager, fragment, R.id.fragment_container)
     }
 
+    fun deleteSection(view:View){
+        Toast.makeText(this, "Tap a section to delete it.", Toast.LENGTH_LONG).show()
+        isInDeleteMode = true
+    }
+
     fun closeFragment(fragment: Fragment) {
-
-
         var util = ActivityUtil()
         util.removeFragmentFromActivity(supportFragmentManager, fragment)
         currentEmployee.hobbies.clear()
         currentEmployee.technicalSkills.clear()
         hobbyList.clear()
         technicalSkillList.clear()
-//        mergeAdapter.removeAdapter(hobbyStringListAdapter)
-//        mergeAdapter.removeAdapter(technicalSkillListAdapter)
-//        hobbyStringListAdapter = StringListAdapter(hobbyList, this, "Technical Skills")
-//        technicalSkillListAdapter = StringListAdapter(technicalSkillList, this, "Hobbies")
-//        mergeAdapter.addAdapter(technicalSkillListAdapter)
-//        mergeAdapter.addAdapter(hobbyStringListAdapter)
         loadProfile()
-
     }
 
 

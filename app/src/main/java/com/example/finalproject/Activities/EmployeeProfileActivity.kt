@@ -66,8 +66,7 @@ class EmployeeProfileActivity: AppCompatActivity() {
                 newEmployee.general = generalProfile
             }
 
-
-//            //TODO REMOVE THIS
+            
 //            var educationTest = Education("Computer Science", "4.0", "2021", "Washington University")
 //            newEmployee.educations.add(educationTest)
 //            newEmployee.educations.add(educationTest)
