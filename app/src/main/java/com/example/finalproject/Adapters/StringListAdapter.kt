@@ -11,9 +11,16 @@ import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalproject.Activities.EmployeeUI.isInDeleteMode
+import com.example.finalproject.Data.Hobby
+import com.example.finalproject.Data.TechnicalSkill
 import com.example.finalproject.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 
 class StringListViewHolder(inflater: LayoutInflater, var parent: ViewGroup):
         RecyclerView.ViewHolder(inflater.inflate(R.layout.list_item, parent, false)){
@@ -28,6 +35,7 @@ class StringListViewHolder(inflater: LayoutInflater, var parent: ViewGroup):
 
         fun bind(listObject: ArrayList<String>, context: Context, title: String){
             listHere.removeAllViews()
+
             titleHere.text = title
             var width = listHere.width
             for(item in listObject){
@@ -40,6 +48,33 @@ class StringListViewHolder(inflater: LayoutInflater, var parent: ViewGroup):
                 temp.gravity = Gravity.CENTER
                 temp.setTextColor(textColor)
                 listHere.addView(temp)
+            }
+            itemView.setOnClickListener {
+                if(isInDeleteMode && listObject.size > 0){
+                    var field = "technicalSkills"
+                    var fieldObj: Any = TechnicalSkill()
+                    if(title == "Hobbies"){
+                        field = "hobbies"
+                        fieldObj = Hobby()
+                    }
+                    var firestore = FirebaseFirestore.getInstance()
+
+                    var userDoc = firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
+//                Toast.makeText(it.context, )
+                    userDoc.update(mapOf(field to mutableListOf(fieldObj)))
+                            .addOnSuccessListener {
+                                listObject.removeAt(bindingAdapterPosition)
+                                isInDeleteMode = false
+                                bindingAdapter?.notifyDataSetChanged()
+
+                            }
+                            .addOnFailureListener {it2 ->
+                                Toast.makeText(it.context, "Failed to delete item", Toast.LENGTH_LONG).show()
+                                isInDeleteMode = false
+                            }
+
+                }
+
             }
         }
 }

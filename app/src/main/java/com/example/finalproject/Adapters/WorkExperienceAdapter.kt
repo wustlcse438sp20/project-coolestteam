@@ -11,6 +11,7 @@ import com.example.finalproject.Activities.EmployeeUI.isInDeleteMode
 import com.example.finalproject.Data.WorkExperience
 import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_profile_employee.view.*
 
@@ -36,10 +37,18 @@ class WorkExperienceViewHolder(inflater: LayoutInflater, parent: ViewGroup):
             if(isInDeleteMode){
                 var firestore = FirebaseFirestore.getInstance()
                 var userDoc = firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
-//                userDoc.get()
-                list.removeAt(bindingAdapterPosition)
-                isInDeleteMode = false
-                bindingAdapter?.notifyDataSetChanged()
+//                Toast.makeText(it.context, )
+                userDoc.update("workExperiences", FieldValue.arrayRemove(work))
+                        .addOnSuccessListener {
+                            list.removeAt(bindingAdapterPosition)
+                            isInDeleteMode = false
+                            bindingAdapter?.notifyDataSetChanged()
+                        }
+                        .addOnFailureListener {it2 ->
+                            Toast.makeText(it.context, "Failed to delete item",Toast.LENGTH_LONG).show()
+                            isInDeleteMode = false
+                        }
+
             }
 
         }
