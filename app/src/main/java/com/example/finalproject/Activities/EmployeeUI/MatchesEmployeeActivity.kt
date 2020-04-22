@@ -8,9 +8,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Activities.LoginActivity
+import com.example.finalproject.ActivityUtil
 import com.example.finalproject.Adapters.MatchesAdapterEmployee
 import com.example.finalproject.Data.Employee
 import com.example.finalproject.Data.PostMatch
@@ -123,5 +125,9 @@ class MatchesEmployeeActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         startActivity(intent)
+    }
+    fun closeFragment(fragment: Fragment){
+        var util = ActivityUtil()
+        util.removeFragmentFromActivity(supportFragmentManager, fragment)
     }
 }

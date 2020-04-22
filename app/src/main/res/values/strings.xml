@@ -52,8 +52,7 @@
     <string name="graduation">Graduation</string>
     <string name="proficiency_propt">Proficiency</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="employee_match_item">You matched with:</string>
 
 </resources>
 
