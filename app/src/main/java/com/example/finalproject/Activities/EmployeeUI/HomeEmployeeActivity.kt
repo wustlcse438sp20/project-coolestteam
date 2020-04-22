@@ -205,7 +205,7 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
             return true
         }
         else if (event1.x - event2.x > swipedistance){
-            addNoMatch()
+            //addNoMatch() // no need for now unless don't display repeat postings
             loadPosting()
             return true
         }

@@ -67,11 +67,22 @@ class MatchesEmployeeActivity : AppCompatActivity() {
                     Log.d("check success", "s check")
                     for (document in result) {
                         Log.d("check", document.data.toString())
-                        postingList.add(document.toObject<PostMatch>())
-                    }
-                    // notify to show fetched matches
-                    adapter.notifyDataSetChanged()
+                        var curDoc = document.toObject<PostMatch>()
 
+                        //check if match
+                        firestore.collection("Employers").document(curDoc.employerId)
+                                .collection("Postings").document(curDoc.id)
+                                .collection("Matches").get().addOnSuccessListener { res ->
+                                    for(r in res){
+                                        Log.d("check id field", r.data.get("id").toString())
+                                        Log.d("check current user", FirebaseAuth.getInstance().currentUser!!.uid)
+                                        if (r.data.get("id")!!.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                                            postingList.add(curDoc)
+                                        }
+                                    }
+                                    adapter.notifyDataSetChanged()
+                                }
+                    }
         }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
 
         // call load profile to update banner
