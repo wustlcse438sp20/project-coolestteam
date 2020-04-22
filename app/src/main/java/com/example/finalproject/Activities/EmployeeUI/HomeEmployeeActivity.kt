@@ -97,8 +97,8 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
                                 Log.d("check id", doc.id)
                                 if(curPost.company != "") {
                                     postingList.add(curPost)
+                                    loadPosting()
                                 }
-                                loadPosting()
                             }
                         }
             }
@@ -140,9 +140,6 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         newEmployeeMatchMap["age"] = curEmployeeMatch.age
         newEmployeeMatchMap["major"] = curEmployeeMatch.major
         newEmployeeMatchMap["interested"] = curEmployeeMatch.interested
-
-//        var id = postingList[postIndex].companyid
-//        Log.d("check addMatch id", postingList[postIndex].companyid)
 
         //TODO add to the database
         firestore.collection("Employers").document(postingList[postIndex].companyid)
@@ -201,9 +198,13 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
     ): Boolean {
         if(event2.x - event1.x > swipedistance) {
             addMatch()
+            loadPosting()
+            return true
         }
         else if (event1.x - event2.x > swipedistance){
             addNoMatch()
+            loadPosting()
+            return true
         }
         return false
     }
