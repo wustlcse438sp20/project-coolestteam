@@ -39,6 +39,7 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
     private lateinit var mDetector: GestureDetectorCompat
     private var swipedistance = 100
     private var postIndex: Int = 0
+    private var prevIndex : Int = 0
     private lateinit var curEmployeeMatch : EmployeeMatch
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,8 +63,6 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         postingList = arrayListOf()
 
         populateList()
-
-
 
         //get current user information
         var userDoc = firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -109,11 +108,17 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
     }
 
-    // choose a random posting to show the user
+    // choose a new random posting to show the user
     fun loadPosting(){
         if(postingList.size > 0) {
-            Log.d("check", "inside load")
+            prevIndex = postIndex
             postIndex = (0..postingList.size-1).random()
+            // make sure next index is new
+            if(postingList.size > 1) {
+                while (postIndex == prevIndex) {
+                    postIndex = (0..postingList.size - 1).random()
+                }
+            }
             company.text = "Company: " + postingList[postIndex].company
             position.text = "Position: " + postingList[postIndex].position
             education.text = "Education: " + postingList[postIndex].education
@@ -150,7 +155,6 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         //TODO add to the database
         firestore.collection("Employers").document(postingList[postIndex].companyid)
                 .collection("Postings").document(postingList[postIndex].id)
-//                .collection("Matches").add(newEmployeeMatchMap)
                 .collection("Matches").document(curEmployeeMatch.id).set(newEmployeeMatchMap)
                 .addOnSuccessListener{
                     Toast.makeText(this, "Posting Liked", Toast.LENGTH_SHORT)
@@ -204,8 +208,8 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
             velocityY: Float
     ): Boolean {
         if(event2.x - event1.x > swipedistance) {
-            addMatch()
             loadPosting()
+            addMatch()
             return true
         }
         else if (event1.x - event2.x > swipedistance){
