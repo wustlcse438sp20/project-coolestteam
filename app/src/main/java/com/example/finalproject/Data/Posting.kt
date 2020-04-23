@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.io.Serializable
 
 data class Posting (
     var company: String = "",
@@ -13,7 +14,7 @@ data class Posting (
     var id : String = "",
     var companyid: String = "",
     var email: String = ""
-) {
+): Serializable {
     fun updateDatabase() {
         val db = Firebase.firestore
         db.collection("Employers").get().addOnSuccessListener { result ->

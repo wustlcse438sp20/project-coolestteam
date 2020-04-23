@@ -46,7 +46,6 @@ class CreateJobPostingActivity: AppCompatActivity() {
                 position,
                 education,
                 salary
-
             )
             newPosting.email =  auth.currentUser?.email.toString()
 

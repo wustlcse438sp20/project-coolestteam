@@ -194,7 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@color/dark"
-                android:src="@drawable/addwhite" />
+                android:src="@drawable/addwhite2" />
 
             <TextView
                 android:layout_width="match_parent"
