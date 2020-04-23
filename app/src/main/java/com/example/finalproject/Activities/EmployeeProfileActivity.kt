@@ -2,6 +2,7 @@ package com.example.finalproject.Activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,8 @@ class EmployeeProfileActivity: AppCompatActivity() {
 
             //Get UID of current user to place values in correct doc
             var currUser = auth.currentUser?.uid.toString()
+            var email = FirebaseAuth.getInstance().currentUser?.email.toString()
+
 //            var currUser = intent.getStringExtra("uid")
 
             //Get values and put them in map to insert into collection
@@ -55,6 +58,7 @@ class EmployeeProfileActivity: AppCompatActivity() {
                 school,
                 major,
                 age,
+                    email,
                     GeneralEmployee(),
                     mutableListOf<Education>(),
                     mutableListOf<Hobby>(),
@@ -90,6 +94,7 @@ class EmployeeProfileActivity: AppCompatActivity() {
             newEmployeeMap["age"] = newEmployee.age
             newEmployeeMap["school"] = newEmployee.school
             newEmployeeMap["major"] = newEmployee.major
+            newEmployeeMap["email"] = newEmployee.email
             newEmployeeMap["general"] = newEmployee.general
             newEmployeeMap["educations"] = newEmployee.educations
             newEmployeeMap["hobbies"] = newEmployee.hobbies
