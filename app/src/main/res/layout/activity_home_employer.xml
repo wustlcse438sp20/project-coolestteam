@@ -59,7 +59,7 @@
             android:layout_height="wrap_content" />
 
 
-        </LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout
@@ -175,7 +175,6 @@
                 android:textColor="@color/light"
                 android:textSize="10sp" />
         </LinearLayout>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

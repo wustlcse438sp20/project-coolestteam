@@ -32,12 +32,11 @@ class LeaderboardHolder(inflater: LayoutInflater, parent: ViewGroup) :
                 .collection("Postings").document(data)
 
         item.get().addOnSuccessListener { doc ->
-
             postObj = doc.toObject<Posting>()
             postObj!!.id = data
             postObj!!.companyid = FirebaseAuth.getInstance().currentUser!!.uid
             postingItemName.text = postObj!!.position
-            if(itemsShouldBeClickable) {
+            if (itemsShouldBeClickable) {
                 itemView.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putSerializable("post", postObj)

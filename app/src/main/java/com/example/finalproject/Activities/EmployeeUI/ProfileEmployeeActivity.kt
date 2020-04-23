@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_profile_employee.*
 
 
 var isInDeleteMode = false
+
 class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
     private lateinit var homeButton: ImageButton
@@ -51,8 +52,6 @@ class ProfileEmployeeActivity : AppCompatActivity() {
     private lateinit var workExperienceAdapter: WorkExperienceAdapter
     private lateinit var hobbyStringListAdapter: StringListAdapter
     private lateinit var technicalSkillListAdapter: StringListAdapter
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -174,7 +173,7 @@ class ProfileEmployeeActivity : AppCompatActivity() {
         util.addFragmentToActivty(supportFragmentManager, fragment, R.id.fragment_container)
     }
 
-    fun deleteSection(view:View){
+    fun deleteSection(view: View) {
         Toast.makeText(this, "Tap a section to delete it.", Toast.LENGTH_LONG).show()
         isInDeleteMode = true
     }

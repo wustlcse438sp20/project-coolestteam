@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
@@ -33,11 +32,10 @@ class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(post: PostMatch) {
         companyName?.text = "Company: " + post.Company
-        jobTitle?.text =  "Position: "+ post.Position
+        jobTitle?.text = "Position: " + post.Position
         jobSalary?.text = "Salary: " + post.Salary.toString()
 
         matchesContainer?.setOnClickListener {
-//            Toast.makeText(it.context, post.toString(), Toast.LENGTH_LONG).show()
             val bundle = Bundle()
             bundle.putSerializable("post", post)
             var fragment = EmployeeMatchJobDisplayFragment()
@@ -45,7 +43,6 @@ class MatchesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
             val transaction: FragmentTransaction = (it.context as FragmentActivity).supportFragmentManager.beginTransaction()
             transaction.add(R.id.fragment_container, fragment)
             transaction.commit()
-            //allow users to click on postings?
         }
     }
 }

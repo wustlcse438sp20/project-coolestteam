@@ -61,8 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="75dp"
             android:layout_margin="10dp"
-            android:padding="20dp"
             android:background="@color/accentGreen"
+            android:padding="20dp"
             android:text="@string/register_as_employer"
             android:textColor="@color/dark" />
 
@@ -70,9 +70,9 @@
             android:id="@+id/employee_btn"
             android:layout_width="wrap_content"
             android:layout_height="75dp"
-            android:padding="20dp"
             android:layout_margin="10dp"
             android:background="@color/accentBlue"
+            android:padding="20dp"
             android:text="@string/register_as_employee"
             android:textColor="@color/dark" />
     </LinearLayout>
@@ -86,10 +86,6 @@
         android:paddingRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-
-
-    </FrameLayout>
+        app:layout_constraintStart_toStartOf="parent"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

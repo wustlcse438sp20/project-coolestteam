@@ -18,7 +18,6 @@ import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home_employee.*
 import kotlinx.android.synthetic.main.activity_home_employee.logout_button
 import kotlinx.android.synthetic.main.activity_home_employee.match_button
@@ -26,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_home_employee.profile_button
 import java.util.HashMap
 
 class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListener,
-        GestureDetector.OnDoubleTapListener{
+        GestureDetector.OnDoubleTapListener {
     private lateinit var logoutButton: ImageButton
     private lateinit var profileButton: ImageButton
     private lateinit var matchButton: ImageButton
@@ -34,13 +33,13 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
     private lateinit var position: TextView
     private lateinit var education: TextView
     private lateinit var salary: TextView
-    private lateinit var postingList : ArrayList<Posting>
+    private lateinit var postingList: ArrayList<Posting>
     private lateinit var firestore: FirebaseFirestore
     private lateinit var mDetector: GestureDetectorCompat
     private var swipedistance = 100
     private var postIndex: Int = 0
-    private var prevIndex : Int = 0
-    private lateinit var curEmployeeMatch : EmployeeMatch
+    private var prevIndex: Int = 0
+    private lateinit var curEmployeeMatch: EmployeeMatch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +49,7 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         matchButton = match_button
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployeeActivity::class.java, false) }
-        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false)}
+        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployeeActivity::class.java, false) }
 
         //text for textviews
         company = home_company_text
@@ -84,7 +83,7 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
     }
 
     // populate the list of potential postings
-    fun populateList(){
+    fun populateList() {
         firestore.collection("Employers").get().addOnSuccessListener { result ->
             for (document in result) {
                 firestore.collection("Employers").document(document.id)
@@ -98,7 +97,7 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
                                 curPost.id = doc.id
                                 Log.d("check company id", document.id)
                                 Log.d("check id", doc.id)
-                                if(curPost.company != "") {
+                                if (curPost.company != "") {
                                     postingList.add(curPost)
                                     loadPosting()
                                 }
@@ -109,12 +108,12 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
     }
 
     // choose a new random posting to show the user
-    fun loadPosting(){
-        if(postingList.size > 0) {
+    fun loadPosting() {
+        if (postingList.size > 0) {
             prevIndex = postIndex
-            postIndex = (0..postingList.size-1).random()
+            postIndex = (0..postingList.size - 1).random()
             // make sure next index is new
-            if(postingList.size > 1) {
+            if (postingList.size > 1) {
                 while (postIndex == prevIndex) {
                     postIndex = (0..postingList.size - 1).random()
                 }
@@ -123,23 +122,22 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
             position.text = "Position: " + postingList[postIndex].position
             education.text = "Education: " + postingList[postIndex].education
             salary.text = "Salary: " + postingList[postIndex].salary.toString()
-        }
-        else{
+        } else {
             Log.d("check", "inside load else")
             Toast.makeText(this, "No postings to show", Toast.LENGTH_LONG).show()
         }
     }
 
-    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
+    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean) {
         val intent = Intent(this, activity)
-        if(isLogout){
+        if (isLogout) {
             FirebaseAuth.getInstance().signOut()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         startActivity(intent)
     }
 
-    fun addMatch(){
+    fun addMatch() {
         val newEmployeeMatchMap: MutableMap<String, Any> = HashMap()
         curEmployeeMatch.interested = true
 
@@ -150,21 +148,18 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         newEmployeeMatchMap["interested"] = curEmployeeMatch.interested
         newEmployeeMatchMap["id"] = curEmployeeMatch.id
 
-
-        Log.d("blah", curEmployeeMatch.toString())
-        //TODO add to the database
         firestore.collection("Employers").document(postingList[postIndex].companyid)
                 .collection("Postings").document(postingList[postIndex].id)
                 .collection("Matches").document(curEmployeeMatch.id).set(newEmployeeMatchMap)
-                .addOnSuccessListener{
+                .addOnSuccessListener {
                     Toast.makeText(this, "Posting Liked", Toast.LENGTH_SHORT)
                 }
-                .addOnFailureListener{
+                .addOnFailureListener {
                     Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
                 }
     }
 
-    fun addNoMatch(){
+    fun addNoMatch() {
         val newEmployeeMatchMap: MutableMap<String, Any> = HashMap()
         curEmployeeMatch.interested = false
 
@@ -174,15 +169,14 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         newEmployeeMatchMap["major"] = curEmployeeMatch.major
         newEmployeeMatchMap["interested"] = curEmployeeMatch.interested
 
-        //TODO add to the database
         firestore.collection("Employers").document(postingList[postIndex].companyid)
                 .collection("Postings").document(postingList[postIndex].id)
                 .collection("Matches").add(newEmployeeMatchMap)
-                .addOnSuccessListener{
+                .addOnSuccessListener {
                     Toast.makeText(this, "Posting Discarded", Toast.LENGTH_SHORT)
 
                 }
-                .addOnFailureListener{
+                .addOnFailureListener {
                     Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
                 }
     }
@@ -207,13 +201,11 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
             velocityX: Float,
             velocityY: Float
     ): Boolean {
-        if(event2.x - event1.x > swipedistance) {
+        if (event2.x - event1.x > swipedistance) {
             loadPosting()
             addMatch()
             return true
-        }
-        else if (event1.x - event2.x > swipedistance){
-            //addNoMatch() // no need for now unless don't display repeat postings
+        } else if (event1.x - event2.x > swipedistance) {
             loadPosting()
             return true
         }

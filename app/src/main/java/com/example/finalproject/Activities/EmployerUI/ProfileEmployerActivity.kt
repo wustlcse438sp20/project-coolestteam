@@ -28,11 +28,9 @@ class ProfileEmployerActivity : AppCompatActivity() {
     private lateinit var createJobButton: ImageButton
     private lateinit var matchButton: ImageButton
     private lateinit var homeButton: ImageButton
-
     private lateinit var company: TextView
     private lateinit var liaison: TextView
     private lateinit var contact: TextView
-
     lateinit var postingList: MutableList<String>
     lateinit var recyclerView: RecyclerView
 
@@ -47,30 +45,30 @@ class ProfileEmployerActivity : AppCompatActivity() {
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         createJobButton.setOnClickListener { v ->
             changeActivity(
-                v,
-                CreateJobActivity::class.java,
-                false
+                    v,
+                    CreateJobActivity::class.java,
+                    false
             )
         }
         profileButton.setOnClickListener { v ->
             changeActivity(
-                v,
-                ProfileEmployerActivity::class.java,
-                false
+                    v,
+                    ProfileEmployerActivity::class.java,
+                    false
             )
         }
         matchButton.setOnClickListener { v ->
             changeActivity(
-                v,
-                MatchesEmployerActivity::class.java,
-                false
+                    v,
+                    MatchesEmployerActivity::class.java,
+                    false
             )
         }
         homeButton.setOnClickListener { v ->
             changeActivity(
-                v,
-                HomeEmployerActivity::class.java,
-                false
+                    v,
+                    HomeEmployerActivity::class.java,
+                    false
             )
         }
 
@@ -79,7 +77,6 @@ class ProfileEmployerActivity : AppCompatActivity() {
         liaison = liaison_text
         contact = contact_text
 
-
         var db = FirebaseFirestore.getInstance()
         var auth = FirebaseAuth.getInstance()
         postingList = arrayListOf()
@@ -87,32 +84,28 @@ class ProfileEmployerActivity : AppCompatActivity() {
         var doc = db.collection("Employers").document(auth.currentUser!!.uid)
         doc.get().addOnSuccessListener { document ->
             company.text = "Employer: " + document.data!!.get("company").toString()
-            liaison.text  = "Liaison: " + document.data!!.get("name").toString()
-            contact.text  = "Contact: " + document.data!!.get("email").toString()
-
-                    Log.d("here", "${document.data!!.get("company").toString()}")
-            //var companyName = document.data!!.get("company").toString()
+            liaison.text = "Liaison: " + document.data!!.get("name").toString()
+            contact.text = "Contact: " + document.data!!.get("email").toString()
             doc.collection("Postings").get()
-                .addOnSuccessListener { result ->
-                    for (document2 in result) {
-                        postingList.add(document2.id)
-                        Log.d("here", "${postingList}")
+                    .addOnSuccessListener { result ->
+                        for (document2 in result) {
+                            postingList.add(document2.id)
+                        }
+                        recyclerView = postings_recycler_view
+                        var itemsShouldBeClickable = false
+                        var adapter = PostingsListAdapter(postingList, itemsShouldBeClickable)
+                        recyclerView.adapter = adapter
+                        recyclerView.layoutManager = LinearLayoutManager(this)
                     }
-                    recyclerView = postings_recycler_view
-                    var itemsShouldBeClickable = false
-                    var adapter = PostingsListAdapter(postingList, itemsShouldBeClickable)
-                    recyclerView.adapter = adapter
-                    recyclerView.layoutManager = LinearLayoutManager(this)
-                }
-                .addOnFailureListener { exception ->
-                    Log.d("here", "Error getting documents: ", exception)
-                }
+                    .addOnFailureListener { exception ->
+                        Log.d("here", "Error getting documents: ", exception)
+                    }
         }
     }
 
-    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
+    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean) {
         val intent = Intent(this, activity)
-        if(isLogout){
+        if (isLogout) {
             FirebaseAuth.getInstance().signOut()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

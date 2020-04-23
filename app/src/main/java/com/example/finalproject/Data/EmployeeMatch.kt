@@ -16,4 +16,4 @@ data class EmployeeMatch(
         var workExperiences: MutableList<WorkExperience> = mutableListOf<WorkExperience>(),
         var matchList: MutableList<PostMatch> = mutableListOf<PostMatch>(),
         var id: String = ""
-):Serializable
+) : Serializable

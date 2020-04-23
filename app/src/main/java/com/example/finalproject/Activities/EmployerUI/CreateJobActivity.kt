@@ -32,20 +32,20 @@ class CreateJobActivity : AppCompatActivity() {
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         createJobButton.setOnClickListener { v -> changeActivity(v, CreateJobActivity::class.java, false) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployerActivity::class.java, false) }
-        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployerActivity::class.java, false)}
-        homeButton.setOnClickListener{ v -> changeActivity(v, HomeEmployerActivity::class.java, false)}
+        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployerActivity::class.java, false) }
+        homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployerActivity::class.java, false) }
 
-        createJobBigButton.setOnClickListener{
+        createJobBigButton.setOnClickListener {
             intent = Intent(this, CreateJobPostingActivity::class.java)
             startActivity(intent)
         }
 
 
-
     }
-    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
+
+    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean) {
         val intent = Intent(this, activity)
-        if(isLogout){
+        if (isLogout) {
             FirebaseAuth.getInstance().signOut()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

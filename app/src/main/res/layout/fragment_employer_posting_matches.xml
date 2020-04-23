@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="57dp"
     android:layout_marginBottom="40dp"
     android:background="@color/mediumLight"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.EmployerPostingMatches">
+
     <LinearLayout
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
@@ -37,10 +38,11 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/matchesRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height= "490dp"
+        android:layout_height="490dp"
         android:layout_marginTop="75dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@id/main_nav_bar"

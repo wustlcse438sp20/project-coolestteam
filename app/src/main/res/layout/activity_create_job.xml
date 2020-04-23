@@ -46,13 +46,13 @@
         android:layout_marginTop="57dp"
         android:layout_marginBottom="40dp"
         android:background="@color/mediumLight"
+        android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
         <Button
             android:id="@+id/create_job_big_button"
@@ -62,12 +62,11 @@
             android:gravity="center"
             android:text="@string/create_a_job"
             android:textColor="@color/accentGreen"
-            android:textSize="30sp"
-            />
+            android:textSize="30sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
@@ -186,7 +185,5 @@
                 android:textColor="@color/light"
                 android:textSize="10sp" />
         </LinearLayout>
-
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

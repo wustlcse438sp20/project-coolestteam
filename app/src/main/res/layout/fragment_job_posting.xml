@@ -8,12 +8,13 @@
     android:layout_marginBottom="40dp"
     android:background="@color/mediumLight"
     tools:context=".Fragments.EmployeeMatchJobDisplayFragment">
+
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/backarraowblack"
-        />
+        android:src="@drawable/backarraowblack" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,40 +38,42 @@
             android:textColor="@color/accentBlue"
             android:textSize="20sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/company_prompt"
-            android:textSize="18sp"
             android:textColor="@color/light"
-            android:gravity="center"/>
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/position"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:gravity="center"
-            android:textColor="@color/light"
             android:text="@string/position"
-            />
+            android:textColor="@color/light"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/salary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/job_salary"
             android:gravity="center"
-            android:textSize="18sp"
+            android:text="@string/job_salary"
             android:textColor="@color/light"
-            />
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/placeholder_email"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/light"/>
+            android:text="@string/placeholder_email"
+            android:textColor="@color/light"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

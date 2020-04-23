@@ -18,9 +18,7 @@ import com.example.finalproject.Data.Education
 import com.example.finalproject.Data.Employee
 import com.example.finalproject.Data.EmployeeMatch
 import com.example.finalproject.Data.WorkExperience
-
 import com.example.finalproject.R
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -32,7 +30,6 @@ import kotlinx.android.synthetic.main.fragment_employer_view_employee_profile.vi
 
 class EmployerViewEmployeeProfile : Fragment() {
     private lateinit var db: FirebaseFirestore
-    private var firebase = FirebaseAuth.getInstance()
     private lateinit var currentEmployee: Employee
     private lateinit var displayName: TextView
     private lateinit var email: TextView
@@ -78,6 +75,7 @@ class EmployerViewEmployeeProfile : Fragment() {
 
         return v
     }
+
     fun loadProfile(id: String) {
 
         var uid = id
@@ -149,6 +147,4 @@ class EmployerViewEmployeeProfile : Fragment() {
 
         }
     }
-
-
 }

@@ -106,8 +106,8 @@
                 android:id="@+id/employer_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
                 android:gravity="center"
-                android:layout_marginTop = "40dp"
                 android:text="@string/employer"
                 android:textSize="30sp" />
 
@@ -131,8 +131,8 @@
                 android:id="@+id/postings_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="40dp"
+                android:gravity="center"
                 android:text="@string/postings"
                 android:textSize="30sp" />
 

@@ -21,11 +21,10 @@ import kotlinx.android.synthetic.main.activity_home_employer.logout_button
 import kotlinx.android.synthetic.main.activity_home_employer.match_button
 import kotlinx.android.synthetic.main.activity_home_employer.profile_button
 import kotlinx.android.synthetic.main.activity_post_home_employer_activity.*
-
 import kotlin.math.abs
 
 
-class PostHomeEmployerActivity: AppCompatActivity() {
+class PostHomeEmployerActivity : AppCompatActivity() {
 
     private lateinit var logoutButton: ImageButton
     private lateinit var profileButton: ImageButton
@@ -36,12 +35,7 @@ class PostHomeEmployerActivity: AppCompatActivity() {
     var auth = FirebaseAuth.getInstance()
     var db = FirebaseFirestore.getInstance()
     var currId = ""
-
     var i = 0
-
-//    lateinit var postingList: MutableList<Map<String, Any>>
-//    lateinit var employerList: MutableList<Map<String, Any>>
-
     lateinit var employeeList: MutableList<Map<String, Any>>
     lateinit var docIds: MutableList<String>
 
@@ -59,36 +53,8 @@ class PostHomeEmployerActivity: AppCompatActivity() {
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         createJobButton.setOnClickListener { v -> changeActivity(v, CreateJobActivity::class.java, false) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployerActivity::class.java, false) }
-        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployerActivity::class.java, false)}
-        homeButton.setOnClickListener{ v -> changeActivity(v, HomeEmployerActivity::class.java, false)}
-
-
-        //For Employers idk why I did this lmao
-        /*
-        employeeList = arrayListOf()
-        postingList = arrayListOf()
-        db.collection("Employers").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d("here", "${document.data.get("company").toString()}")
-                    var companyName = document.data.get("company").toString()
-                    db.collection("Employers").document(document.id).collection(companyName).get()
-                        .addOnSuccessListener { result ->
-                            for(document2 in result) {
-                                postingList.add(document2.data)
-                                Log.d("here", "${postingList}")
-                            }
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.d("here", "Error getting documents: ", exception)
-                        }
-                }
-
-                R.layout.activity
-            }
-            .addOnFailureListener { exception ->
-                Log.d("here", "Error getting documents: ", exception)
-            } */
+        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployerActivity::class.java, false) }
+        homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployerActivity::class.java, false) }
 
         //For employees
         currId = intent.getStringExtra("docId")
@@ -96,25 +62,25 @@ class PostHomeEmployerActivity: AppCompatActivity() {
         docIds = arrayListOf()
 
         db.collection("Employees").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    docIds.add(document.id)
-                    employeeList.add(document.data)
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        docIds.add(document.id)
+                        employeeList.add(document.data)
+                    }
+                    Log.d("here", "${employeeList}")
+                    employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                    employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
+                    employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
+                    employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
                 }
-                Log.d("here", "${employeeList}")
-                employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
-                employee_age_home.text = "Age: " +  employeeList[i].get("age").toString()
-                employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
-                employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
-            }
-            .addOnFailureListener { exception ->
-                Log.d("here", "Error getting documents: ", exception)
-            }
+                .addOnFailureListener { exception ->
+                    Log.d("here", "Error getting documents: ", exception)
+                }
     }
 
-    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
+    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean) {
         val intent = Intent(this, activity)
-        if(isLogout){
+        if (isLogout) {
             FirebaseAuth.getInstance().signOut()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -133,24 +99,23 @@ class PostHomeEmployerActivity: AppCompatActivity() {
         }
 
         override fun onFling(
-            e1: MotionEvent,
-            e2: MotionEvent,
-            velocityX: Float,
-            velocityY: Float
+                e1: MotionEvent,
+                e2: MotionEvent,
+                velocityX: Float,
+                velocityY: Float
         ): Boolean {
             val xDif = e2.rawX - e1.rawX
             val yDif = e2.rawY - e1.rawY
 
             //on left swipe, don't make match but move on
             if (xDif < 0 && abs(xDif) > 500) {
-                if(i<employeeList.size - 1) {
+                if (i < employeeList.size - 1) {
                     i += 1
                     employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
                     employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
-                    employee_school_home.text = "Education: " +  employeeList[i].get("school").toString()
+                    employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
                     employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
-                }
-                else{
+                } else {
                     i = 0
                     employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
                     employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
@@ -159,68 +124,67 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                 }
             }
             // liked this applicant,get next user and add to database
-            else if(xDif > 0 && abs(xDif) > 500) {
+            else if (xDif > 0 && abs(xDif) > 500) {
 
                 // add to database
                 val newPostingMatchMap: MutableMap<String, Any> = HashMap()
                 var currUserData = db.collection("Employers").document(auth.currentUser!!.uid).get()
-                    .addOnSuccessListener { document ->
-                        db.collection("Employers").document(auth.currentUser!!.uid).collection("Postings")
-                            .document(currId).get()
-                            .addOnSuccessListener { document ->
-                                var postingMatch = PostMatch(
-                                    document.data!!.get("company").toString(),
-                                    true,
-                                    document.data!!.get("position").toString(),
-                                    document.data!!.get("salary").toString().toInt(),
-                                        auth.currentUser!!.uid.toString(),
-                                        document.id.toString()
-                                )
-                                newPostingMatchMap["company"] = postingMatch.Company
-                                newPostingMatchMap["position"] = postingMatch.Position
-                                newPostingMatchMap["salary"] = postingMatch.Salary
-                                newPostingMatchMap["interested"] = postingMatch.Interested
-                                newPostingMatchMap["employerId"] = postingMatch.employerId
-                                newPostingMatchMap["id"] = postingMatch.id
-
-                                val id = db.collection("Employees").document(docIds[i])
-                                    .collection("Matches").document().id
-
-                                db.collection("Employees").document(docIds[i])
-                                        .collection("Matches").document(postingMatch.id)
-                                    .set(newPostingMatchMap)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(
-                                            this@PostHomeEmployerActivity,
-                                            "Post added",
-                                            Toast.LENGTH_SHORT
+                        .addOnSuccessListener { document ->
+                            db.collection("Employers").document(auth.currentUser!!.uid).collection("Postings")
+                                    .document(currId).get()
+                                    .addOnSuccessListener { document ->
+                                        var postingMatch = PostMatch(
+                                                document.data!!.get("company").toString(),
+                                                true,
+                                                document.data!!.get("position").toString(),
+                                                document.data!!.get("salary").toString().toInt(),
+                                                auth.currentUser!!.uid.toString(),
+                                                document.id.toString()
                                         )
+                                        newPostingMatchMap["company"] = postingMatch.Company
+                                        newPostingMatchMap["position"] = postingMatch.Position
+                                        newPostingMatchMap["salary"] = postingMatch.Salary
+                                        newPostingMatchMap["interested"] = postingMatch.Interested
+                                        newPostingMatchMap["employerId"] = postingMatch.employerId
+                                        newPostingMatchMap["id"] = postingMatch.id
 
-                                        //still move to next user
-                                        if(i<employeeList.size - 1) {
-                                            i += 1
-                                            employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
-                                            employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
-                                            employee_school_home.text = "Education: " +  employeeList[i].get("school").toString()
-                                            employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
-                                        }
-                                        else{
-                                            i = 0
-                                            employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
-                                            employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
-                                            employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
-                                            employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
-                                        }
+                                        val id = db.collection("Employees").document(docIds[i])
+                                                .collection("Matches").document().id
+
+                                        db.collection("Employees").document(docIds[i])
+                                                .collection("Matches").document(postingMatch.id)
+                                                .set(newPostingMatchMap)
+                                                .addOnSuccessListener {
+                                                    Toast.makeText(
+                                                            this@PostHomeEmployerActivity,
+                                                            "Post added",
+                                                            Toast.LENGTH_SHORT
+                                                    )
+
+                                                    //still move to next user
+                                                    if (i < employeeList.size - 1) {
+                                                        i += 1
+                                                        employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                                                        employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
+                                                        employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
+                                                        employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
+                                                    } else {
+                                                        i = 0
+                                                        employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                                                        employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
+                                                        employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
+                                                        employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
+                                                    }
+                                                }
+                                                .addOnFailureListener {
+                                                    Toast.makeText(
+                                                            this@PostHomeEmployerActivity,
+                                                            "Failed to insert data!",
+                                                            Toast.LENGTH_LONG
+                                                    )
+                                                }
                                     }
-                                    .addOnFailureListener {
-                                        Toast.makeText(
-                                            this@PostHomeEmployerActivity,
-                                            "Failed to insert data!",
-                                            Toast.LENGTH_LONG
-                                        )
-                                    }
-                            }
-                    }.addOnFailureListener { e -> Log.d("here", e.toString()) }
+                        }.addOnFailureListener { e -> Log.d("here", e.toString()) }
 
             }
             return true

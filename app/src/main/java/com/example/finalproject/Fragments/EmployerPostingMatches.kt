@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_matches_employer.*
 import kotlinx.android.synthetic.main.fragment_employer_posting_matches.view.*
 
 
-
 class EmployerPostingMatches : Fragment() {
     private lateinit var db: FirebaseFirestore
     private var matchList = ArrayList<EmployeeMatch>()
@@ -32,26 +31,22 @@ class EmployerPostingMatches : Fragment() {
         var v = inflater.inflate(R.layout.fragment_employer_posting_matches, container, false)
         var post: Posting = arguments!!.getSerializable("post") as Posting
 
-
         activity!!.postings_matchesRecyclerViewEmployer.visibility = View.GONE
         v.company_name.text = post.company
         db = FirebaseFirestore.getInstance()
         viewManager = LinearLayoutManager(this.context)
         employerMatchAdapter = EmployerMatchesAdapter(matchList)
 
-        recyclerView = v.findViewById<RecyclerView>(R.id.matchesRecyclerView).apply{
+        recyclerView = v.findViewById<RecyclerView>(R.id.matchesRecyclerView).apply {
             layoutManager = viewManager
             adapter = employerMatchAdapter
         }
 
 
-
-        Log.d("blah", post.toString())
         var matchesRef = db.collection("Employers").document(post.companyid).collection("Postings").document(post.id).collection("Matches")
         matchesRef.get()
                 .addOnSuccessListener { documents ->
-                    for(doc in documents){
-//                        Log.d("blah", doc.data.toString())
+                    for (doc in documents) {
                         matchList.add(doc.toObject<EmployeeMatch>())
                     }
                     employerMatchAdapter.notifyDataSetChanged()
