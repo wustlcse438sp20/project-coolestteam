@@ -94,7 +94,7 @@
         <LinearLayout
             android:id="@+id/profile_info"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:background="@color/mediumLight"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
@@ -141,9 +141,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postings_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            />
         
     </LinearLayout>
+
 
 
     <LinearLayout
