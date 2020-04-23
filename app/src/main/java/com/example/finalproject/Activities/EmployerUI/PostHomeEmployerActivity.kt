@@ -63,9 +63,6 @@ class PostHomeEmployerActivity: AppCompatActivity() {
         homeButton.setOnClickListener{ v -> changeActivity(v, HomeEmployerActivity::class.java, false)}
 
 
-
-
-
         //For Employers idk why I did this lmao
         /*
         employeeList = arrayListOf()
@@ -105,16 +102,14 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                     employeeList.add(document.data)
                 }
                 Log.d("here", "${employeeList}")
-                employee_name_home.text = employeeList[i].get("name").toString()
-                employee_age_home.text = employeeList[i].get("age").toString()
-                employee_school_home.text = employeeList[i].get("school").toString()
-                employee_major_home.text = employeeList[i].get("major").toString()
+                employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                employee_age_home.text = "Age: " +  employeeList[i].get("age").toString()
+                employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
+                employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
             }
             .addOnFailureListener { exception ->
                 Log.d("here", "Error getting documents: ", exception)
             }
-
-
     }
 
     fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
@@ -146,26 +141,27 @@ class PostHomeEmployerActivity: AppCompatActivity() {
             val xDif = e2.rawX - e1.rawX
             val yDif = e2.rawY - e1.rawY
 
-            //on right swipe
+            //on left swipe, don't make match but move on
             if (xDif < 0 && abs(xDif) > 500) {
                 if(i<employeeList.size - 1) {
                     i += 1
-                    employee_name_home.text = employeeList[i].get("name").toString()
-                    employee_age_home.text = employeeList[i].get("age").toString()
-                    employee_school_home.text = employeeList[i].get("school").toString()
-                    employee_major_home.text = employeeList[i].get("major").toString()
+                    employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                    employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
+                    employee_school_home.text = "Education: " +  employeeList[i].get("school").toString()
+                    employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
                 }
                 else{
                     i = 0
-                    employee_name_home.text = employeeList[i].get("name").toString()
-                    employee_age_home.text = employeeList[i].get("age").toString()
-                    employee_school_home.text = employeeList[i].get("school").toString()
-                    employee_major_home.text = employeeList[i].get("major").toString()
+                    employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                    employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
+                    employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
+                    employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
                 }
             }
-            //document.data!!.get("company").toString() <-- removed this below
-
+            // liked this applicant,get next user and add to database
             else if(xDif > 0 && abs(xDif) > 500) {
+
+                // add to database
                 val newPostingMatchMap: MutableMap<String, Any> = HashMap()
                 var currUserData = db.collection("Employers").document(auth.currentUser!!.uid).get()
                     .addOnSuccessListener { document ->
@@ -187,12 +183,10 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                                 newPostingMatchMap["employerId"] = postingMatch.employerId
                                 newPostingMatchMap["id"] = postingMatch.id
 
-
                                 val id = db.collection("Employees").document(docIds[i])
                                     .collection("Matches").document().id
 
                                 db.collection("Employees").document(docIds[i])
-//                                    .collection("Matches").document(id)
                                         .collection("Matches").document(postingMatch.id)
                                     .set(newPostingMatchMap)
                                     .addOnSuccessListener {
@@ -202,6 +196,21 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                                             Toast.LENGTH_SHORT
                                         )
 
+                                        //still move to next user
+                                        if(i<employeeList.size - 1) {
+                                            i += 1
+                                            employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                                            employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
+                                            employee_school_home.text = "Education: " +  employeeList[i].get("school").toString()
+                                            employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
+                                        }
+                                        else{
+                                            i = 0
+                                            employee_name_home.text = "Applicant: " + employeeList[i].get("name").toString()
+                                            employee_age_home.text = "Age: " + employeeList[i].get("age").toString()
+                                            employee_school_home.text = "Education: " + employeeList[i].get("school").toString()
+                                            employee_major_home.text = "Major: " + employeeList[i].get("major").toString()
+                                        }
                                     }
                                     .addOnFailureListener {
                                         Toast.makeText(
@@ -211,27 +220,10 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                                         )
                                     }
                             }
-                            }
-
-
-
-
-
-
-
-                    .addOnFailureListener { e ->
-                        Log.d("here", e.toString())
-                    }
-
+                    }.addOnFailureListener { e -> Log.d("here", e.toString()) }
 
             }
-
-
-
-
             return true
-
-
         }
     }
 }

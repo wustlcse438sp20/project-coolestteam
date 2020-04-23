@@ -53,12 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="EmployeeUI"
-            android:textSize="30sp" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -70,8 +64,8 @@
             android:id="@+id/home_position_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="@string/position"
+            android:layout_marginLeft="20dp"
             android:textSize="25sp" />
 
         <TextView

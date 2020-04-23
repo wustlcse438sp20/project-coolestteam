@@ -53,13 +53,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
-        <TextView
-            android:id="@+id/main_container_text"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:gravity="center"
-            android:text="EmployerUI"
-            android:textSize="30sp" />
+            android:src="@drawable/home" />
 
         <LinearLayout
             android:id="@+id/info_container"
@@ -82,7 +80,8 @@
                 app:layout_constraintTop_toTopOf="@+id/info_container"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="25sp"
                 />
             <TextView
                 android:id="@+id/employee_school_home"
@@ -92,7 +91,8 @@
                 app:layout_constraintTop_toTopOf="@+id/job_posting"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="25sp"
                 />
             <TextView
                 android:id="@+id/employee_major_home"
@@ -102,7 +102,8 @@
                 app:layout_constraintTop_toTopOf="@+id/employee_school_home"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="25sp"
                 />
             <TextView
                 android:id="@+id/employee_age_home"
@@ -112,7 +113,8 @@
                 app:layout_constraintTop_toTopOf="@+id/employee_major_home"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="25sp"
                 />
         </LinearLayout>
     </LinearLayout>

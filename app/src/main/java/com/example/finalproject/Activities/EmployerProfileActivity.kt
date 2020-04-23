@@ -47,7 +47,6 @@ class EmployerProfileActivity: AppCompatActivity() {
                 name,
                 company,
                     email
-
             )
 
             newEmployerMap["name"] = newEmployer.name

@@ -66,6 +66,7 @@ class EmployeeProfileActivity: AppCompatActivity() {
                     mutableListOf<TechnicalSkill>(),
                     mutableListOf<WorkExperience>()
             )
+
             if(intentHasProfileData){
                 newEmployee.general = generalProfile
             }
