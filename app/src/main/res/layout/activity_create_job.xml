@@ -51,53 +51,23 @@
         app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
+        android:gravity="center">
 
-        <TextView
+        <Button
+            android:id="@+id/create_job_big_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/create_a_job"
             android:textColor="@color/accentGreen"
-            android:textSize="30sp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="@string/position" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/qualifications"
-            android:textSize="20sp" />
+            android:textSize="30sp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/us_citizen" />
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/current_student" />
-
-        </LinearLayout>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:hint="@string/job_description"
-            android:minLines="1" />
+            android:layout_height="wrap_content"/>
 
 
     </LinearLayout>
