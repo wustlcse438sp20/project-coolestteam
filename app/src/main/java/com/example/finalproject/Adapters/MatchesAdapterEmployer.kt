@@ -1,54 +1,57 @@
 package com.example.finalproject.Adapters
 
-import android.content.Intent
+
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import com.example.finalproject.Data.PostMatch
-import com.example.finalproject.Data.Posting
+import com.example.finalproject.Data.EmployeeMatch
+import com.example.finalproject.Fragments.EmployerViewEmployeeProfile
 import com.example.finalproject.R
+import kotlinx.android.synthetic.main.match_item_employer.view.*
 
-//create the view holder
+
 class MatchesViewHolderEmployer(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.match_item_employer, parent, false)) {
-    private val userName: TextView?
-    private val userMajor: TextView?
-    private val matchesContainer: LinearLayout?
+    private lateinit var profileMajor: TextView
+    private lateinit var profileName: TextView
+    private lateinit var profileSchool: TextView
 
-    //show matches in a list
+
     init {
-        userName = itemView.findViewById(R.id.companyName)
-        userMajor = itemView.findViewById(R.id.jobTitle)
-        matchesContainer = itemView.findViewById(R.id.matchContainerEmployer)
+        profileMajor = itemView.employee_major
+        profileName = itemView.employee_display_name
+        profileSchool = itemView.employee_school
+
     }
 
-    fun bind(post: PostMatch) {
-        userName?.text = post.Company
-        userMajor?.text = post.Position
+    fun bind(employee: EmployeeMatch) {
+        profileName.text = employee.name
+        profileSchool.text = employee.school
+        profileMajor.text = employee.major
 
-        matchesContainer?.setOnClickListener {
-            //allow users to click on postings?
-//            var id = pl.id.toString()
-//            val context = it.context
-//            val intent = Intent(context, PlaylistActivity::class.java).apply {
-//                putExtra("id", id)
-//                putExtra("title", pl.title)
-//                putExtra("description", pl.description)
-//                putExtra("rating", pl.rating)
-//                putExtra("genre", pl.genre)
-//            }
-//            context.startActivity(intent)
-        }
+
+            itemView.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable("employee", employee)
+                var fragment = EmployerViewEmployeeProfile()
+                fragment.arguments = bundle
+                val transaction: FragmentTransaction = (it.context as FragmentActivity).supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_container, fragment)
+                transaction.commit()
+            }
+
     }
 }
 
 //create the listener for the recycler view
-class EmployerMatchesAdapter(private val list: ArrayList<PostMatch>?) : RecyclerView.Adapter<MatchesViewHolderEmployer>() {
-    private var listEvents: ArrayList<PostMatch>? = list
+class EmployerMatchesAdapter(private val list: ArrayList<EmployeeMatch>) : RecyclerView.Adapter<MatchesViewHolderEmployer>() {
+//    private var listEvents: ArrayList<EmployeeMatch>? = list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchesViewHolderEmployer {
         val inflater = LayoutInflater.from(parent.context)
         return MatchesViewHolderEmployer(inflater, parent)
@@ -56,11 +59,11 @@ class EmployerMatchesAdapter(private val list: ArrayList<PostMatch>?) : Recycler
 
     //bind the object
     override fun onBindViewHolder(holder: MatchesViewHolderEmployer, position: Int) {
-        val event: PostMatch = listEvents!!.get(position)
-        holder.bind(event)
+        val employeeMatchObj: EmployeeMatch = list[position]
+        holder.bind(employeeMatchObj)
     }
 
     //set the count
-    override fun getItemCount(): Int = list!!.size
+    override fun getItemCount(): Int = list.size
 
 }
