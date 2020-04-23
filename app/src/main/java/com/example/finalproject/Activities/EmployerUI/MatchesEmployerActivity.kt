@@ -63,7 +63,8 @@ class MatchesEmployerActivity : AppCompatActivity() {
                         Log.d("here", "${postingList}")
                     }
                     recyclerView = postings_matchesRecyclerViewEmployer
-                    var adapter = PostingsListAdapter(postingList)
+                    var itemsShouldBeClickable = true
+                    var adapter = PostingsListAdapter(postingList,itemsShouldBeClickable)
                     recyclerView.adapter = adapter
                     recyclerView.layoutManager = LinearLayoutManager(this)
                 }

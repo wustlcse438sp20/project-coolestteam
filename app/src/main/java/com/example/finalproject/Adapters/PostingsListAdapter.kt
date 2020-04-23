@@ -26,31 +26,34 @@ class LeaderboardHolder(inflater: LayoutInflater, parent: ViewGroup) :
         postingItemName = itemView.posting_item_name
     }
 
-    fun bind(data: String) {
+    fun bind(data: String, itemsShouldBeClickable: Boolean) {
         var item = db.collection("Employers")
                 .document(FirebaseAuth.getInstance().currentUser!!.uid)
                 .collection("Postings").document(data)
+
         item.get().addOnSuccessListener { doc ->
 
             postObj = doc.toObject<Posting>()
             postObj!!.id = data
             postObj!!.companyid = FirebaseAuth.getInstance().currentUser!!.uid
             postingItemName.text = postObj!!.position
-            itemView.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putSerializable("post", postObj)
-                var fragment = EmployerPostingMatches()
-                fragment.arguments = bundle
-                val transaction: FragmentTransaction = (it.context as FragmentActivity).supportFragmentManager.beginTransaction()
-                transaction.add(R.id.fragment_container, fragment)
-                transaction.commit()
+            if(itemsShouldBeClickable) {
+                itemView.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putSerializable("post", postObj)
+                    var fragment = EmployerPostingMatches()
+                    fragment.arguments = bundle
+                    val transaction: FragmentTransaction = (it.context as FragmentActivity).supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.fragment_container, fragment)
+                    transaction.commit()
+                }
             }
         }
     }
 }
 
 //create the listener for the recycler view
-class PostingsListAdapter(private val list: MutableList<String>)
+class PostingsListAdapter(private val list: MutableList<String>, private var itemsShouldBeClickable: Boolean)
     : RecyclerView.Adapter<LeaderboardHolder>() {
     private var listPostings: MutableList<String> = list
 
@@ -63,7 +66,7 @@ class PostingsListAdapter(private val list: MutableList<String>)
     //bind the object
     override fun onBindViewHolder(holder: LeaderboardHolder, position: Int) {
         val data: String = listPostings!!.get(position)
-        holder.bind(data)
+        holder.bind(data, itemsShouldBeClickable)
     }
 
     //set the count
