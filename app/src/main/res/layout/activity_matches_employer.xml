@@ -58,7 +58,7 @@ tools:context=".Activities.EmployerUI.ProfileEmployerActivity">
         android:id="@+id/postingMatches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="75dp"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/posting_matches"
         android:gravity="center"
@@ -72,7 +72,7 @@ tools:context=".Activities.EmployerUI.ProfileEmployerActivity">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postings_matchesRecyclerViewEmployer"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="500dp"
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"

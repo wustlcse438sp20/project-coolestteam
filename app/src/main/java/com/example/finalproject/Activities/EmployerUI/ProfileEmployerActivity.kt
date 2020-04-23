@@ -30,9 +30,8 @@ class ProfileEmployerActivity : AppCompatActivity() {
     private lateinit var homeButton: ImageButton
 
     private lateinit var company: TextView
-    private lateinit var liason: TextView
+    private lateinit var liaison: TextView
     private lateinit var contact: TextView
-    private lateinit var profile: TextView
 
     lateinit var postingList: MutableList<String>
     lateinit var recyclerView: RecyclerView
@@ -77,11 +76,9 @@ class ProfileEmployerActivity : AppCompatActivity() {
 
         //text for textviews
         company = employer_text
-        liason = liason_text
-        profile = profile_text
+        liaison = liaison_text
         contact = contact_text
 
-        profile.text = "Employer Profile"
 
         var db = FirebaseFirestore.getInstance()
         var auth = FirebaseAuth.getInstance()
@@ -90,7 +87,7 @@ class ProfileEmployerActivity : AppCompatActivity() {
         var doc = db.collection("Employers").document(auth.currentUser!!.uid)
         doc.get().addOnSuccessListener { document ->
             company.text = "Employer: " + document.data!!.get("company").toString()
-            liason.text  = "Liason: " + document.data!!.get("name").toString()
+            liaison.text  = "Liaison: " + document.data!!.get("name").toString()
             contact.text  = "Contact: " + document.data!!.get("email").toString()
 
                     Log.d("here", "${document.data!!.get("company").toString()}")

@@ -40,6 +40,7 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
@@ -54,9 +55,46 @@
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
         <LinearLayout
+            android:id="@+id/profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@color/medium"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
+
+            <ImageView
+                android:id="@+id/user_profile_image"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/profileblue" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/user_display_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/employer_profile"
+                    android:textColor="@color/mediumLight"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/profile_info"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:background="@color/mediumLight"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/main_nav_bar"
@@ -65,28 +103,20 @@
             app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
             <TextView
-                android:id="@+id/profile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginBottom="40dp"
-                android:text="@string/profile"
-                android:textSize="30sp" />
-
-            <TextView
                 android:id="@+id/employer_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginTop = "40dp"
                 android:text="@string/employer"
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/liason_text"
+                android:id="@+id/liaison_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/liason"
+                android:text="@string/liaison"
                 android:textSize="30sp" />
 
             <TextView
@@ -112,8 +142,7 @@
             android:id="@+id/postings_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-
+        
     </LinearLayout>
 
 

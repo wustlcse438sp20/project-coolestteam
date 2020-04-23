@@ -7,9 +7,10 @@
     <string name="placeholder_gpa">GPA: 4.0</string>
     <string name="employee">Employee</string>
     <string name="employer">Employer</string>
+    <string name="employer_profile">Employer Profile</string>
     <string name="employees">Employees</string>
     <string name="employers">Employers</string>
-    <string name="liason">Liason</string>
+    <string name="liaison">Liaison</string>
     <string name="contact">Contact</string>
     <string name="create_a_job">Create a Job</string>
     <string name="company_name">Company Name</string>
