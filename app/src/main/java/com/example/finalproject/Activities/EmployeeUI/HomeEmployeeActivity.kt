@@ -150,7 +150,8 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         //TODO add to the database
         firestore.collection("Employers").document(postingList[postIndex].companyid)
                 .collection("Postings").document(postingList[postIndex].id)
-                .collection("Matches").add(newEmployeeMatchMap)
+//                .collection("Matches").add(newEmployeeMatchMap)
+                .collection("Matches").document(curEmployeeMatch.id).set(newEmployeeMatchMap)
                 .addOnSuccessListener{
                     Toast.makeText(this, "Posting Liked", Toast.LENGTH_SHORT)
                 }
