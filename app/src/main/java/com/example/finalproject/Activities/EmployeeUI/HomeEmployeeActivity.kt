@@ -18,6 +18,7 @@ import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home_employee.*
 import kotlinx.android.synthetic.main.activity_home_employee.logout_button
 import kotlinx.android.synthetic.main.activity_home_employee.match_button
@@ -61,6 +62,8 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
         postingList = arrayListOf()
 
         populateList()
+
+
 
         //get current user information
         var userDoc = firestore.collection("Employees").document(FirebaseAuth.getInstance().currentUser!!.uid)

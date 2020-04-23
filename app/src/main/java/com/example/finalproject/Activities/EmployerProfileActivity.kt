@@ -2,6 +2,7 @@ package com.example.finalproject.Activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +36,8 @@ class EmployerProfileActivity: AppCompatActivity() {
 
             //Get UID of current user to place values in correct doc
             var currUser = auth.currentUser?.uid.toString()
+            var email = auth.currentUser!!.email.toString()
+
 
             //Get values and put them in map to insert into collection
             val newEmployerMap: MutableMap<String, Any> = HashMap()
@@ -42,12 +45,14 @@ class EmployerProfileActivity: AppCompatActivity() {
 
             var newEmployer = Employer(
                 name,
-                company
+                company,
+                    email
 
             )
 
             newEmployerMap["name"] = newEmployer.name
             newEmployerMap["company"] = newEmployer.company
+            newEmployerMap["email"] = newEmployer.email
 
 
             //add to the database

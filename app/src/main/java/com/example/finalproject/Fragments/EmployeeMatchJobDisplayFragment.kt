@@ -1,6 +1,6 @@
 package com.example.finalproject.Fragments
 
-import android.app.Activity
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.finalproject.Activities.EmployeeUI.MatchesEmployeeActivity
-import com.example.finalproject.ActivityUtil
 import com.example.finalproject.Data.PostMatch
 import com.example.finalproject.Data.Posting
 import com.example.finalproject.R
@@ -58,6 +57,7 @@ class EmployeeMatchJobDisplayFragment : Fragment() {
         company.text = post.company
         position.text = post.position
         salary.text = post.salary.toString()
+        email.text = post.email
 
     }
 
