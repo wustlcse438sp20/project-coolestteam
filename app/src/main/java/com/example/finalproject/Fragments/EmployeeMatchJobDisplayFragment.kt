@@ -38,8 +38,6 @@ class EmployeeMatchJobDisplayFragment : Fragment() {
     }
 
     fun loadData(employerId: String, id: String) {
-        Log.d("blah", employerId)
-        Log.d("blah", id)
         var employerRef = db.collection("Employers").document(employerId).collection("Postings").document(id)
         employerRef.get()
                 .addOnSuccessListener { doc ->
@@ -61,7 +59,7 @@ class EmployeeMatchJobDisplayFragment : Fragment() {
 
     }
 
-    fun closeFragment(view: View){
+    fun closeFragment(view: View) {
         activity!!.matchesRecyclerView.visibility = View.VISIBLE
         var bl: MatchesEmployeeActivity = this.activity as MatchesEmployeeActivity
         bl.closeFragment(this)

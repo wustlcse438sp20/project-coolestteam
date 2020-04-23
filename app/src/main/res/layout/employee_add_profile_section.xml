@@ -1,174 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:isScrollContainer="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/mediumLight">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginVertical="10dp"
-    android:layout_marginHorizontal="10dp"
-    android:background="@drawable/profile_section"
-    android:orientation="vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginVertical="10dp"
-        android:textColor="@color/accentBlue"
-        android:text="@string/add_a_profile_section"
-        android:textSize="20sp"
-        />
+    android:background="@color/mediumLight"
+    android:isScrollContainer="true">
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/section_spinner"
-        android:layout_gravity="center"
-        />
     <LinearLayout
-        android:id="@+id/input_contianer"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:isScrollContainer="true"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/profile_section"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/hobby_input"
-            android:orientation="vertical"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
-            <EditText
-                android:id="@+id/hobby_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/hobby_prompt"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-        </LinearLayout>
+            android:layout_marginVertical="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/add_a_profile_section"
+            android:textColor="@color/accentBlue"
+            android:textSize="20sp" />
 
-        <LinearLayout
-            android:id="@+id/skill_input"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible">
-            <EditText
-                android:id="@+id/skill_skill"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/skill_prompt"
-                android:inputType="text"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-            <EditText
-                android:id="@+id/skill_proficiency"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/proficiency_propt"
-                android:inputType="number"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/work_input"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:isScrollContainer="true"
-            android:visibility="visible">
-            <EditText
-                android:id="@+id/work_company"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/company_prompt"
-                android:inputType="text"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-            <EditText
-                android:id="@+id/work_position"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/position_prompt"
-                android:inputType="text"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-            <EditText
-                android:id="@+id/work_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/description_prompt"
-                android:inputType="textLongMessage"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/education_input"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:isScrollContainer="true"
-            android:visibility="visible">
-            <EditText
-                android:id="@+id/education_university"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/university"
-                android:inputType="text"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-            <EditText
-                android:id="@+id/education_degree"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/degree"
-                android:inputType="text"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-            <EditText
-                android:id="@+id/education_gpa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/gpa"
-                android:inputType="textLongMessage"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-            <EditText
-                android:id="@+id/education_graduation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/graduation"
-                android:inputType="date"
-                android:clickable="true"
-                android:textColorHint="@color/accentBlue"
-                android:textColor="@color/mediumLight"/>
-        </LinearLayout>
-
-
-
-        <Button
-            android:id="@+id/submitSection"
+        <Spinner
+            android:id="@+id/section_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="50dp"
-            android:text="@string/submit"
-            android:layout_gravity="center"
-            android:background="@color/accentGreen"
-            android:textColor="@color/dark"/>
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:id="@+id/input_contianer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/hobby_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/hobby_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hobby_prompt"
+                    android:inputType="text"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/skill_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/skill_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/skill_prompt"
+                    android:inputType="text"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+
+                <EditText
+                    android:id="@+id/skill_proficiency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/proficiency_propt"
+                    android:inputType="number"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/work_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="true"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/work_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/company_prompt"
+                    android:inputType="text"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+
+                <EditText
+                    android:id="@+id/work_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/position_prompt"
+                    android:inputType="text"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+
+                <EditText
+                    android:id="@+id/work_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description_prompt"
+                    android:inputType="textLongMessage"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/education_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="true"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/education_university"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/university"
+                    android:inputType="text"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+
+                <EditText
+                    android:id="@+id/education_degree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/degree"
+                    android:inputType="text"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+
+                <EditText
+                    android:id="@+id/education_gpa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/gpa"
+                    android:inputType="textLongMessage"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+
+                <EditText
+                    android:id="@+id/education_graduation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:hint="@string/graduation"
+                    android:inputType="date"
+                    android:textColor="@color/mediumLight"
+                    android:textColorHint="@color/accentBlue" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/submitSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/accentGreen"
+                android:paddingHorizontal="50dp"
+                android:text="@string/submit"
+                android:textColor="@color/dark" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

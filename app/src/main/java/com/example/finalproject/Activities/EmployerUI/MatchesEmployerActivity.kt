@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_matches_employer.home_button
 import kotlinx.android.synthetic.main.activity_matches_employer.logout_button
 import kotlinx.android.synthetic.main.activity_matches_employer.match_button
 import kotlinx.android.synthetic.main.activity_matches_employer.profile_button
-import kotlinx.android.synthetic.main.activity_profile_employer.*
 
 class MatchesEmployerActivity : AppCompatActivity() {
     private lateinit var logoutButton: ImageButton
@@ -27,10 +26,8 @@ class MatchesEmployerActivity : AppCompatActivity() {
     private lateinit var createJobButton: ImageButton
     private lateinit var matchButton: ImageButton
     private lateinit var homeButton: ImageButton
-
     lateinit var postingList: MutableList<String>
     lateinit var recyclerView: RecyclerView
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +42,8 @@ class MatchesEmployerActivity : AppCompatActivity() {
         logoutButton.setOnClickListener { v -> changeActivity(v, LoginActivity::class.java, true) }
         createJobButton.setOnClickListener { v -> changeActivity(v, CreateJobActivity::class.java, false) }
         profileButton.setOnClickListener { v -> changeActivity(v, ProfileEmployerActivity::class.java, false) }
-        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployerActivity::class.java, false)}
-        homeButton.setOnClickListener{ v -> changeActivity(v, HomeEmployerActivity::class.java, false)}
+        matchButton.setOnClickListener { v -> changeActivity(v, MatchesEmployerActivity::class.java, false) }
+        homeButton.setOnClickListener { v -> changeActivity(v, HomeEmployerActivity::class.java, false) }
 
         var db = FirebaseFirestore.getInstance()
         var auth = FirebaseAuth.getInstance()
@@ -57,27 +54,28 @@ class MatchesEmployerActivity : AppCompatActivity() {
             Log.d("here", "${document.data!!.get("company").toString()}")
             //var companyName = document.data!!.get("company").toString()
             doc.collection("Postings").get()
-                .addOnSuccessListener { result ->
-                    for (document2 in result) {
-                        postingList.add(document2.id)
-                        Log.d("here", "${postingList}")
+                    .addOnSuccessListener { result ->
+                        for (document2 in result) {
+                            postingList.add(document2.id)
+                            Log.d("here", "${postingList}")
+                        }
+                        recyclerView = postings_matchesRecyclerViewEmployer
+                        var itemsShouldBeClickable = true
+                        var adapter = PostingsListAdapter(postingList, itemsShouldBeClickable)
+                        recyclerView.adapter = adapter
+                        recyclerView.layoutManager = LinearLayoutManager(this)
                     }
-                    recyclerView = postings_matchesRecyclerViewEmployer
-                    var itemsShouldBeClickable = true
-                    var adapter = PostingsListAdapter(postingList,itemsShouldBeClickable)
-                    recyclerView.adapter = adapter
-                    recyclerView.layoutManager = LinearLayoutManager(this)
-                }
-                .addOnFailureListener { exception ->
-                    Log.d("here", "Error getting documents: ", exception)
-                }
+                    .addOnFailureListener { exception ->
+                        Log.d("here", "Error getting documents: ", exception)
+                    }
         }
 
 
     }
-    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
+
+    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean) {
         val intent = Intent(this, activity)
-        if(isLogout){
+        if (isLogout) {
             FirebaseAuth.getInstance().signOut()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

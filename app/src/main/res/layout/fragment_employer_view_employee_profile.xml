@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="@color/medium"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/user_profile_image"
@@ -56,8 +55,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="75dp"
         android:layout_marginBottom="0dp"
-        android:scrollbars="vertical"
-      />
+        android:scrollbars="vertical" />
 
 
 </FrameLayout>

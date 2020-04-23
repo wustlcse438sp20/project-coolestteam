@@ -19,7 +19,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-class LoginActivity: AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -28,8 +28,6 @@ class LoginActivity: AppCompatActivity() {
     private lateinit var signUpButton: Button
     private lateinit var loginButton: Button
     private lateinit var githubLoginButton: Button
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +46,10 @@ class LoginActivity: AppCompatActivity() {
         if (currentUser != null) {
             startNewActivity(MainActivity::class.java)
         } else {
-            loginButton.setOnClickListener{
+            loginButton.setOnClickListener {
                 emailLoginFlow()
             }
-            githubLoginButton.setOnClickListener{
+            githubLoginButton.setOnClickListener {
                 githubLogin()
             }
             signUpButton.setOnClickListener {
@@ -62,9 +60,7 @@ class LoginActivity: AppCompatActivity() {
     }
 
 
-
-
-    fun githubLogin(){
+    fun githubLogin() {
 
         val provider = OAuthProvider.newBuilder("github.com")
         var scopes = listOf("read:user, repo") //Github auto grants read access to public info (Public repos)
@@ -73,13 +69,7 @@ class LoginActivity: AppCompatActivity() {
         val pendingResultTask = firebaseAuth.pendingAuthResult
         if (pendingResultTask != null) { // There's something already here! Finish the sign-in for your user.
             pendingResultTask
-                    .addOnSuccessListener {authRes ->
-                        Log.d("blah", "AuthRes: "+ authRes.toString())
-                        Log.d("blah", "AuthRes.getAdditionalUserInfo: "+ authRes.additionalUserInfo.toString())
-                        Log.d("blah", "AuthRes.getAssitionalUserInfo.profile: "+ authRes.additionalUserInfo?.profile.toString())
-                        Log.d("blah", "AuthRes.getCredential(): "+ authRes.credential.toString())
-//                        Log.d("blah", "AuthRes.credentail.accesToken: "+ authRes.credential.t)
-                        Log.d("blah", "SUCCESS")
+                    .addOnSuccessListener { authRes ->
                         var pic = authRes.additionalUserInfo?.profile!!["avatar_url"].toString()
                         var repos = authRes.additionalUserInfo?.profile!!["repos_url"].toString()
                         var url = authRes.additionalUserInfo?.profile!!["html_url"].toString()
@@ -89,35 +79,28 @@ class LoginActivity: AppCompatActivity() {
                         var profile = GeneralEmployee(name, null, bio, url, pic, repos)
                         startNewActivity(MainActivity::class.java, profile)
                     }
-                    .addOnFailureListener {e ->
+                    .addOnFailureListener { e ->
                         // Handle failure.
                         Log.d("blah", "Error: " + e.toString())
                     }
         } else { // There's no pending result so you need to start the sign-in flow.
             firebaseAuth.startActivityForSignInWithProvider(this, provider.build())
-                    .addOnSuccessListener {res ->
-//                        var currentU = firebaseAuth.currentUser
-                        Log.d("blah", "TEST HERE: "+res.additionalUserInfo?.profile.toString())
+                    .addOnSuccessListener { res ->
                         var pic = res.additionalUserInfo?.profile!!["avatar_url"].toString()
                         var repos = res.additionalUserInfo?.profile!!["repos_url"].toString()
                         var url = res.additionalUserInfo?.profile!!["html_url"].toString()
                         var bio = res.additionalUserInfo?.profile!!["bio"].toString()
                         var name = res.additionalUserInfo?.profile!!["name"].toString()
-                        Log.d("blah", res.additionalUserInfo?.profile!!::class.qualifiedName.toString())
                         var profile = GeneralEmployee(name, null, bio, url, pic, repos)
-
-//                        Log.d("blah", "acccess Token: "+res.credential.getAccessToken())
                         startNewActivity(MainActivity::class.java, profile)
                     }
-                    .addOnFailureListener {e ->
-                        Log.d("blah", "Error: "+e.toString())
+                    .addOnFailureListener { e ->
+                        Log.d("blah", "Error: " + e.toString())
                     }
         }
-
-
     }
 
-    fun emailLoginFlow(){
+    fun emailLoginFlow() {
         var emailLogin: String = emailLogin.text.toString()
         var passwordLogin: String = passwordLogin.text.toString()
         if (emailLogin == "" || passwordLogin == "") {
@@ -136,22 +119,20 @@ class LoginActivity: AppCompatActivity() {
         }
     }
 
-    fun startNewActivity(activity: Class<*>){
+    fun startNewActivity(activity: Class<*>) {
         val intent = Intent(this, activity)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }
-    fun startNewActivity(activity: Class<*>, profile: GeneralEmployee){
+
+    fun startNewActivity(activity: Class<*>, profile: GeneralEmployee) {
         val intent = Intent(this, activity)
         intent.putExtra("profile", profile)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }
-
-
-
 }
 
 

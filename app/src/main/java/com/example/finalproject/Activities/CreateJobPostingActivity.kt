@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_posting.*
 import java.util.HashMap
 
-class CreateJobPostingActivity: AppCompatActivity() {
+class CreateJobPostingActivity : AppCompatActivity() {
 
     lateinit var createPosting: Button
     lateinit var auth: FirebaseAuth
@@ -28,7 +28,7 @@ class CreateJobPostingActivity: AppCompatActivity() {
         createPosting = job_create_posting_button
 
         createPosting.setOnClickListener {
-        //Get values from the profile page
+            //Get values from the profile page
             var position: String = job_title.text.toString()
             var company: String = job_company.text.toString()
             var education: String = job_education.text.toString()
@@ -37,21 +37,19 @@ class CreateJobPostingActivity: AppCompatActivity() {
             //Get UID of current user to place values in correct doc
             var currUser = intent.getStringExtra("uid")
 
-            if(currUser == null){
+            if (currUser == null) {
                 currUser = auth.currentUser!!.uid
             }
-
-
             //Get values and put them in map to insert into collection
             val newPostingMap: MutableMap<String, Any> = HashMap()
 
             var newPosting = Posting(
-                company,
-                position,
-                education,
-                salary
+                    company,
+                    position,
+                    education,
+                    salary
             )
-            newPosting.email =  auth.currentUser?.email.toString()
+            newPosting.email = auth.currentUser?.email.toString()
 
             newPostingMap["position"] = newPosting.position
             newPostingMap["company"] = newPosting.company
@@ -59,19 +57,16 @@ class CreateJobPostingActivity: AppCompatActivity() {
             newPostingMap["salary"] = newPosting.salary
             newPostingMap["email"] = newPosting.email
 
-            //add to the database
-            //TODO make sure this change no break stuff
             db.collection("Employers").document(currUser)
-                .collection("Postings").add(newPostingMap)
-                .addOnSuccessListener{
-                    Toast.makeText(this, "Posting created", Toast.LENGTH_LONG)
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                .addOnFailureListener{
-                    Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
-                }
-
+                    .collection("Postings").add(newPostingMap)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Posting created", Toast.LENGTH_LONG)
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed to insert data!", Toast.LENGTH_LONG)
+                    }
         }
     }
 }

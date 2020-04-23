@@ -5,7 +5,7 @@ data class Employee(
         var school: String = "",
         var major: String = "",
         var age: Int = 0,
-        var email: String ="",
+        var email: String = "",
         var general: GeneralEmployee = GeneralEmployee(null, null, null, null, null),
         var educations: MutableList<Education> = mutableListOf<Education>(),
         var hobbies: MutableList<Hobby> = mutableListOf<Hobby>(),

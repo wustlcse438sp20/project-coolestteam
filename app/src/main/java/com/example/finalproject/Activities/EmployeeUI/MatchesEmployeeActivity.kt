@@ -38,8 +38,8 @@ class MatchesEmployeeActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
 
     lateinit var firestore: FirebaseFirestore
-    lateinit var adapter : MatchesAdapterEmployee
-    lateinit var recycler : RecyclerView
+    lateinit var adapter: MatchesAdapterEmployee
+    lateinit var recycler: RecyclerView
     private var postingList = ArrayList<PostMatch>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,58 +75,59 @@ class MatchesEmployeeActivity : AppCompatActivity() {
                         firestore.collection("Employers").document(curDoc.employerId)
                                 .collection("Postings").document(curDoc.id)
                                 .collection("Matches").get().addOnSuccessListener { res ->
-                                    for(r in res){
+                                    for (r in res) {
                                         Log.d("check id field", r.data.get("id").toString())
                                         Log.d("check current user", FirebaseAuth.getInstance().currentUser!!.uid)
-                                        if (r.data.get("id")!!.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                                        if (r.data.get("id")!!.equals(FirebaseAuth.getInstance().currentUser!!.uid)) {
                                             postingList.add(curDoc)
                                         }
                                     }
                                     adapter.notifyDataSetChanged()
                                 }
                     }
-        }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
+                }.addOnFailureListener { exception -> Log.w("TAG", "ERROR", exception) }
 
         // call load profile to update banner
         loadProfile()
     }
 
     // gets user info for the banner
-    fun loadProfile(){
+    fun loadProfile() {
         var currentUser = FirebaseAuth.getInstance().currentUser
         var uid = currentUser!!.uid
         var userDoc = db.collection("Employees").document(uid)
         userDoc.get()
-                .addOnSuccessListener{ docSnap->
+                .addOnSuccessListener { docSnap ->
                     Log.d("blah", docSnap.data.toString())
                     currentEmployee = docSnap.toObject<Employee>()!!
                     Log.d("blah", currentEmployee.toString())
                     renderProfile()
                 }
-                .addOnFailureListener { e->
+                .addOnFailureListener { e ->
                     Log.d("blah", e.toString())
                     currentEmployee = Employee()
                 }
     }
 
     //Display user profile
-    fun renderProfile(){
+    fun renderProfile() {
         displayName.text = "Matches for " + currentEmployee.name
         var profilePicView: ImageView = user_profile_image_matches
-        if(currentEmployee.general.pic != "") {
+        if (currentEmployee.general.pic != "") {
             Picasso.get().load(currentEmployee.general.pic).into(profilePicView)
         }
     }
 
-    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean){
+    fun changeActivity(view: View, activity: Class<*>, isLogout: Boolean) {
         val intent = Intent(this, activity)
-        if(isLogout){
+        if (isLogout) {
             FirebaseAuth.getInstance().signOut()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         startActivity(intent)
     }
-    fun closeFragment(fragment: Fragment){
+
+    fun closeFragment(fragment: Fragment) {
         var util = ActivityUtil()
         util.removeFragmentFromActivity(supportFragmentManager, fragment)
     }

@@ -2,7 +2,6 @@ package com.example.finalproject.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +10,6 @@ import com.example.finalproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_employee_profile.*
-import java.io.Serializable
 import java.util.*
 
 class EmployeeProfileActivity: AppCompatActivity() {
@@ -47,11 +45,9 @@ class EmployeeProfileActivity: AppCompatActivity() {
             var currUser = auth.currentUser?.uid.toString()
             var email = FirebaseAuth.getInstance().currentUser?.email.toString()
 
-//            var currUser = intent.getStringExtra("uid")
 
             //Get values and put them in map to insert into collection
             val newEmployeeMap: MutableMap<String, Any> = HashMap()
-
 
             var newEmployee = Employee(
                 name,
@@ -71,26 +67,6 @@ class EmployeeProfileActivity: AppCompatActivity() {
                 newEmployee.general = generalProfile
             }
 
-            
-//            var educationTest = Education("Computer Science", "4.0", "2021", "Washington University")
-//            newEmployee.educations.add(educationTest)
-//            newEmployee.educations.add(educationTest)
-//            var workTest = WorkExperience("Google", "Did important stuff", Date(2020), Date(2021), "CEO")
-//            newEmployee.workExperiences.add(workTest)
-//            newEmployee.workExperiences.add(workTest)
-//            var tempHobby = Hobby("running")
-//            newEmployee.hobbies.add(tempHobby)
-//            newEmployee.hobbies.add(tempHobby)
-//            newEmployee.hobbies.add(tempHobby)
-//            newEmployee.hobbies.add(tempHobby)
-//            newEmployee.hobbies.add(tempHobby)
-//            var tempSkill= TechnicalSkill("Java")
-//            newEmployee.technicalSkills.add(tempSkill)
-//            newEmployee.technicalSkills.add(tempSkill)
-//            newEmployee.technicalSkills.add(tempSkill)
-//            newEmployee.technicalSkills.add(tempSkill)
-
-//           newEmployeeMap["employee"] = newEmployee
             newEmployeeMap["name"] = newEmployee.name
             newEmployeeMap["age"] = newEmployee.age
             newEmployeeMap["school"] = newEmployee.school
