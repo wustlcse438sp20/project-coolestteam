@@ -1,5 +1,7 @@
 package com.example.finalproject.Data
 
+import java.io.Serializable
+
 data class EmployeeMatch(
         var name: String = "",
         var school: String = "",
@@ -14,4 +16,4 @@ data class EmployeeMatch(
         var workExperiences: MutableList<WorkExperience> = mutableListOf<WorkExperience>(),
         var matchList: MutableList<PostMatch> = mutableListOf<PostMatch>(),
         var id: String = ""
-)
+):Serializable

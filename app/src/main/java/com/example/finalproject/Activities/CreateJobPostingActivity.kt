@@ -37,6 +37,10 @@ class CreateJobPostingActivity: AppCompatActivity() {
             //Get UID of current user to place values in correct doc
             var currUser = intent.getStringExtra("uid")
 
+            if(currUser == null){
+                currUser = auth.currentUser!!.uid
+            }
+
 
             //Get values and put them in map to insert into collection
             val newPostingMap: MutableMap<String, Any> = HashMap()
@@ -46,7 +50,6 @@ class CreateJobPostingActivity: AppCompatActivity() {
                 position,
                 education,
                 salary
-
             )
             newPosting.email =  auth.currentUser?.email.toString()
 
