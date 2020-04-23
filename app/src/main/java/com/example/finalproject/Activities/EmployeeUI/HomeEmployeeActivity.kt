@@ -208,8 +208,8 @@ class HomeEmployeeActivity : AppCompatActivity(), GestureDetector.OnGestureListe
             velocityY: Float
     ): Boolean {
         if(event2.x - event1.x > swipedistance) {
-            loadPosting()
             addMatch()
+            loadPosting()
             return true
         }
         else if (event1.x - event2.x > swipedistance){
