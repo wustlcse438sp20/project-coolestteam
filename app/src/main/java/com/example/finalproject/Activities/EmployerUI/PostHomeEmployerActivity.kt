@@ -192,12 +192,13 @@ class PostHomeEmployerActivity: AppCompatActivity() {
                                     .collection("Matches").document().id
 
                                 db.collection("Employees").document(docIds[i])
-                                    .collection("Matches").document(id)
+//                                    .collection("Matches").document(id)
+                                        .collection("Matches").document(postingMatch.id)
                                     .set(newPostingMatchMap)
                                     .addOnSuccessListener {
                                         Toast.makeText(
                                             this@PostHomeEmployerActivity,
-                                            "Posting Added",
+                                            "Post added",
                                             Toast.LENGTH_SHORT
                                         )
 
