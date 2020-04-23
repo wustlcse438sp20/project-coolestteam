@@ -9,6 +9,8 @@
     <string name="employer">Employer</string>
     <string name="employees">Employees</string>
     <string name="employers">Employers</string>
+    <string name="liason">Liason</string>
+    <string name="contact">Contact</string>
     <string name="create_a_job">Create a Job</string>
     <string name="company_name">Company Name</string>
     <string name="job_description">Job Description</string>
@@ -17,7 +19,9 @@
     <string name="job_education">Job Education</string>
     <string name="users_matches">User Matches</string>
     <string name="posting_matches">Posting Matches</string>
+    <string name="postings">Postings: </string>
     <string name="position">Position</string>
+    <string name="profile">Profile</string>
     <string name="qualifications">Qualifications</string>
     <string name="us_citizen">U.S. Citizen</string>
     <string name="current_student">Current Student</string>

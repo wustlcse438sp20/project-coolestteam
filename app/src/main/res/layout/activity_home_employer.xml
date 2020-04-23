@@ -53,14 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
-        <TextView
-            android:id="@+id/main_container_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="EmployerUI"
-            android:textSize="30sp" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/employer_home_postings_recycler_view"
             android:layout_width="match_parent"
